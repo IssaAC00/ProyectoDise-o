@@ -1,4 +1,4 @@
-class _Area {
+class Area {
     private _id: string;
     private _description: string;
     private _images: string[];
@@ -49,4 +49,4 @@ class _Area {
     // }
 }
 
-export { _Area };
+export { Area };

@@ -1,13 +1,13 @@
-import {_Area} from './Area'
+import {Area} from './Area'
 
-class _Element { 
+class Element { 
     private _id: string;
     private _description: string;
     private _images: string[];
     private _location: string;
-    private _area: _Area;
+    private _area: Area;
 
-    constructor(id: string, description: string, images: string[], location: string, area: _Area){
+    constructor(id: string, description: string, images: string[], location: string, area: Area){
         this._id = id;
         this._description =description;
         this._images = images;
@@ -33,7 +33,7 @@ class _Element {
     }
 
     public get area(){
-        return this._area as _Area;
+        return this._area as Area;
     }
 
     public set id(id: string){
@@ -52,9 +52,9 @@ class _Element {
         this._location = location;
     }
 
-    public set area(area: _Area){
+    public set area(area: Area){
         this._area = area;
     }
 }
 
-export { _Element };
+export { Element };

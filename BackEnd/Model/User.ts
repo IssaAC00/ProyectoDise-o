@@ -9,7 +9,7 @@ class User{
         this._rol = rol;
     }
     
-    public get mail(){
+    public get email(){
         return this._email;
     }
 
@@ -21,7 +21,7 @@ class User{
         return this._rol;
     }
 
-    public set mail(mail: string){
+    public set email(mail: string){
         this._email = mail;
     }
 

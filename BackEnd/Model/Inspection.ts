@@ -1,19 +1,19 @@
-import { _DutyManager } from './DutyManager'
-import { _Area } from './Area'
-import { _Element } from './Element'
+import { DutyManager } from './DutyManager'
+import { Area } from './Area'
+import { Element } from './Element'
 
-abstract class _Inspection{
+abstract class Inspection{
     protected _id: number;
     protected _description: string;
     protected _initialDate: Date;
     protected _endDate: Date;
     protected _deliveryDate: Date;
-    protected _dutyManager: _DutyManager;
+    protected _dutyManager: DutyManager;
     protected _PDF: string;
     protected _state: State;
 
     constructor(id: number, description: string, initialDate:Date,
-                    endDate: Date, deliveryDate: Date, dutymanager: _DutyManager,
+                    endDate: Date, deliveryDate: Date, dutymanager: DutyManager,
                     PDF: string, state: State){
 
         this._id = id;
@@ -78,7 +78,7 @@ abstract class _Inspection{
         this._deliveryDate = deliveryDate;
     }
 
-    public set dutyManager(dutyManager: _DutyManager){
+    public set dutyManager(dutyManager: DutyManager){
         this._dutyManager = dutyManager;
     }
 
@@ -100,12 +100,12 @@ enum State{
 }
 
 
-class InspectionArea extends _Inspection{
-    private area: _Area;
+class InspectionArea extends Inspection{
+    private area: Area;
 
     constructor(id: number, description: string, initialDate:Date,
-                    endDate: Date, deliveryDate: Date, dutymanager: _DutyManager,
-                    PDF: string, state: State, area: _Area){
+                    endDate: Date, deliveryDate: Date, dutymanager: DutyManager,
+                    PDF: string, state: State, area: Area){
         super(id, description, initialDate,endDate, deliveryDate, dutymanager,
                 PDF, state);
 
@@ -114,12 +114,12 @@ class InspectionArea extends _Inspection{
     }
 }
 
-class InspectionElement extends _Inspection{
-    private _element: _Element;
+class InspectionElement extends Inspection{
+    private _element: Element;
 
     constructor(id: number, description: string, initialDate:Date,
-                    endDate: Date, deliveryDate: Date, dutymanager: _DutyManager,
-                    PDF: string, state: State, element: _Element){
+                    endDate: Date, deliveryDate: Date, dutymanager: DutyManager,
+                    PDF: string, state: State, element: Element){
         super(id, description, initialDate,endDate, deliveryDate, dutymanager,
                 PDF, state);
 
@@ -130,10 +130,10 @@ class InspectionElement extends _Inspection{
 
 
 class FactoryInspections{
-    public getInspection(): _Inspection{
+    public getInspection(): Inspection{
         //Codigo de la fabrica
         return null!;
     }
 }
 
-export { _Inspection, State, InspectionArea, InspectionElement, FactoryInspections};
+export { Inspection, State, InspectionArea, InspectionElement, FactoryInspections};

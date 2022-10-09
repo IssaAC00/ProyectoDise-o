@@ -1,4 +1,4 @@
-class _DutyManager{
+class DutyManager{
     protected _id: number;
     protected _name: string;
     protected _email: string;
@@ -50,7 +50,7 @@ enum TypeWork{
     Conservacion
 }
 
-class LegalPerson extends _DutyManager{
+class LegalPerson extends DutyManager{
     private _managerName: string;
     private _idManager: number;
 
@@ -78,4 +78,4 @@ class LegalPerson extends _DutyManager{
     }
 }
 
-export { _DutyManager, TypeWork, LegalPerson }
+export { DutyManager, TypeWork, LegalPerson }

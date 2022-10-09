@@ -1,4 +1,4 @@
-class _Spolaige{
+class Spolaige{
     private _id: string;
     private _description: string;
     private _type: TypeSpolaige;
@@ -27,4 +27,4 @@ enum TypeSpolaige{
     Circunstancial
 }
 
-export{ _Spolaige, TypeSpolaige};
+export{ Spolaige, TypeSpolaige};
