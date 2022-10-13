@@ -5,7 +5,7 @@ class AdminDutyManager{
 
     constructor(){}
 
-    private search(id: number): DutyManager{
+    public search(id: number): DutyManager{
         for(const dutyManager of this._dutyManagers){
             if (dutyManager.id === id) {
                 return dutyManager;
@@ -33,7 +33,8 @@ class AdminDutyManager{
         return true;
     }
 
-    public delete(dutyManager: DutyManager):boolean{
+    public delete(id: number):boolean{
+        let dutyManager = this.search(id);
         this._dutyManagers = this._dutyManagers.filter(item => item !== dutyManager);
         return true;
     }

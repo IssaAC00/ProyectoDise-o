@@ -33,7 +33,8 @@ class AdminSpolaige{
         return true;
     }
 
-    public delete(spolaige: Spolaige):boolean{
+    public delete(id: string):boolean{
+        let spolaige = this.search(id);
         this._spolaiges = this._spolaiges.filter(item => item !== spolaige);
         return true;
     }
