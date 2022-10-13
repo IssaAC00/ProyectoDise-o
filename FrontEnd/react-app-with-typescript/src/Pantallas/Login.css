@@ -1,0 +1,62 @@
+
+.Input-container{
+    width: 60%;
+    height: 10%;
+    border-radius: 3px;
+    padding: 0 10px 0 30px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    color:cadetblue;
+    font-size: 16px;
+    outline:  none;
+    position: relative;;
+    padding: 16px;
+    left: -4rem;
+    top: -6rem;
+ 
+}
+
+
+.Input-Clave{
+    width: 60%;
+    height: 10%;
+    border-radius: 3px;
+    padding: 0 10px 0 30px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    color:cadetblue;
+    font-size: 16px;
+    outline:  none;
+    position: relative;;
+    padding: 16px;
+    left: -4rem;
+    top: 0rem;
+
+
+
+}
+
+
+.regular-style::placeholder{
+    font-size: 14px;
+    color:gray;
+    opacity: 0.8;
+
+}
+
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #DCC594;
+    position: relative;
+    padding: 16px;
+    left: 20rem;
+    top: 12rem;
+    width: 550px;
+    height: 500px;
+    border-radius: 10px;
+
+}

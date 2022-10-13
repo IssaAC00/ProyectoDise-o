@@ -1,0 +1,62 @@
+.topbarContainer {
+    height: 60px;
+    width: 102%;
+    background-color: #b18543;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 16px;
+    left: -1rem;
+    top: -1rem;
+    z-index: 999;
+  }
+
+
+.Areas {
+    font-size: x-large;
+    color: white;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 16px;
+    left: 60rem;
+    top: 3.5rem;
+
+}
+
+.Elementos{
+    font-size: x-large;
+    color: white;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 16px;
+    left: 65rem;
+    top: -0.2rem;
+
+
+}
+
+
+.Titulo{
+    color : rgb(253, 253, 253);
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 16px;
+    left: 2rem;
+    top: 2rem;
+
+}
+
+.svg{
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 16px;
+    left: 130rem;
+    top: -1.5rem;
+    
+
+}
