@@ -1,24 +1,10 @@
 import {Area} from './Area'
 import {Element} from './Element'
-let area1 = new Area('ds','ds',[''],'ds');
-let element = null;
+import { Inspection, InspectionArea, InspectionElement, FactoryInspections, State} from './Inspection'
+let area1 = new Area('dsd', 'dsda', ['dsdsa'], 'dasda');
+let element = new Element('dasd', 'dada', ['dad'], 'dadasd', area1);
+let factoryInspection: FactoryInspections = new FactoryInspections();
+let pArea: Inspection = factoryInspection.getInspection(2, 2333,'hola mundo', null!, null!,null!,null!,'txt.pdf', State.Ejecutada, element);
 
-let setPrueba = new Set<number>();
 
-setPrueba.add(1);
-setPrueba.add(2);
-setPrueba.add(1);
-
-let lista: number[] = [1,2,3,4];
-
-lista = lista.filter(n => n === 4);
-let num:number = 0;
-
-for(const n of lista){
-    if (n === 2){
-        num = n;
-    }
-
-}
-// clase.cosntructor.name
-console.log(area1.constructor.name);
+console.log(pArea);

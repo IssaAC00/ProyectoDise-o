@@ -1,11 +1,12 @@
-import { Inspection} from '../Model/Inspection'
+import { FactoryInspections, Inspection, State} from '../Model/Inspection'
 
 class AdminInspection{
     private _inspections: Inspection[];
+    private _factory:FactoryInspections =  new FactoryInspections();
 
     constructor(){}
 
-    private search(id: number): Inspection{
+    public search(id: number): Inspection{
         for(const inspection of this._inspections){
             if (inspection.id === id) {
                 return inspection;
@@ -33,7 +34,8 @@ class AdminInspection{
         return true;
     }
 
-    public delete(inspection: Inspection): boolean{
+    public delete(id: number): boolean{
+        let inspection = this.search(id);
         this._inspections = this._inspections.filter(item => item !== inspection);
         return true;
     }

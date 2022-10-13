@@ -101,7 +101,7 @@ enum State{
 
 
 class InspectionArea extends Inspection{
-    private area: Area;
+    private _area: Area;
 
     constructor(id: number, description: string, initialDate:Date,
                     endDate: Date, deliveryDate: Date, dutymanager: DutyManager,
@@ -109,8 +109,16 @@ class InspectionArea extends Inspection{
         super(id, description, initialDate,endDate, deliveryDate, dutymanager,
                 PDF, state);
 
-        this.area = area;
+        this._area = area;
             
+    }
+
+    public get area(){
+        return this._area;
+    }
+
+    public set area(area: Area){
+        this._area = this.area;
     }
 }
 
@@ -126,13 +134,31 @@ class InspectionElement extends Inspection{
         this._element = element;
             
     }
+
+    public get element(){
+        return this._element;
+    }
+
+    public set element(element: Element){
+        this._element = this.element;
+    }
+
+
 }
 
 
 class FactoryInspections{
-    public getInspection(): Inspection{
-        //Codigo de la fabrica
-        return null!;
+    public getInspection(choiceInspection: number, id: number, description: string, iDate:Date,
+        eDate: Date, dDate: Date, dutymanager: DutyManager,
+        PDF: string, state: State, objectInspect: Element|Area): Inspection{
+        switch (choiceInspection) {
+            case 1:
+                return new InspectionArea(id, description, iDate, eDate, dDate, dutymanager, PDF, state, objectInspect as Area);
+            case 2:
+                return new InspectionElement(id, description, iDate, eDate, dDate, dutymanager, PDF, state, objectInspect as Element);
+            default:
+                return null!;
+        }
     }
 }
 

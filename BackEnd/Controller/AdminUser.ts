@@ -33,7 +33,8 @@ class AdminUser{
         return true;
     }
 
-    public delete(user: User):boolean{
+    public delete(email: string):boolean{
+        let user = this.search(email);
         this._users = this._users.filter(item => item !== user);
         return true;
     }

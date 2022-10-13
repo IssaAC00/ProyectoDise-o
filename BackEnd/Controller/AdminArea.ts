@@ -5,7 +5,7 @@ class AdminArea{
 
     constructor(){}
 
-    private search(id: string): Area{
+    public search(id: string): Area{
         for(const area of this._areas){
             if (area.id === id) {
                 return area;
@@ -33,7 +33,8 @@ class AdminArea{
         return true;
     }
 
-    public delete(area: Area):boolean{
+    public delete(id: string):boolean{
+        let area = this.search(id);
         this._areas = this._areas.filter(item => item !== area);
         return true;
     }
