@@ -1,0 +1,13 @@
+.input-global {
+    width: 20%;
+    height: 10%;
+    border-radius: 5px;
+    padding: 0 10px 0 30px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    color:cadetblue;
+    font-size: 30px;
+    outline:  none;
+
+
+}
