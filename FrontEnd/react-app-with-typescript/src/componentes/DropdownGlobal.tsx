@@ -2,7 +2,7 @@ import React, {useRef, useState , MouseEvent } from 'react';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
-export default function DropdownsGlobal (){
+export default function DropdownsGlobal ( ){
 
   const [selectedOption, setSelectedOption] = useState<String>();
 
@@ -37,7 +37,7 @@ export default function DropdownsGlobal (){
 
 };
 
-// Just some styles
+
 const styles: { [name: string]: React.CSSProperties } = {
   container: {
     marginTop: 50,

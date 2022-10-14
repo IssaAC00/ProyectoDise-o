@@ -2,7 +2,7 @@
 .Input-container{
     width: 60%;
     height: 10%;
-    border-radius: 3px;
+    border-radius: 8px;
     padding: 0 10px 0 30px;
     box-sizing: border-box;
     margin-bottom: 10px;
@@ -20,7 +20,7 @@
 .Input-Clave{
     width: 60%;
     height: 10%;
-    border-radius: 3px;
+    border-radius: 8px;
     padding: 0 10px 0 30px;
     box-sizing: border-box;
     margin-bottom: 10px;
@@ -50,7 +50,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #DCC594;
+    background-color: #d3bc89;
     position: relative;
     padding: 16px;
     left: 20rem;
@@ -59,4 +59,16 @@
     height: 500px;
     border-radius: 10px;
 
+}
+
+
+.Contraseña {
+    font-size: x-large;
+    color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    position: relative;;
+    padding: 16px;
+    left: 24rem;
+    top: -1rem;
 }

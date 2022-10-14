@@ -4,7 +4,7 @@ import './App.css';
 import Login from './Pantallas/login';
 import  Areas  from './Pantallas/Areas';
 import  Elementos  from './Pantallas/Elementos';
-
+import Contraseña from './Pantallas/Contraseña';
 import { Component } from 'react';
 
 
@@ -21,6 +21,7 @@ export default function RoutesP() {
                 <Route  path="/" element={<Login/>}/>
                 <Route path="/Area" element={<Areas />} />
                 <Route path="/Elementos" element={<Elementos />} />
+                <Route path="/Contraseña" element={<Contraseña />} />
               
                 
             </Routes>
