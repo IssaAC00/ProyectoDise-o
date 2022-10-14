@@ -18,9 +18,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "preserve"
   },
   "include": [
-    "src"
-, "Routes/RoutesP.tsx", "src/index.tsx", "src/componentes"  ]
+    "src",
+    "Routes/RoutesP.tsx",
+    "src/index.tsx",
+    "src/componentes"
+  ]
 }
