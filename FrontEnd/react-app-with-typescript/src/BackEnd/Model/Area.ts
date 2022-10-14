@@ -3,12 +3,14 @@ class Area {
     private _description: string;
     private _images: string[];
     private _location: string;
+    private _floor: Floor;
 
-    constructor(id: string, description: string, images: string[], location: string){
+    constructor(id: string, description: string, images: string[], location: string, floor: Floor){
         this._id = id;
         this._description =description;
         this._images = images;
-        this._location = location; 
+        this._location = location;
+        this._floor = floor; 
     }
 
     public get id(){
@@ -27,6 +29,10 @@ class Area {
         return this._location;
     }
 
+    public get floor(){
+        return this._floor;
+    }
+
     public set id(id: string){
         this._id = id;
     }
@@ -43,10 +49,19 @@ class Area {
         this._location = location;
     }
 
+    public set floor(floor: Floor){
+        this._floor = floor;
+    }
+
     // public toString(): string{
     //     return `id = ${this._id} , description = ${this._description}, 
     //                 images = ${this._images}, location = ${this._location}`;
     // }
 }
 
-export { Area };
+enum Floor{
+    Primer, Segundo, Tercer,
+    Sotana
+}
+
+export { Area, Floor };

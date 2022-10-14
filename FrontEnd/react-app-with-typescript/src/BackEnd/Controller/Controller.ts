@@ -9,9 +9,9 @@ import { Area } from '../Model/Area'
 import { Element } from '../Model/Element'
 import { Inspection, FactoryInspections ,State, InspectionArea } from '../Model/Inspection'
 import { Rol, User } from '../Model/User'
-import { DutyManager, TypeWork } from '../Model/DutyManager'
+import { DutyManager, TypeWork, FactoryDutyManager} from '../Model/DutyManager'
 
-class controller{
+class Controller{
     private adminArea: AdminArea = new AdminArea();
     private adminElement: AdminElement = new AdminElement();
     private adminDutyManager: AdminDutyManager = new AdminDutyManager;
@@ -28,7 +28,10 @@ class controller{
         this.adminSpolaige.add(newSpolaige);
     }
     
-    public seePolaige(){}//preguntar como se va a ver
+    public seePolaige(id: string){
+        let polaige = this.adminSpolaige.see(id);
+        console.log(polaige);
+    }//preguntar como se va a ver
 
     public modifyPolaige(id: string, description: string, type: TypeSpolaige){
         //Validar nombre && type
@@ -140,9 +143,11 @@ class controller{
     //DutyManager
 
     //Preguntar legal
-    public registerDutyManager(id: number, name: string, email: string, labor: Set<TypeWork>){
+    public registerDutyManager(optionDM:number, id: number, name: string, email: string, 
+                                labor: Set<TypeWork>, managerName?: string, idManager?: number){
         //Validar email y contra
-        let newDutyManager = new DutyManager(id, name, email, labor);
+        let factoryDutyManager = new FactoryDutyManager();
+        let newDutyManager = factoryDutyManager.getInspection(optionDM, id, name, email, labor, managerName, idManager);
         this.adminDutyManager.add(newDutyManager);
     }
     
@@ -150,11 +155,14 @@ class controller{
 
     public modifyDutyManager(id: number, name: string, email: string, labor: Set<TypeWork>){
         //Validar nombre && type
-        let newDutyManager = new DutyManager(id, name, email, labor);
-        this.adminDutyManager.modify(newDutyManager);
+        //let newDutyManager = new DutyManager(id, name, email, labor);
+        //this.adminDutyManager.modify(newDutyManager);
     }
 
     public deleteDutyManager(id: number){
         this.adminDutyManager.delete(id);
     }
 }
+
+let controller = new Controller();
+export { controller }

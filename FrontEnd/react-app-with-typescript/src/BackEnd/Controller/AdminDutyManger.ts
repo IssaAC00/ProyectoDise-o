@@ -1,7 +1,7 @@
 import { DutyManager, LegalPerson } from '../Model/DutyManager'
 
 class AdminDutyManager{
-    private _dutyManagers: DutyManager[];
+    private _dutyManagers: DutyManager[] = [];
 
     constructor(){}
 

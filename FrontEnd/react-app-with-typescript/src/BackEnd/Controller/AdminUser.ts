@@ -1,7 +1,7 @@
 import { User } from '../Model/User'
 
 class AdminUser{
-    private _users: User[];
+    private _users: User[] = [];
 
     constructor(){}
 

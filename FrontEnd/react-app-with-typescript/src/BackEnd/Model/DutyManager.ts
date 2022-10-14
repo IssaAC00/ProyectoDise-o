@@ -1,4 +1,4 @@
-class DutyManager{
+abstract class DutyManager{
     protected _id: number;
     protected _name: string;
     protected _email: string;
@@ -78,4 +78,35 @@ class LegalPerson extends DutyManager{
     }
 }
 
-export { DutyManager, TypeWork, LegalPerson }
+class ExternalPerson extends DutyManager{
+
+    constructor(id: number, name: string, email: string, labor: Set<TypeWork>){
+                        super(id, name, email, labor);
+    }
+}
+
+class InternalPerson extends DutyManager{
+
+    constructor(id: number, name: string, email: string, labor: Set<TypeWork>){
+                        super(id, name, email, labor);
+    }
+}
+
+class FactoryDutyManager{
+    public getInspection(choiceDuty: number, id: number, name: string, email: string, labor: Set<TypeWork>
+                            , managerName?: string, idManager?: number): DutyManager{
+        switch (choiceDuty) {
+            case 1:
+                return new InternalPerson(id, name, email, labor);
+            case 2:
+                return new ExternalPerson(id, name, email, labor);
+            case 3:
+                return new LegalPerson(id, name, email, labor, managerName!, idManager!);
+            default:
+                return null!;
+        }
+    }
+}
+
+
+export { DutyManager, TypeWork, LegalPerson, InternalPerson, ExternalPerson, FactoryDutyManager}
