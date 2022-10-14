@@ -10,8 +10,9 @@ import { Element } from '../Model/Element'
 import { Inspection, FactoryInspections ,State, InspectionArea } from '../Model/Inspection'
 import { Rol, User } from '../Model/User'
 import { DutyManager, TypeWork } from '../Model/DutyManager'
+import { queryAllByAltText } from '@testing-library/react'
 
-class controller{
+class Controller{
     private adminArea: AdminArea = new AdminArea();
     private adminElement: AdminElement = new AdminElement();
     private adminDutyManager: AdminDutyManager = new AdminDutyManager;
@@ -28,7 +29,10 @@ class controller{
         this.adminSpolaige.add(newSpolaige);
     }
     
-    public seePolaige(){}//preguntar como se va a ver
+    public seePolaige(id: string){
+        let polaige = this.adminSpolaige.see(id);
+        console.log(polaige);
+    }//preguntar como se va a ver
 
     public modifyPolaige(id: string, description: string, type: TypeSpolaige){
         //Validar nombre && type
@@ -158,3 +162,6 @@ class controller{
         this.adminDutyManager.delete(id);
     }
 }
+
+let controller = new Controller();
+export { controller }

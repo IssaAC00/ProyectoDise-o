@@ -1,7 +1,7 @@
 import { Spolaige} from '../Model/Spolaige'
 
 class AdminSpolaige{
-    private _spolaiges: Spolaige[];
+    private _spolaiges: Spolaige[] = [];
 
     constructor(){}
 
