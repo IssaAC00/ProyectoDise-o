@@ -5,7 +5,7 @@ class AdminElement{
 
     constructor(){}
 
-    private search(id: string): Element{
+    public search(id: string): Element{
         for(const element of this._elements){
             if (element.id === id) {
                 return element;
@@ -33,7 +33,8 @@ class AdminElement{
         return true;
     }
 
-    public delete(element: Element):boolean{
+    public delete(id: string):boolean{
+        let element = this.search(id);
         this._elements = this._elements.filter(item => item !== element);
         return true;
     }
