@@ -17,6 +17,8 @@ function login (): JSX.Element {
                 <label style = {{color: 'white', position: 'absolute', top: 230, left: 65, fontSize: 23, fontWeight: 'bold'}}>Contraseña</label>
                 <input type="text" placeholder="Contraseña" className='Input-Clave' />
                 </div>
+
+                <button style = {{color: 'white', backgroundColor: '#D8AE7C' ,position: 'absolute', top: 750, left: 780, fontSize: 23, fontWeight: 'bold'}}>Ingresar</button>
             
             </div>
 
