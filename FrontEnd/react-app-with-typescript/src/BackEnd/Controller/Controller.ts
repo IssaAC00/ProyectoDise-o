@@ -9,8 +9,7 @@ import { Area } from '../Model/Area'
 import { Element } from '../Model/Element'
 import { Inspection, FactoryInspections ,State, InspectionArea } from '../Model/Inspection'
 import { Rol, User } from '../Model/User'
-import { DutyManager, TypeWork } from '../Model/DutyManager'
-import { queryAllByAltText } from '@testing-library/react'
+import { DutyManager, TypeWork, FactoryDutyManager} from '../Model/DutyManager'
 
 class Controller{
     private adminArea: AdminArea = new AdminArea();
@@ -144,9 +143,11 @@ class Controller{
     //DutyManager
 
     //Preguntar legal
-    public registerDutyManager(id: number, name: string, email: string, labor: Set<TypeWork>){
+    public registerDutyManager(optionDM:number, id: number, name: string, email: string, 
+                                labor: Set<TypeWork>, managerName?: string, idManager?: number){
         //Validar email y contra
-        let newDutyManager = new DutyManager(id, name, email, labor);
+        let factoryDutyManager = new FactoryDutyManager();
+        let newDutyManager = factoryDutyManager.getInspection(optionDM, id, name, email, labor, managerName, idManager);
         this.adminDutyManager.add(newDutyManager);
     }
     
@@ -154,8 +155,8 @@ class Controller{
 
     public modifyDutyManager(id: number, name: string, email: string, labor: Set<TypeWork>){
         //Validar nombre && type
-        let newDutyManager = new DutyManager(id, name, email, labor);
-        this.adminDutyManager.modify(newDutyManager);
+        //let newDutyManager = new DutyManager(id, name, email, labor);
+        //this.adminDutyManager.modify(newDutyManager);
     }
 
     public deleteDutyManager(id: number){
