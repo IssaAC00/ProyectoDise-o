@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import "./areas.css"
 import '../componentes/buttonS.css'
 import { controller } from '../BackEnd/Controller/Controller';
-import { stringify } from 'querystring';
+import { Floor } from '../BackEnd/Model/Area';
 
 
 
@@ -17,7 +17,7 @@ function Areas(): JSX.Element{
         code: '',
         description: '',
         address: '',
-        floor: '',
+        floor: '1',
         PDF: 'dsadsadas.pdf'
     });
   
@@ -44,13 +44,13 @@ function Areas(): JSX.Element{
       }
 
       function Registrar (){
-      //  controller.registerArea();
+      let floor = form.floor as unknown;
+      controller.registerArea(form.code, form.description, [form.PDF], form.address, floor as Floor);
       }
       
       const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [event.target.name]: event.target.value })
         form.floor = selectedOption as string;
-        console.log(form);
       }
 
 
