@@ -5,7 +5,7 @@ class AdminUser{
 
     constructor(){}
 
-    private search(email: string): User{
+    public search(email: string): User{
         for(const user of this._users){
             if (user.email === email) {
                 return user;

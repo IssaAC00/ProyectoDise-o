@@ -5,7 +5,7 @@ import { AdminInspection } from './AdminInspection'
 import { AdminSpolaige } from './AdminSpolaige'
 import { AdminUser } from './AdminUser'
 import { Spolaige, TypeSpolaige } from '../Model/Spolaige'
-import { Area } from '../Model/Area'
+import { Area, Floor } from '../Model/Area'
 import { Element } from '../Model/Element'
 import { Inspection, FactoryInspections ,State, InspectionArea } from '../Model/Inspection'
 import { Rol, User } from '../Model/User'
@@ -46,19 +46,21 @@ class Controller{
 
     //Area
 
-    public registerArea(id: string, description: string, images: string[], location: string){
+    public registerArea(id: string, description: string, images: string[], location: string, floor: Floor){
         //Validar id, description 
 
-        //let newArea = new Area(id, description, images, location);
-        //this.adminArea.add(newArea);
+        let newArea = new Area(id, description, images, location, floor);
+        this.adminArea.add(newArea);
     }
     
-    public seeArea(){}//preguntar como se va a ver
+    public seeArea(idArea: string): Area{
+        return this.adminArea.search(idArea);
+    }//preguntar como se va a ver
 
-    public modifyArea(id: string, description: string, images: string[], location: string){
+    public modifyArea(id: string, description: string, images: string[], location: string, floor: Floor){
         //Validar description
-        //let newArea = new Area(id, description, images, location);
-        //this.adminArea.modify(newArea);
+        let newArea = new Area(id, description, images, location);
+        this.adminArea.modify(newArea);
     }
 
     public deleteArea(id: string){
@@ -74,7 +76,9 @@ class Controller{
         this.adminElement.add(newElement);
     }
     
-    public seeElement(){}//preguntar como se va a ver
+    public seeElement(idElement: string): Element{
+        return this.adminElement.search(idElement);
+    }//preguntar como se va a ver
 
     public modifyElement(id: string, description: string, images: string[], location: string, idArea: string){
         //Validar nombre && type
@@ -106,7 +110,9 @@ class Controller{
         this.adminInspection.add(newInspection);
     }
     
-    public seeInspection(){}//preguntar como se va a ver
+    public seeInspection(idInspection: number): Inspection{
+        return this.adminInspection.search(idInspection);
+    }//preguntar como se va a ver
 
     //Cuando se haga el register
     public modifyInspection(id: string, description: string, images: string[], location: string, idArea: string){
@@ -128,7 +134,9 @@ class Controller{
         this.adminUser.add(newUser);
     }
     
-    public seeUser(){}//preguntar como se va a ver
+    public seeUser(idUser: string): User{
+        return this.adminUser.search(idUser);
+    }//preguntar como se va a ver
 
     public modifyUser(email: string, password: string, rol: Rol){
         //Validar nombre && type
@@ -138,6 +146,14 @@ class Controller{
 
     public deleteUser(email: string){
         this.adminUser.delete(email);
+    }
+
+    public login(email: string, password: string): boolean{
+        let user = this.adminUser.search(email);
+        if(user !== undefined && user.password === password){
+            return true;
+        }
+        return false;
     }
 
     //DutyManager
@@ -151,7 +167,9 @@ class Controller{
         this.adminDutyManager.add(newDutyManager);
     }
     
-    public seeDutyManager(){}//preguntar como se va a ver
+    public seeDutyManager(idDutyManager: number): DutyManager{
+        return this.adminDutyManager.search(idDutyManager);
+    }//preguntar como se va a ver
 
     public modifyDutyManager(id: number, name: string, email: string, labor: Set<TypeWork>){
         //Validar nombre && type
