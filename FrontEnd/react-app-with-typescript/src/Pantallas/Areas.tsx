@@ -12,12 +12,12 @@ function Areas(): JSX.Element{
     const [selectedOption, setSelectedOption] = useState<String>();
   
     const techCompanies = [
-        { label: "Apple", value: '1' },
-        { label: "Facebook", value: '2' },
-        { label: "Netflix", value: '3' },
-        { label: "Tesla", value: '4' },
-        { label: "Amazon", value: '5' },
-        { label: "Alphabet", value: '6' },
+        { label: "Primer Piso", value: '1' },
+        { label: "Segundo Piso", value: '2' },
+        { label: "Tercer Piso", value: '3' },
+        { label: "Cuarto Piso", value: '4' },
+        { label: "Sótano", value: '5' },
+        { label: "Atico", value: '6' },
       ];
   
 
@@ -38,32 +38,35 @@ function Areas(): JSX.Element{
         
         <div>
             <Navbar />
-            <label> Código </label>
-            <input type="text"  className='input-global' />
+            <label style = {{position: 'absolute', top: 200, left: 300, fontSize: 32, fontWeight: 'bold'}}> Código </label>
+            <input type="text"  className='input-global'  style = {{position: 'absolute', top: 150, left: 500, fontSize: 32}} />
 
-            <label> Descripción </label>
-            <input type="text"  className='input-global' />
+            <label style = {{position: 'absolute', top: 400, left: 300, fontSize: 32, fontWeight: 'bold'}}> Descripción </label>
+            <input type="text"  className='input-global' style = {{position: 'absolute', top: 350, left: 500, fontSize: 23, fontWeight: 'bold'}} />
+ 
+            <label style = {{position: 'absolute', top: 600, left: 300, fontSize: 32, fontWeight: 'bold'}}> Ubicación </label>
+            <input type="text"  className='input-global' style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold'}} />
 
-            <label> Ubicación </label>
-            <input type="text"  className='input-global' />
-
-            <select onChange = {selectChange} className= 'dropdown'>
+            <label style = {{position: 'absolute', top: 800, left: 300, fontSize: 32, fontWeight: 'bold'}}> Piso </label>
+            <select onChange = {selectChange} className= 'dropdown'  style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold'}}>
             {techCompanies.map((options) => (
             <option key={options.label} value={options.value}>
             {options.label}
             </option>
             ))}
             </select>
-            <button  className='buttonS' style = {{position: 'absolute', top: 410, left: 700, fontSize: 23, fontWeight: 'bold'}}>Buscar</button>
-            <button  className='buttonS' style = {{position: 'absolute', top: 210, left: 700, fontSize: 23, fontWeight: 'bold'}}> Volver</button>
-            <button  className='buttonS' style = {{position: 'absolute', top: 710, left: 700, fontSize: 23, fontWeight: 'bold'}}>Registrar Area</button>
-            <button  className='buttonS' style = {{position: 'absolute', top: 810, left: 700, fontSize: 23, fontWeight: 'bold'}}>Eliminar Area</button>
-            <button  className='buttonS' style = {{position: 'absolute', top: 610, left: 700, fontSize: 23, fontWeight: 'bold'}}>Volver</button>
-            
-           
+
+            <button  className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
+            <button  className='buttonS' style = {{position: 'absolute', top: 190, left: 1350, fontSize: 23}}>Buscar</button>
+
+            <button  className='buttonS' style = {{position: 'absolute', top: 700, left: 1650, fontSize: 23}}> Editar</button>
+            <button  className='buttonS' style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar Area</button>
+            <button  className='buttonS' style = {{position: 'absolute', top: 860, left: 1650, fontSize: 23}}>Eliminar Area</button>
 
 
-            <div className='importPDF'>
+
+
+            <div className='importPDF'  >
                 
                 <svg xmlns="http://www.w3.org/2000/svg" width="20%" height="20%" fill="currentColor" >
                 <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
@@ -72,7 +75,8 @@ function Areas(): JSX.Element{
                 <label onClick={importar}>Adjuntar Imagen </label>
             </div>    
                 
-            
+            <input type="text"  style = {{position: 'absolute',  top: 270, left: 1900, fontSize: 23, fontWeight: 'bold' , height: 200}} />
+
          
             
         </div>
