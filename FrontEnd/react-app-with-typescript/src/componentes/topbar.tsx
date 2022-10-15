@@ -11,7 +11,6 @@ export default function topBar(){
         <NavbarBs sticky="top" className='topbarContainer'>
         <Container>
           <Nav >
-           
             <Nav.Link to="/Elementos" as={NavLink} className= 'Elemento' > Elementos</Nav.Link>
             <Nav.Link to="/Deterioro" as={NavLink} className = 'Deterioro'> Deterioro</Nav.Link>
             <Nav.Link to="/Encargado" as={NavLink} className = 'Encargado'> Encargado</Nav.Link>
