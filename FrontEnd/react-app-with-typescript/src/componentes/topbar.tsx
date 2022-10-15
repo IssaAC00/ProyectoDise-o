@@ -5,12 +5,21 @@ import './TopBar.css'
 
 export default function topBar(){
 
+
+
+
+
+
+
+
+
     return (
         <NavbarBs sticky="top" className='topbarContainer'>
         <Container>
           <Nav >
             <Nav.Link to="/Area" as={NavLink}  className = 'Areas'>Areas</Nav.Link>
             <Nav.Link to="/Elementos" as={NavLink} className = 'Elementos'> Elementos</Nav.Link>
+
           </Nav>
 
         </Container>
