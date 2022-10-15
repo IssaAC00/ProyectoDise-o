@@ -4,12 +4,22 @@ import '../componentes/inputEstiloGlobal.css'
 import React, { useState } from "react";
 import "./areas.css"
 import '../componentes/buttonS.css'
+import { controller } from '../BackEnd/Controller/Controller';
+import { stringify } from 'querystring';
 
 
 
 function Areas(): JSX.Element{
 
     const [selectedOption, setSelectedOption] = useState<String>();
+
+    const [form, setForm] = useState({
+        code: String,
+        description: String,
+        address: String,
+        floor: '1',
+        PDF: 'dsadsadas.pdf'
+    });
   
     const techCompanies = [
         { label: "Primer Piso", value: '1' },
@@ -33,19 +43,27 @@ function Areas(): JSX.Element{
 
       }
 
+      function Registrar (){
+        controller.registerArea();
+      }
+      
+      const changeHandler = (event: React.KeyboardEvent) => {
+        setForm({ ...form, [event.target.name]: event.target.value })
+      }
+
     
     return (
         
         <div>
             <Navbar />
             <label style = {{position: 'absolute', top: 200, left: 300, fontSize: 32, fontWeight: 'bold'}}> Código </label>
-            <input type="text"  className='input-global'  style = {{position: 'absolute', top: 150, left: 500, fontSize: 32}} />
+            <input name = 'code' id = 'code' onChange = {changeHandler} type="text"  className='input-global'  style = {{position: 'absolute', top: 150, left: 500, fontSize: 32}} />
 
             <label style = {{position: 'absolute', top: 400, left: 300, fontSize: 32, fontWeight: 'bold'}}> Descripción </label>
-            <input type="text"  className='input-global' style = {{position: 'absolute', top: 350, left: 500, fontSize: 23, fontWeight: 'bold'}} />
+            <input name = 'description' id = 'description' onChange = {changeHandler} type="text"  className='input-global' style = {{position: 'absolute', top: 350, left: 500, fontSize: 23, fontWeight: 'bold'}} />
  
             <label style = {{position: 'absolute', top: 600, left: 300, fontSize: 32, fontWeight: 'bold'}}> Ubicación </label>
-            <input type="text"  className='input-global' style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold'}} />
+            <input name = 'address' id = 'address' onChange = {changeHandler} type="text"  className='input-global' style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold'}} />
 
             <label style = {{position: 'absolute', top: 800, left: 300, fontSize: 32, fontWeight: 'bold'}}> Piso </label>
             <select onChange = {selectChange} className= 'dropdown'  style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold'}}>
@@ -60,7 +78,7 @@ function Areas(): JSX.Element{
             <button  className='buttonS' style = {{position: 'absolute', top: 190, left: 1350, fontSize: 23}}>Buscar</button>
 
             <button  className='buttonS' style = {{position: 'absolute', top: 700, left: 1650, fontSize: 23}}> Editar</button>
-            <button  className='buttonS' style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar Area</button>
+            <button  className='buttonS' onClick = {Registrar} style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar Area</button>
             <button  className='buttonS' style = {{position: 'absolute', top: 860, left: 1650, fontSize: 23}}>Eliminar Area</button>
 
 
