@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './login.css'
+import './Login.css'
 import '../componentes/buttonS.css'
 import  Navbar  from "../componentes/TopBarLogin"
 import imagenM from '../imagenes/img_2827_002.jpg'
@@ -19,6 +19,7 @@ function Login (): JSX.Element {
     function Prueba(){
         controller.registerPolaige('1', 'Prueba', null!);
     };
+    
     function Ingresar(){
         navigate('/Area');
       };
