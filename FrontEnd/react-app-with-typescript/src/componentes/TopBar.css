@@ -1,3 +1,6 @@
+
+
+
 .topbarContainer {
     height: 60px;
     width: 102%;
@@ -12,31 +15,17 @@
   }
 
 
-.Areas {
+.Elemento {
+
     font-size: x-large;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     display: flex;
-    align-items: center;
     position: relative;
     padding: 16px;
     left: 60rem;
-    top: -10rem;
+    top: 12.96rem;
 
 }
-
-.Elementos{
-    font-size: x-large;
-    color: white;
-    display: flex;
-    align-items: center;
-    position: relative;
-    padding: 16px;
-    left: 65rem;
-    top: 2rem;
-
-
-}
-
 
 
 .Titulo{
@@ -47,7 +36,7 @@
     position: relative;
     padding: 16px;
     left: 2rem;
-    top: 2rem;
+    top: 4rem;
 
 }
 
@@ -59,8 +48,8 @@
     align-items: center;
     position: relative;
     padding: 16px;
-    left: 72rem;
-    top: -4rem;
+    left: 68rem;
+    top: 9.1rem;
 
 }
 
@@ -72,8 +61,8 @@
     align-items: center;
     position: relative;
     padding: 16px;
-    left: 80rem;
-    top: -4rem;
+    left: 75rem;
+    top: 5.43rem;
 
 }
 
@@ -85,12 +74,53 @@
     align-items: center;
     position: relative;
     padding: 16px;
-    left: 80rem;
-    top: -4rem;
+    left: 83rem;
+    top: 1.7rem;
 
 
 }
 
+
+.Consultas{
+
+    font-size: x-large;
+    color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 16px;
+    left: 94rem;
+    top: -2rem;
+
+
+
+}
+
+.TareasEncarago{
+
+    
+    font-size: x-large;
+    color: rgb(245, 245, 245);
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 16px;
+    left: 101rem;
+    top: -5.7rem;
+
+
+}
+
+.A {
+    font-size: x-large;
+    color: rgb(255, 255, 255);
+    display: flex;
+    position: relative;
+    padding: 16px;
+    left: 55.3rem;
+    top: -9.3rem;
+
+}
 
 .svg{
     display: flex;

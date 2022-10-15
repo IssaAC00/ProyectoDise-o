@@ -1,12 +1,14 @@
 import React from 'react';
-
+import  Navbar  from "../componentes/topbar"
 
 
 function Encargado (): JSX.Element {
 
         return (
 
-            <div> Hola soy encargado</div>
+            <div> 
+                <Navbar />
+                Hola soy encargado</div>
 
 
         )

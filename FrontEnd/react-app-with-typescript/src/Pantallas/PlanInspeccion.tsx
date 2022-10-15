@@ -1,11 +1,15 @@
 import React from 'react';
-
+import  Navbar  from "../componentes/topbar"
 
 function PlanInspeccion (): JSX.Element {
 
         return(
 
-            <div>hello Soy plan de isnpecciones</div>
+            <div>
+                <Navbar />
+                hello Soy plan de isnpecciones
+
+            </div>
         )
 
 }

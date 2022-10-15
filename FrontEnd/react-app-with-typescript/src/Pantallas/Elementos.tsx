@@ -8,7 +8,7 @@ function Elementos(): JSX.Element{
 
         <div>
             <Navbar/>
-            <text>Hola soy elementos </text>
+            Hola soy elementos 
         </div>
     )
 

@@ -1,11 +1,14 @@
 import React from 'react';
+import  Navbar  from "../componentes/topbar"
 
 function Deterioro (): JSX.Element {
 
 
     return(
         
-        <div> Soy Deterioro </div>
+        <div>
+            <Navbar />
+             Soy Deterioro </div>
 
     )
 

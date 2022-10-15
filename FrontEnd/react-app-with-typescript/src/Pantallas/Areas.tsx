@@ -60,12 +60,7 @@ function Areas(): JSX.Element{
             <button  className='buttonS' style = {{position: 'absolute', top: 810, left: 700, fontSize: 23, fontWeight: 'bold'}}>Eliminar Area</button>
             <button  className='buttonS' style = {{position: 'absolute', top: 610, left: 700, fontSize: 23, fontWeight: 'bold'}}>Volver</button>
             
-            <select onChange = {selectChange} className= 'dropdown'>
-                {techCompanies.map((options) => (
-                <option key={options.label} value={options.value}>
-                {options.label}
-                </option>))}
-            </select>
+           
 
 
             <div className='importPDF'>

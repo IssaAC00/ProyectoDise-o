@@ -25,7 +25,7 @@ export default function RoutesP() {
         <BrowserRouter>
 
             <Routes>
-                <Route  path="/" element={<Login/>}/>
+                <Route path="/" element={<Login/>}/>
                 <Route path="/Area" element={<Areas />} />
                 <Route path="/Elementos" element={<Elementos />} />
                 <Route path="/Contraseña" element={<Contraseña />} />

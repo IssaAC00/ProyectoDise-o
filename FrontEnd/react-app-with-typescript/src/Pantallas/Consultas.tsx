@@ -1,12 +1,13 @@
 import React from 'react';
-
-
+import  Navbar  from "../componentes/topbar"
 
 
 function Consultas (): JSX.Element {
     return (
 
-        <div>Hello soy Consultas</div>
+        <div>
+            <Navbar />
+            Hello soy Consultas</div>
     )
 
 
