@@ -59,7 +59,7 @@ class Controller{
 
     public modifyArea(id: string, description: string, images: string[], location: string, floor: Floor){
         //Validar description
-        let newArea = new Area(id, description, images, location);
+        let newArea = new Area(id, description, images, location, floor);
         this.adminArea.modify(newArea);
     }
 
