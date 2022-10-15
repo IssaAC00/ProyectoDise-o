@@ -14,13 +14,13 @@
 
 .Areas {
     font-size: x-large;
-    color: white;
+    color: rgb(0, 0, 0);
     display: flex;
     align-items: center;
     position: relative;
     padding: 16px;
     left: 60rem;
-    top: 3.5rem;
+    top: -10rem;
 
 }
 
@@ -32,7 +32,7 @@
     position: relative;
     padding: 16px;
     left: 65rem;
-    top: -0.2rem;
+    top: 2rem;
 
 
 }
@@ -50,6 +50,47 @@
     top: 2rem;
 
 }
+
+.Deterioro{
+
+    font-size: x-large;
+    color: white;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 16px;
+    left: 72rem;
+    top: -4rem;
+
+}
+
+.Encargado {
+
+    font-size: x-large;
+    color: white;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 16px;
+    left: 80rem;
+    top: -4rem;
+
+}
+
+.PlanInspeccion{
+    
+    font-size: x-large;
+    color: white;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 16px;
+    left: 80rem;
+    top: -4rem;
+
+
+}
+
 
 .svg{
     display: flex;
