@@ -34,17 +34,20 @@ function Areas(): JSX.Element{
             <Navbar />
             <label> Código </label>
             <input type="text"  className='input-global' />
+
             <label> Descripción </label>
             <input type="text"  className='input-global' />
+
             <label> Ubicación </label>
             <input type="text"  className='input-global' />
+
             <select onChange = {selectChange} className= 'dropdown'>
             {techCompanies.map((options) => (
             <option key={options.label} value={options.value}>
             {options.label}
-        </option>
-    ))}
-    </select>
+            </option>
+            ))}
+            </select>
          
             
         </div>
