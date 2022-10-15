@@ -1,7 +1,7 @@
 import { Area } from '../Model/Area'
 
 class AdminArea{
-    private _areas: Area[];
+    private _areas: Area[] = [];
 
     constructor(){}
 
@@ -40,4 +40,4 @@ class AdminArea{
     }
 }
 
-export{AdminArea};
+export {AdminArea};

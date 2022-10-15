@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import './Login.css'
+import './login.css'
 import '../componentes/buttonS.css'
 import  Navbar  from "../componentes/TopBarLogin"
 import imagenM from '../imagenes/img_2827_002.jpg'
 import {   Nav, Navbar as NavbarBs } from "react-bootstrap"
 import { NavLink, useNavigate } from "react-router-dom"
+import {controller} from '../BackEnd/Controller/Controller'
 
 
 
@@ -15,7 +16,9 @@ function Login (): JSX.Element {
 
     const navigate = useNavigate(); 
 
-
+    function Prueba(){
+        controller.registerPolaige('1', 'Prueba', null!);
+    };
     function Ingresar(){
         navigate('/Area');
       };

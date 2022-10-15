@@ -1,7 +1,7 @@
 import { FactoryInspections, Inspection, State} from '../Model/Inspection'
 
 class AdminInspection{
-    private _inspections: Inspection[];
+    private _inspections: Inspection[] = [];
     private _factory:FactoryInspections =  new FactoryInspections();
 
     constructor(){}

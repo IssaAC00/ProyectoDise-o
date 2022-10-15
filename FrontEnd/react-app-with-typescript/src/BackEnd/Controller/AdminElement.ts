@@ -1,7 +1,7 @@
 import { Element } from '../Model/Element'
 
 class AdminElement{
-    private _elements: Element[];
+    private _elements: Element[] = [];
 
     constructor(){}
 

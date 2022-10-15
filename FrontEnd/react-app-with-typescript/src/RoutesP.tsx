@@ -5,7 +5,9 @@ import Login from './Pantallas/Login';
 import  Areas  from './Pantallas/Areas';
 import  Elementos  from './Pantallas/Elementos';
 import Contraseña from './Pantallas/Contraseña';
+import SuperUsuario from './Pantallas/SuperUsuario';
 import { Component } from 'react';
+
 
 
 
@@ -22,6 +24,8 @@ export default function RoutesP() {
                 <Route path="/Area" element={<Areas />} />
                 <Route path="/Elementos" element={<Elementos />} />
                 <Route path="/Contraseña" element={<Contraseña />} />
+                <Route path="/SuperUsuario" element={<SuperUsuario />} />
+                
               
                 
             </Routes>
