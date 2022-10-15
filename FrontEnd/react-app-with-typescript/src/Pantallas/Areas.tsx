@@ -14,20 +14,20 @@ function Areas(): JSX.Element{
     const [selectedOption, setSelectedOption] = useState<String>();
 
     const [form, setForm] = useState({
-        code: String,
-        description: String,
-        address: String,
-        floor: '1',
+        code: '',
+        description: '',
+        address: '',
+        floor: '',
         PDF: 'dsadsadas.pdf'
     });
   
     const techCompanies = [
-        { label: "Primer Piso", value: '1' },
-        { label: "Segundo Piso", value: '2' },
-        { label: "Tercer Piso", value: '3' },
-        { label: "Cuarto Piso", value: '4' },
-        { label: "Sótano", value: '5' },
-        { label: "Atico", value: '6' },
+        { label: "Primer Piso", value: "Primer Piso" },
+        { label: "Segundo Piso", value: "Segundo Piso" },
+        { label: "Tercer Piso", value: "Tercer Piso" },
+        { label: "Cuarto Piso", value: "Cuarto Piso" },
+        { label: "Sótano", value:"Sótano" },
+        { label: "Atico", value: "Atico" },
       ];
   
 
@@ -49,6 +49,7 @@ function Areas(): JSX.Element{
       
       const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [event.target.name]: event.target.value })
+        form.floor = selectedOption as string;
         console.log(form);
       }
 
@@ -69,7 +70,7 @@ function Areas(): JSX.Element{
             <input name = 'address' id = 'address' onChange = {changeHandler} type="text"  className='input-global' style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold'}} />
 
             <label style = {{position: 'absolute', top: 800, left: 300, fontSize: 32, fontWeight: 'bold'}}> Piso </label>
-            <select onChange = {selectChange} className= 'dropdown'  style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold'}}>
+            <select onChange = {selectChange} className= 'dropdown' name= 'floor' style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold'}}>
             {techCompanies.map((options) => (
             <option key={options.label} value={options.value}>
             {options.label}
