@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './Login.css'
+import './login.css'
 import '../componentes/buttonS.css'
 import  Navbar  from "../componentes/TopBarLogin"
 import imagenM from '../imagenes/img_2827_002.jpg';
@@ -7,11 +7,6 @@ import fondo from '../imagenes/fondo.png';
 import {   Nav, Navbar as NavbarBs } from "react-bootstrap"
 import { NavLink, useNavigate } from "react-router-dom"
 import {controller} from '../BackEnd/Controller/Controller'
-
-
-
-
-   
 
 function Login (): JSX.Element {
 
@@ -40,12 +35,8 @@ function Login (): JSX.Element {
                 </Nav>
                 <img src={imagenM}  style = {{position: 'absolute', top: 210, left: 1500, fontSize: 23, fontWeight: 'bold'}}/>
             </div>
-
-
-
         )
 
 }
-
 
 export default Login;
