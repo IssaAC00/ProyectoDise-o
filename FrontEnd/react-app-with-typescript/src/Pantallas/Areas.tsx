@@ -44,12 +44,15 @@ function Areas(): JSX.Element{
       }
 
       function Registrar (){
-        controller.registerArea();
+      //  controller.registerArea();
       }
       
-      const changeHandler = (event: React.KeyboardEvent) => {
+      const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [event.target.name]: event.target.value })
+        console.log(form);
       }
+
+
 
     
     return (
