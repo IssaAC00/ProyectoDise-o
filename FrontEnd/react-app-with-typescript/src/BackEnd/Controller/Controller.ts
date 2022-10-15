@@ -49,16 +49,16 @@ class Controller{
     public registerArea(id: string, description: string, images: string[], location: string){
         //Validar id, description 
 
-        let newArea = new Area(id, description, images, location);
-        this.adminArea.add(newArea);
+        //let newArea = new Area(id, description, images, location);
+        //this.adminArea.add(newArea);
     }
     
     public seeArea(){}//preguntar como se va a ver
 
     public modifyArea(id: string, description: string, images: string[], location: string){
         //Validar description
-        let newArea = new Area(id, description, images, location);
-        this.adminArea.modify(newArea);
+        //let newArea = new Area(id, description, images, location);
+        //this.adminArea.modify(newArea);
     }
 
     public deleteArea(id: string){

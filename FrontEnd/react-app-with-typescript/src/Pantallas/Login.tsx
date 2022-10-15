@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import './login.css'
 import '../componentes/buttonS.css'
 import  Navbar  from "../componentes/TopBarLogin"
-import imagenM from '../imagenes/img_2827_002.jpg'
+import imagenM from '../imagenes/img_2827_002.jpg';
+import fondo from '../imagenes/fondo.png';
 import {   Nav, Navbar as NavbarBs } from "react-bootstrap"
 import { NavLink, useNavigate } from "react-router-dom"
 import {controller} from '../BackEnd/Controller/Controller'
@@ -24,7 +25,7 @@ function Login (): JSX.Element {
       };
 
         return (
-            <div>
+            <div style = {{backgroundImage:`url(${fondo})`, height: '1200px'}}>
                 <Navbar />
                 <div className='login-container' >
                 <label style = {{color: 'white', position: 'absolute', top: 70, left: 65, fontSize: 23, fontWeight: 'bold'}}>Usuario</label>

@@ -1,5 +1,6 @@
 import './superUsuario.css'
 import  Navbar  from "../componentes/TopBarSuperUsuario"
+import fondo from '../imagenes/fondo.png';
 import React, { useState } from "react";
 
 
@@ -23,7 +24,7 @@ function SuperUsuario(): JSX.Element{
     return (
         
 
-        <div>
+        <div style = {{backgroundImage:`url(${fondo})`, height: '800px'}}>
             <Navbar />
             <div>
                 <label style = {{color: 'black', position: 'absolute', top: 160, left: 70, fontSize: 15, fontWeight: 'bold'}}>Email</label>
