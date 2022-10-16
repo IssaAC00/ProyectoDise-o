@@ -60,7 +60,7 @@ function Areas(): JSX.Element{
             form.floor.trim() !== ''){
           controller.registerArea(form.code, form.description, [form.PDF], form.address, Number(form.floor));
           //window.location.reload();
-          setFormValues('','','','','');
+          setFormValues('','','', form.floor,'');
           alert("Agregado exitosamente")
         }else{
           console.log('No deben existir espacios en blanco');
@@ -69,13 +69,13 @@ function Areas(): JSX.Element{
 
       function Searh(){
         let areaS = controller.seeArea(form.code);
-        setFormValues(areaS.id, areaS.description, areaS.location,String(areaS.floor), areaS.images.at(0)?.toString() as string);
+        setFormValues(areaS.id, areaS.description, areaS.location, String(areaS.floor), areaS.images.at(0)?.toString() as string);
         console.log(areaS);
       }
       
       function Drop(){
         controller.deleteArea(form.code);
-        setFormValues('','','','','');
+        setFormValues('','','', form.floor,'');
         alert("Eliminado exitosamente")
       }
 
@@ -83,7 +83,7 @@ function Areas(): JSX.Element{
         if( form.code.trim() !== '' && form.description.trim() !== '' && form.address.trim() !== '',
             form.floor.trim() !== ''){
           controller.modifyArea(form.code, form.description, [form.PDF], form.address, Number(form.floor));
-          setFormValues('','','','','');
+          setFormValues('','','', form.floor,'');
           alert("Editado exitosamente")
         }else{
           console.log('No deben existir espacios en blanco');

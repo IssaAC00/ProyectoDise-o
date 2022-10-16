@@ -28,9 +28,9 @@ class Controller{
         this.adminSpolaige.add(newSpolaige);
     }
     
-    public seePolaige(id: string){
+    public seePolaige(id: string): Spolaige{
         let polaige = this.adminSpolaige.see(id);
-        console.log(polaige);
+        return polaige;
     }//preguntar como se va a ver
 
     public modifyPolaige(id: string, description: string, type: TypeSpolaige){

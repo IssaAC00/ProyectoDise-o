@@ -3,6 +3,8 @@ import  Navbar  from "../componentes/topbar"
 import "./areas.css"
 import '../componentes/buttonS.css'
 import '../componentes/inputEstiloGlobal.css'
+import { controller } from '../BackEnd/Controller/Controller'
+import { Spolaige } from '../BackEnd/Model/Spolaige'
 
 function Deterioro (): JSX.Element {
 
@@ -10,21 +12,67 @@ function Deterioro (): JSX.Element {
     const [selectedOption, setSelectedOption] = useState<String>();
   
     const techCompanies = [
-        { label: "Agente 1", value: '1' },
-        { label: "Agente 2", value: '2' },
-        { label: "Agente 3", value: '3' },
+        { label: "Natural", value: '0' },
+        { label: "Circunstancial", value: '1' },
    
       ];
+
+      const [form, setForm] = useState({
+        code: '',
+        description: '',
+        type: '0' 
+      });
   
-
-
     const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
         setSelectedOption(value);
         console.log(value);
-      };
+        form.type = value;
+    };
 
+    function setFormValues(idS: string, descriptionS: string, rolS: string){
+      setForm({
+        code: idS,
+        description: descriptionS,
+        type: rolS
+      })
+    }
 
+    function Register(){
+      if( form.code.trim() !== '' && form.description.trim() !== ''){
+          controller.registerPolaige(form.code, form.description, Number(form.type));
+          setFormValues('','', form.type);
+          alert("Agregado exitosamente")
+        }else{
+          console.log('No deben existir espacios en blanco');
+        }
+    }
+
+    function Modify(){
+      if( form.code.trim() !== '' && form.description.trim() !== ''){
+        controller.modifyPolaige(form.code, form.description, Number(form.type));
+        setFormValues('','', form.type);
+        alert("Agregado exitosamente")
+      }else{
+        console.log('No deben existir espacios en blanco');
+      }
+    }
+
+    function Drop(){
+      controller.deleteSpolaige(form.code);
+      setFormValues('','', form.type);
+      alert("Eliminado exitosamente")      
+    }
+
+    function Search(){
+      let polaigeS = controller.seePolaige(form.code);
+      setFormValues(polaigeS.id , polaigeS.description, String(polaigeS.type));
+      console.log(polaigeS);
+    }
+
+    const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setForm({ ...form, [event.target.name]: event.target.value });
+    }
 
 
 
@@ -38,14 +86,14 @@ function Deterioro (): JSX.Element {
             <Navbar />
 
             <label style = {{position: 'absolute', top: 200, left: 300, fontSize: 32, fontWeight: 'bold'}}> Código </label>
-            <input type="text"  className='input-global'  style = {{position: 'absolute', top: 150, left: 500, fontSize: 32}} />
+            <input type="text"  name = 'code' value={form.code} id = 'code' onChange = {changeHandler} className='input-global'  style = {{position: 'absolute', top: 150, left: 500, fontSize: 32}} />
 
             <label style = {{position: 'absolute', top: 400, left: 300, fontSize: 32, fontWeight: 'bold'}}> Descripción </label>
-            <input type="text"  className='input-global' style = {{position: 'absolute', top: 350, left: 500, fontSize: 23, fontWeight: 'bold'}} />
+            <input type="text"  name = 'description' value={form.description} id = 'description' onChange = {changeHandler} className='input-global' style = {{position: 'absolute', top: 350, left: 500, fontSize: 23, fontWeight: 'bold'}} />
  
 
             <label style = {{position: 'absolute', top: 600, left: 300, fontSize: 32, fontWeight: 'bold'}}> Tipo Deterioro </label>
-            <select onChange = {selectChange} className= 'dropdown'  style = {{position: 'absolute', top: 578, left: 600, fontSize: 23, fontWeight: 'bold'}}>
+            <select onChange = {selectChange} value={form.type} className= 'dropdown'  style = {{position: 'absolute', top: 578, left: 600, fontSize: 23, fontWeight: 'bold'}}>
             {techCompanies.map((options) => (
             <option key={options.label} value={options.value}>
             {options.label}
@@ -54,11 +102,11 @@ function Deterioro (): JSX.Element {
             </select>
 
             <button  className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
-            <button  className='buttonS' style = {{position: 'absolute', top: 190, left: 1350, fontSize: 23}}>Buscar</button>
+            <button  className='buttonS' onClick= {Search} style = {{position: 'absolute', top: 190, left: 1350, fontSize: 23}}>Buscar</button>
 
-            <button  className='buttonS' style = {{position: 'absolute', top: 700, left: 1650, fontSize: 23}}> Editar</button>
-            <button  className='buttonS' style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar Area</button>
-            <button  className='buttonS' style = {{position: 'absolute', top: 860, left: 1650, fontSize: 23}}>Eliminar Area</button>
+            <button  className='buttonS' onClick= {Modify} style = {{position: 'absolute', top: 700, left: 1650, fontSize: 23}}> Editar</button>
+            <button  className='buttonS' onClick= {Register} style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar Deterioro</button>
+            <button  className='buttonS' onClick= {Drop} style = {{position: 'absolute', top: 860, left: 1650, fontSize: 23}}>Eliminar Deterioro</button>
 
     
             
