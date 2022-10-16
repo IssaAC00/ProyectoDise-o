@@ -50,3 +50,33 @@
     font-size: 30px;
     outline:  none;
 }
+
+.importPDF {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #b4b4b4;
+    position: relative;
+    padding: 16px;
+    left: 100rem;
+    top: 13rem;
+    width: 150px;
+    height: 40px;
+    border-radius: 10px; 
+}
+
+.imagenesAdjuntadas {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #b4b4b4;
+    position: relative;
+    padding: 16px;
+    left: 100rem;
+    top: 13rem;
+    width: 200px;
+    height: 130px;
+    border-radius: 10px; 
+}
