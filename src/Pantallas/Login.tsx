@@ -7,6 +7,7 @@ import fondo from '../imagenes/fondo.png';
 import {   Nav, Navbar as NavbarBs } from "react-bootstrap"
 import { NavLink, useNavigate } from "react-router-dom"
 import {controller} from '../BackEnd/Controller/Controller'
+import '../componentes/ajustePaginas.css'
 
 function Login (): JSX.Element {
 
@@ -21,15 +22,15 @@ function Login (): JSX.Element {
       };
 
         return (
-            <div style = {{backgroundImage:`url(${fondo})`, height: '1200px'}}>
+            <div  style = {{backgroundImage:`url(${fondo})`, height: '1200px'}}>
                 <Navbar />
                 <div className='login-container' >
                 <label style = {{color: 'white', position: 'absolute', top: 70, left: 65, fontSize: 23, fontWeight: 'bold'}}>Usuario</label>
-                <input type="text" placeholder="_________________" className='Input-container' />
+                <input type="text" placeholder="_________________" className='Input-container' style={{ width: 300 , height: 60, color: 'black' }}/>
                 <label style = {{color: 'white', position: 'absolute', top: 230, left: 65, fontSize: 23, fontWeight: 'bold'}}>Contraseña</label>
-                <input type="password" placeholder="_________________" className='Input-Clave' />
+                <input type="password" placeholder="_________________" className='Input-Clave' style={{ width: 300 , height: 60, color: 'black' }} />
                 </div>
-                <button onClick={Ingresar} className='buttonS' style = {{position: 'absolute', top: 710, left: 700, fontSize: 23, fontWeight: 'bold'}}>Ingresar</button>
+                <button onClick={Ingresar} className='buttonS' style = {{position: 'absolute', top: 710, left: 600, fontSize: 23, fontWeight: 'bold'}}>Ingresar</button>
                 <Nav >
                  <Nav.Link to="/Contraseña" as={NavLink}  className = 'Contraseña '>Olvidaste tu contraseña</Nav.Link>
                 </Nav>

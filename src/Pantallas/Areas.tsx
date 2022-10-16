@@ -120,7 +120,7 @@ function Areas(): JSX.Element{
             </select>
 
             <button  className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
-            <button  className='buttonS' onClick = {Searh} style = {{position: 'absolute', top: 190, left: 1350, fontSize: 23}}>Buscar</button>
+            <button  className='buttonS' onClick = {Searh} style = {{position: 'absolute', top: 180, left: 1150, fontSize: 23}}>Buscar</button>
 
             <button  className='buttonS' onClick= {Modify} style = {{position: 'absolute', top: 700, left: 1650, fontSize: 23}}> Editar</button>
             <button  className='buttonS' onClick = {Register} style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar Area</button>
@@ -129,7 +129,7 @@ function Areas(): JSX.Element{
 
 
 
-            <div className='importPDF'  >
+            <div className='importPDF' style = {{position: 'absolute', top: 300, left: 1700}}  >
                 
                 <svg xmlns="http://www.w3.org/2000/svg" width="20%" height="20%" fill="currentColor" >
                 <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
@@ -138,7 +138,7 @@ function Areas(): JSX.Element{
                 <label onClick={importar}>Adjuntar Imagen </label>
             </div>    
                 
-            <input type="text" value={form.PDF} style = {{position: 'absolute',  top: 270, left: 1900, fontSize: 23, fontWeight: 'bold' , height: 200}} />
+            <input type="text" value={form.PDF} style = {{position: 'absolute',  top: 270, left: 2000, fontSize: 23, fontWeight: 'bold' , height: 200}} />
 
          
             
