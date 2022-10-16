@@ -15,10 +15,14 @@ function Encargado (): JSX.Element {
             });
         
         const [selectedOption, setSelectedOption] = useState<String>();
-        const [selectedLaboro, setSelectLaboro] = useState<String>();
+        const [selectedLaboro, setSelectLaboro] = useState();
 
         var options = [{id:'Cedula Juridica',nm:"Cedula Juridica", topl: 200, leftl: 1340, top: 0, left: -40 },
         {id:'Cedula Fisica',nm:"Cedula Fisica",top: 0, left: -40,topl: 200, leftl: 1500}];
+
+        var trabajos = [{id:'Inspección',nm:"Inspección", topl: 200, leftl: 1340, top: 0, left: -40 },
+        {id:'Conservación',nm:"Conservación",top: 0, left: -40,topl: 200, leftl: 1500},
+         {id:'Restauración ',nm:"Restauración ", topl: 200, leftl: 1340, top: 0, left: -40 }];
 
 
      
@@ -34,12 +38,7 @@ function Encargado (): JSX.Element {
                 console.log(form);
               }
         
-        
-        function set(){
-
-                console.log('tontera')
-                
-        }
+     
               
 
         return (
