@@ -1,0 +1,14 @@
+.importPDF {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #b4b4b4;
+    position: relative;
+    padding: 16px;
+    left: 45rem;
+    top: 28rem;
+    width: 150px;
+    height: 72px;
+    border-radius: 10px;
+}
