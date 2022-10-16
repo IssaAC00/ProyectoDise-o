@@ -1,0 +1,122 @@
+CREATE TABLE Rol (
+    id integer PRIMARY KEY,
+    description VARCHAR(150) 
+);
+
+
+
+CREATE TABLE FloorType (
+    id integer PRIMARY KEY,
+    description VARCHAR(150)
+);
+
+CREATE TABLE Estado (
+    id integer PRIMARY KEY,
+    description VARCHAR(150)
+);
+
+CREATE TABLE TypeSpolaige (
+    id integer PRIMARY KEY,
+    description VARCHAR(150)
+);
+CREATE TABLE TypeWork (
+    id integer PRIMARY KEY,
+    description VARCHAR(150)
+);
+
+
+CREATE TABLE USUARIO (
+    userMail VARCHAR(150) PRIMARY KEY,
+    userPassword VARCHAR(150),
+    rol integer,
+    FOREIGN KEY (rol) REFERENCES Rol (id)
+);
+
+
+CREATE TABLE Area (
+    id VARCHAR(150) PRIMARY KEY,
+    description VARCHAR(150),
+    imagen VARCHAR(150),
+    ubicacion VARCHAR(150),
+    floorA integer,
+    FOREIGN KEY (floorA) REFERENCES FloorType (id)
+    
+);
+
+CREATE TABLE Element (
+    id VARCHAR(150) PRIMARY KEY,
+    description VARCHAR(150),
+    imagen VARCHAR(150),
+    ubicacion VARCHAR(150),
+    detail VARCHAR(150),
+    areaID integer,
+    FOREIGN KEY (areaID) REFERENCES Area (id)
+    
+);
+
+
+CREATE TABLE DutyManager (
+    DNIManager integer PRIMARY KEY,
+    nameDutManager VARCHAR(150),
+    emailDutyManager VARCHAR(150),
+    typeWork integer,
+    FOREIGN KEY (typeWork) REFERENCES TypeWork (id)
+);
+
+
+CREATE TABLE LegalPerson (
+    legalPerson VARCHAR(150) PRIMARY KEY,
+    DNIMANAGER integer,
+    FOREIGN KEY (DNIMANAGER) REFERENCES DutyManager (DNIManager)
+
+);
+
+CREATE TABLE SpolaigeArea (
+    id integer PRIMARY KEY,
+    description VARCHAR(150),
+    type_typespolaige integer, 
+    area_id integer,
+    FOREIGN KEY (type_typespolaige) REFERENCES TypeSpolaige (id)
+);
+
+
+CREATE TABLE Inspeccion (
+    id VARCHAR(150) PRIMARY KEY,
+    description VARCHAR(150),
+    initialInspection date,
+    endDateInspection date,
+    dateRealice date,
+    dutyManager integer,
+    pdf VARCHAR(150),
+    idxinspeccionarArea VARCHAR(150),
+    idxinspeccionarElemento VARCHAR(150),
+    result integer,
+    estado integer,
+
+    FOREIGN KEY (estado) REFERENCES Estado (id),
+    FOREIGN KEY (dutyManager) REFERENCES DutyManager (DNIManager),
+    FOREIGN KEY (resultado) REFERENCES TypeWork (id),
+    FOREIGN KEY (idxinspeccionarArea) REFERENCES Area (id),
+    FOREIGN KEY (idxinspeccionarElemento) REFERENCES Element (id)
+    
+);
+
+CREATE TABLE inspeccionArea (
+    inspeccion_id integer PRIMARY KEY,
+    idxinspeccionar VARCHAR(150),
+    FOREIGN KEY (idxinspeccionar) REFERENCES Inspeccion (idxinspeccionarArea)
+);
+
+
+CREATE TABLE inspeccionElemento (
+    inspeccion_id integer PRIMARY KEY,
+    idxinspeccionar VARCHAR(150),
+
+    FOREIGN KEY (idxinspeccionar) REFERENCES Inspeccion (idxinspeccionarElemento)
+);
+
+
+
+
+
+--http://localhost/phpmyadmin/index.php?route=/database/structure&tbl_type=table&db=mysql link al server donde esta la BD
