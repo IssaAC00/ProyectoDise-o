@@ -27,7 +27,7 @@ function Login (): JSX.Element {
                 <label style = {{color: 'white', position: 'absolute', top: 70, left: 65, fontSize: 23, fontWeight: 'bold'}}>Usuario</label>
                 <input type="text" placeholder="_________________" className='Input-container' />
                 <label style = {{color: 'white', position: 'absolute', top: 230, left: 65, fontSize: 23, fontWeight: 'bold'}}>Contraseña</label>
-                <input type="text" placeholder="_________________" className='Input-Clave' />
+                <input type="password" placeholder="_________________" className='Input-Clave' />
                 </div>
                 <button onClick={Ingresar} className='buttonS' style = {{position: 'absolute', top: 710, left: 700, fontSize: 23, fontWeight: 'bold'}}>Ingresar</button>
                 <Nav >
