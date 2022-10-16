@@ -17,7 +17,7 @@ function Areas(): JSX.Element{
         code: '',
         description: '',
         address: '',
-        floor: '',
+        floor: '0',
         PDF: '' 
     });
   
@@ -35,6 +35,7 @@ function Areas(): JSX.Element{
     const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
         setSelectedOption(value);
+        form.floor = value;
       };
 
       function importar (){
@@ -42,20 +43,24 @@ function Areas(): JSX.Element{
 
       }
 
-      function Registrar (){
-        //let floor = Number(form.floor).valueOf();
-        let floor = Number(selectedOption === undefined? 0: selectedOption);
-        if( form.code.trim() !== ''){
-          controller.registerArea(form.code, form.description, [form.PDF], form.address, floor);
-          //window.location.reload();
-          setForm({
-            code: '',
-            description: '',
-            address: '',
-            floor:'',
-            PDF: ''
+      function setFormValues(idA: string, descriptionA: string, locationA: string, floorA: string, PDFA: string){
+        setForm({
+          code: idA,
+          description: descriptionA,
+          address: locationA,
+          floor: floorA,
+          PDF: PDFA
 
         })
+      }
+
+      function Registrar (){
+        
+        if( form.code.trim() !== '' && form.description.trim() !== '' && form.address.trim() !== '',
+            form.floor.trim() !== ''){
+          controller.registerArea(form.code, form.description, [form.PDF], form.address, Number(form.floor));
+          //window.location.reload();
+          setFormValues('','','','','');
           alert("Agregado exitosamente")
         }else{
           console.log('No deben existir espacios en blanco');
@@ -64,28 +69,25 @@ function Areas(): JSX.Element{
 
       function Buscar(){
         let areaS = controller.seeArea(form.code);
-        setForm({
-            code: areaS.id,
-            description: areaS.description,
-            address: areaS.location,
-            floor: String(areaS.floor),
-            PDF: areaS.images.at(0)?.toString() as string
-
-        })
+        setFormValues(areaS.id, areaS.description, areaS.location,String(areaS.floor), areaS.images.at(0)?.toString() as string);
         console.log(areaS);
       }
       
       function Eliminar(){
         controller.deleteArea(form.code);
-        setForm({
-            code: '',
-            description: '',
-            address: '',
-            floor:'',
-            PDF: ''
-
-        })
+        setFormValues('','','','','');
         alert("Eliminado exitosamente")
+      }
+
+      function Editar(){
+        if( form.code.trim() !== '' && form.description.trim() !== '' && form.address.trim() !== '',
+            form.floor.trim() !== ''){
+          controller.modifyArea(form.code, form.description, [form.PDF], form.address, Number(form.floor));
+          setFormValues('','','','','');
+          alert("Editado exitosamente")
+        }else{
+          console.log('No deben existir espacios en blanco');
+        }
       }
 
       const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,7 +117,7 @@ function Areas(): JSX.Element{
             <input name = 'address' value={form.address} id = 'address' onChange = {changeHandler} type="text"  className='input-global' style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold'}} />
 
             <label style = {{position: 'absolute', top: 800, left: 300, fontSize: 32, fontWeight: 'bold'}}> Piso </label>
-            <select onChange = {selectChange}   className= 'dropdown' name= 'floor'  style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold'}}>
+            <select onChange = {selectChange} value= {form.floor}   className= 'dropdown' name= 'floor'  style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold'}}>
             {techCompanies.map((options) => (
             <option key={options.label} value={options.value}>
             {options.label}
@@ -126,7 +128,7 @@ function Areas(): JSX.Element{
             <button  className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
             <button  className='buttonS' onClick = {Buscar} style = {{position: 'absolute', top: 190, left: 1350, fontSize: 23}}>Buscar</button>
 
-            <button  className='buttonS' style = {{position: 'absolute', top: 700, left: 1650, fontSize: 23}}> Editar</button>
+            <button  className='buttonS' onClick= {Editar} style = {{position: 'absolute', top: 700, left: 1650, fontSize: 23}}> Editar</button>
             <button  className='buttonS' onClick = {Registrar} style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar Area</button>
             <button  className='buttonS' onClick= {Eliminar} style = {{position: 'absolute', top: 860, left: 1650, fontSize: 23}}>Eliminar Area</button>
 
