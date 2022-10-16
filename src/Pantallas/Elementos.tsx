@@ -1,4 +1,5 @@
 import  Navbar  from "../componentes/topbar"
+import "./elementos.css"
 import React, { useState } from "react";
 
 
@@ -18,6 +19,10 @@ function Elementos(): JSX.Element{
         setSelectedOption(value);
         console.log(value);
       };
+    
+    function importar (){
+      console.log('hola')
+    }
 
     return (
 
@@ -49,6 +54,18 @@ function Elementos(): JSX.Element{
                 <button className='buttonS' style = {{position: 'absolute', top: 340, left: 600, fontSize: 15, fontWeight: 'bold'}}>Editar Elemento</button>
 
                 <button className='buttonS' style = {{position: 'absolute', top: 400, left: 600, fontSize: 15, fontWeight: 'bold'}}>Eliminar Elemento</button>
+                
+                <div className='importPDF' style = {{position: 'absolute', top: 430, left: 100, fontSize: 15, fontWeight: 'bold'}}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20%" height="40%" fill="currentColor" >
+                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                </svg>
+                <label onClick={importar}>Adjuntar Imagen </label>
+                </div>
+
+                <div className='imagenesAdjuntadas' style = {{position: 'absolute', top: 430, left: 350, fontSize: 15, fontWeight: 'bold'}}>
+                <label style = {{position: 'absolute', top: 15, left: 20, fontSize: 15, fontWeight: 'bold'}}>Imagenes Adjuntadas </label>
+                </div>
 
                 <button className='buttonS' style = {{position: 'absolute', top: 550, left: 100, fontSize: 15, fontWeight: 'bold'}}>Volver</button>
         </div>
