@@ -15,6 +15,8 @@ function Encargado (): JSX.Element {
             });
         
         const [selectedOption, setSelectedOption] = useState<String>();
+        const [selectedLaboro, setSelectLaboro] = useState<String>();
+
         var options = [{id:'Cedula Juridica',nm:"Cedula Juridica", topl: 200, leftl: 1340, top: 0, left: -40 },
         {id:'Cedula Fisica',nm:"Cedula Fisica",top: 0, left: -40,topl: 200, leftl: 1500}];
 
