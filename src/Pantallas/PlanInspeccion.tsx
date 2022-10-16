@@ -9,6 +9,7 @@ function PlanInspeccion (): JSX.Element {
     const [fin, setFin] = React.useState<Date | null>(new Date());
     const [selectedOption, setSelectedOption] = useState<String>();
     const [SelectedResultado, setSelectedResultado] = useState<String>();
+    const [SelectedArea, setSelectedArea] = useState<String>();
     const [selectedOptionRadio, setSelectedOptionRadio] = useState<String>();
     var options = [{id:'Area',nm:"Area", topl: 290, leftl: 500, top: 0, left: -40 },
     {id:'Elemento',nm:"Elemento",top: 0, left: -40,topl: 290, leftl: 800}];
@@ -16,7 +17,14 @@ function PlanInspeccion (): JSX.Element {
     const Encargado = [
         { label: "Luis", value: '1' },
         { label: "Luis Miguel", value: '2' },
-        { label: "Luis Miguel Ferando", value: '3' },
+        { label: "Luis Miguel Fernando", value: '3' },
+   
+      ];
+
+    const Areas = [
+        { label: "Amarillo", value: '1' },
+        { label: "Rojo", value: '2' },
+        { label: "Verde", value: '3' },
    
       ];
 
@@ -36,6 +44,12 @@ function PlanInspeccion (): JSX.Element {
     const selectChangeResultado = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
         setSelectedResultado(value);
+        console.log(value);
+      };
+    
+    const selectChangeArea = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = event.target.value;
+        setSelectedArea(value);
         console.log(value);
       };
 
@@ -80,6 +94,15 @@ function PlanInspeccion (): JSX.Element {
                 <label style = {{position: 'absolute', top: 500, left: 1600, fontSize: 32, fontWeight: 'bold'}}> Resultado </label>
                 <select onChange = {selectChangeResultado} className= 'dropdown'  style = {{position: 'absolute', top: 470, left: 1790, fontSize: 23, fontWeight: 'bold'}}>
                 {resultado.map((options) => (
+                <option key={options.label} value={options.value}>
+                {options.label}
+                </option>
+                ))}
+                </select>
+
+                <label style = {{position: 'absolute', top: 550, left: 300, fontSize: 32, fontWeight: 'bold'}}> Areas </label>
+                <select onChange = {selectChangeArea} className= 'dropdown'  style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold'}}>
+                {Areas.map((options) => (
                 <option key={options.label} value={options.value}>
                 {options.label}
                 </option>
