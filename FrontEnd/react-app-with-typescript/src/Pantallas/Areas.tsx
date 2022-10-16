@@ -17,8 +17,8 @@ function Areas(): JSX.Element{
         code: '',
         description: '',
         address: '',
-        floor: '0',
-        PDF: 'dsadsadas.pdf'
+        floor: '',
+        PDF: '' 
     });
   
     const techCompanies = [
@@ -47,7 +47,16 @@ function Areas(): JSX.Element{
         let floor = Number(selectedOption === undefined? 0: selectedOption);
         if( form.code.trim() !== ''){
           controller.registerArea(form.code, form.description, [form.PDF], form.address, floor);
-          window.location.reload();
+          //window.location.reload();
+          setForm({
+            code: '',
+            description: '',
+            address: '',
+            floor:'',
+            PDF: ''
+
+        })
+          alert("Agregado exitosamente")
         }else{
           console.log('No deben existir espacios en blanco');
         }
@@ -55,11 +64,28 @@ function Areas(): JSX.Element{
 
       function Buscar(){
         let areaS = controller.seeArea(form.code);
+        setForm({
+            code: areaS.id,
+            description: areaS.description,
+            address: areaS.location,
+            floor: String(areaS.floor),
+            PDF: areaS.images.at(0)?.toString() as string
+
+        })
         console.log(areaS);
       }
       
       function Eliminar(){
         controller.deleteArea(form.code);
+        setForm({
+            code: '',
+            description: '',
+            address: '',
+            floor:'',
+            PDF: ''
+
+        })
+        alert("Eliminado exitosamente")
       }
 
       const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,16 +106,16 @@ function Areas(): JSX.Element{
         <div>
             <Navbar />
             <label style = {{position: 'absolute', top: 200, left: 300, fontSize: 32, fontWeight: 'bold'}}> Código </label>
-            <input name = 'code' id = 'code' onChange = {changeHandler} type="text"  className='input-global'  style = {{position: 'absolute', top: 150, left: 500, fontSize: 32}} />
+            <input name = 'code' value={form.code} id = 'code' onChange = {changeHandler} type="text"  className='input-global'  style = {{position: 'absolute', top: 150, left: 500, fontSize: 32}} />
 
             <label style = {{position: 'absolute', top: 400, left: 300, fontSize: 32, fontWeight: 'bold'}}> Descripción </label>
-            <input name = 'description' id = 'description' onChange = {changeHandler} type="text"  className='input-global' style = {{position: 'absolute', top: 350, left: 500, fontSize: 23, fontWeight: 'bold'}} />
+            <input name = 'description' value={form.description} id = 'description' onChange = {changeHandler} type="text"  className='input-global' style = {{position: 'absolute', top: 350, left: 500, fontSize: 23, fontWeight: 'bold'}} />
  
             <label style = {{position: 'absolute', top: 600, left: 300, fontSize: 32, fontWeight: 'bold'}}> Ubicación </label>
-            <input name = 'address' id = 'address' onChange = {changeHandler} type="text"  className='input-global' style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold'}} />
+            <input name = 'address' value={form.address} id = 'address' onChange = {changeHandler} type="text"  className='input-global' style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold'}} />
 
             <label style = {{position: 'absolute', top: 800, left: 300, fontSize: 32, fontWeight: 'bold'}}> Piso </label>
-            <select onChange = {selectChange} className= 'dropdown' name= 'floor'  style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold'}}>
+            <select onChange = {selectChange}   className= 'dropdown' name= 'floor'  style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold'}}>
             {techCompanies.map((options) => (
             <option key={options.label} value={options.value}>
             {options.label}
@@ -116,7 +142,7 @@ function Areas(): JSX.Element{
                 <label onClick={importar}>Adjuntar Imagen </label>
             </div>    
                 
-            <input type="text"  style = {{position: 'absolute',  top: 270, left: 1900, fontSize: 23, fontWeight: 'bold' , height: 200}} />
+            <input type="text" value={form.PDF} style = {{position: 'absolute',  top: 270, left: 1900, fontSize: 23, fontWeight: 'bold' , height: 200}} />
 
          
             
