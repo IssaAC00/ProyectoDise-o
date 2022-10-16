@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import Navbar  from "../componentes/topbar"
 import Checkbox from "../componentes/Checkbox";
 import "./consulta.css"
+import {DatePicker} from '@material-ui/pickers'
 
 
 function Consultas (): JSX.Element {
+    const [value, setValue] = React.useState<Date | null>(new Date());
+    const [fin, setFin] = React.useState<Date | null>(new Date());
 
     const [form, setForm] = useState({ 
         primeroDesde: '',
@@ -57,21 +60,23 @@ function Consultas (): JSX.Element {
                 })}
             
             <label style = {{position: 'absolute', top: 300, left: 300, fontSize: 32, fontWeight: 'bold'}}> Desde: </label>
-            <input name = 'primeroDesde' id = 'primeroDesde' onChange = {changeHandler} type="text"  className='Input-container'  style = {{position: 'absolute', top: 280, left: 500, fontSize: 32}} />
-            <input name = 'segundoDesde' id = 'segundoDesde' onChange = {changeHandler} type="text"  className='Input-container'  style = {{position: 'absolute', top: 280, left: 900, fontSize: 32}} />
+            <div style = {{position: 'absolute', top: 300, left: 450, fontSize: 32, fontWeight: 'bold'}}>
+            <DatePicker value={value} onChange={(newValue) => setValue(newValue)}/>
+            </div>
 
+           
             <label style = {{position: 'absolute', top: 400, left: 300, fontSize: 32, fontWeight: 'bold'}}> Hasta: </label>
-            <input name = 'primeroHasta' id = 'primeroHasta' onChange = {changeHandler} type="text"  className='Input-container'  style = {{position: 'absolute', top: 380, left: 500, fontSize: 32}} />
+            <div style = {{position: 'absolute', top: 400, left: 450, fontSize: 32, fontWeight: 'bold'}}>
+            <DatePicker value={fin} onChange={(newValue) => setFin(newValue)}/>
+            </div>
 
-            <input name = 'consulta' id = 'consulta' onChange = {changeHandler} type="text"  className='Input-consulta'  style = {{position: 'absolute', top: 280, left: 1400, fontSize: 32}} />
-
+            <label style = {{position: 'absolute', top: 300, left: 770, fontSize: 23, fontWeight: 'bold'}}> Código </label>
+            <input name = 'code' id = 'code'  type="text"  className='Input-consulta'  style = {{position: 'absolute', top: 280, left: 850, fontSize: 23}} />
+            <input name = 'consulta' id = 'consulta' onChange = {changeHandler} type="text"   style = {{position: 'absolute', top: 280, left: 1400, fontSize: 32,  width: 1000, height: 500}} />
             <button  className='buttonS' style = {{position: 'absolute', top: 500, left: 500, fontSize: 23, fontWeight: 'bold'}}>Consultar Estado</button>
-
-            <button  className='buttonS' style = {{position: 'absolute', top: 950, left: 1400, fontSize: 23, fontWeight: 'bold'}}>Agentes</button>
-
-            <button  className='buttonS' style = {{position: 'absolute', top: 1050, left: 1400, fontSize: 23, fontWeight: 'bold'}}>Area y Elemento</button>
-
-            <button  className='buttonS' style = {{position: 'absolute', top: 1150, left: 1400, fontSize: 23, fontWeight: 'bold'}}>Encargados</button>
+            <button  className='buttonS' style = {{position: 'absolute', top: 850, left: 1400, fontSize: 23, fontWeight: 'bold'}}>Agentes</button>
+            <button  className='buttonS' style = {{position: 'absolute', top: 950, left: 1400, fontSize: 23, fontWeight: 'bold'}}>Area y Elemento</button>
+            <button  className='buttonS' style = {{position: 'absolute', top: 1050, left: 1400, fontSize: 23, fontWeight: 'bold'}}>Encargados</button>
 
             {optionsB.map((item,i) => {
                 return (
@@ -82,7 +87,7 @@ function Consultas (): JSX.Element {
                 );
                 })}
             
-            <button  className='buttonS' style = {{position: 'absolute', top: 1150, left: 500, fontSize: 23, fontWeight: 'bold'}}>Volver</button>
+            <button  className='buttonS' style = {{position: 'absolute', top: 950, left: 500, fontSize: 23, fontWeight: 'bold'}}>Volver</button>
 
         </div>
     )

@@ -83,7 +83,7 @@ function PlanInspeccion (): JSX.Element {
                 <input name = 'Estado'  id = 'Estado'  type="text"  className='input-global' style = {{position: 'absolute', top: 700 , left: 1850, fontSize: 23, fontWeight: 'bold'}} />
 
                 <label style = {{position: 'absolute', top: 200, left: 300, fontSize: 32, fontWeight: 'bold'}}> Encargado </label>
-                <select onChange = {selectChange} className= 'dropdown'  style = {{position: 'absolute', top: 170, left: 300, fontSize: 23, fontWeight: 'bold'}}>
+                <select onChange = {selectChange} className= 'dropdown'  style = {{position: 'absolute', top: 170, left: 500, fontSize: 23, fontWeight: 'bold'}}>
                 {Encargado.map((options) => (
                 <option key={options.label} value={options.value}>
                 {options.label}
