@@ -57,6 +57,10 @@ class Controller{
         return this.adminArea.search(idArea);
     }//preguntar como se va a ver
 
+    public seeAllArea(): Area[]{
+        return this.adminArea.seeAll();
+    }
+
     public modifyArea(id: string, description: string, images: string[], location: string, floor: Floor){
         //Validar description
         let newArea = new Area(id, description, images, location, floor);
@@ -95,7 +99,7 @@ class Controller{
 
 
     public registerInspection(optionInspection: number, id: number, description: string, iDate: Date, eDate: Date, dDate: Date,
-                                    idDutyManager: number, PDF: string, state: State, idObjectInspect: string){
+                                    idDutyManager: number, PDF: string, result: TypeWork, state: State, idObjectInspect: string){
         //Validar id, description, busqueda area
         let factoryInspection = new FactoryInspections(); 
         let dutyManager = this.adminDutyManager.search(idDutyManager);
@@ -106,7 +110,7 @@ class Controller{
             objectInspect = this.adminElement.search(idObjectInspect);
         }
         let newInspection = factoryInspection.getInspection(optionInspection, id, description, iDate, eDate, dDate, dutyManager,
-                                                            PDF, state, objectInspect);
+                                                            PDF, result, state, objectInspect);
         this.adminInspection.add(newInspection);
     }
     
@@ -183,4 +187,7 @@ class Controller{
 }
 
 let controller = new Controller();
+controller.registerArea('2a', 'Amarillo', ['pdf.pdf'], 'Entrando por arriba', 0);
+controller.registerArea('2c', 'Rojo', ['pdf.pdf'], 'Entrando por arriba', 0);
+controller.registerArea('2b', 'Verde', ['pdf.pdf'], 'Entrando por arriba', 0);
 export { controller }

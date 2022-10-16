@@ -52,7 +52,7 @@ function Deterioro (): JSX.Element {
       if( form.code.trim() !== '' && form.description.trim() !== ''){
         controller.modifyPolaige(form.code, form.description, Number(form.type));
         setFormValues('','', form.type);
-        alert("Agregado exitosamente")
+        alert("Modificado exitosamente")
       }else{
         console.log('No deben existir espacios en blanco');
       }
@@ -73,8 +73,6 @@ function Deterioro (): JSX.Element {
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
       setForm({ ...form, [event.target.name]: event.target.value });
     }
-
-
 
     return(
 

@@ -24,6 +24,10 @@ class AdminArea{
 
     }
 
+    public seeAll(): Area[]{
+        return this._areas;
+    }
+
     public modify(area: Area): boolean{
         this._areas.forEach((item, index, arr) => {
             if (item.id === area.id){
