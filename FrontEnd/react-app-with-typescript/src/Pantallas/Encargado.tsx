@@ -35,7 +35,10 @@ function Encargado (): JSX.Element {
               }
         
         
+        function set(){
 
+                console.log('tontera')
+        }
               
 
         return (
