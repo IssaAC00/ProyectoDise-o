@@ -54,7 +54,7 @@ function Areas(): JSX.Element{
         })
       }
 
-      function Registrar (){
+      function Register (){
         
         if( form.code.trim() !== '' && form.description.trim() !== '' && form.address.trim() !== '',
             form.floor.trim() !== ''){
@@ -67,19 +67,19 @@ function Areas(): JSX.Element{
         }
       }
 
-      function Buscar(){
+      function Searh(){
         let areaS = controller.seeArea(form.code);
         setFormValues(areaS.id, areaS.description, areaS.location,String(areaS.floor), areaS.images.at(0)?.toString() as string);
         console.log(areaS);
       }
       
-      function Eliminar(){
+      function Drop(){
         controller.deleteArea(form.code);
         setFormValues('','','','','');
         alert("Eliminado exitosamente")
       }
 
-      function Editar(){
+      function Modify(){
         if( form.code.trim() !== '' && form.description.trim() !== '' && form.address.trim() !== '',
             form.floor.trim() !== ''){
           controller.modifyArea(form.code, form.description, [form.PDF], form.address, Number(form.floor));
@@ -91,13 +91,7 @@ function Areas(): JSX.Element{
       }
 
       const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        // form.floor = selectedOption as string;
-        // if (form.floor === undefined){
-        //   setSelectedOption('0');
-        // }
         setForm({ ...form, [event.target.name]: event.target.value });
-        console.log(form);
-    
       }
 
 
@@ -126,11 +120,11 @@ function Areas(): JSX.Element{
             </select>
 
             <button  className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
-            <button  className='buttonS' onClick = {Buscar} style = {{position: 'absolute', top: 190, left: 1350, fontSize: 23}}>Buscar</button>
+            <button  className='buttonS' onClick = {Searh} style = {{position: 'absolute', top: 190, left: 1350, fontSize: 23}}>Buscar</button>
 
-            <button  className='buttonS' onClick= {Editar} style = {{position: 'absolute', top: 700, left: 1650, fontSize: 23}}> Editar</button>
-            <button  className='buttonS' onClick = {Registrar} style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar Area</button>
-            <button  className='buttonS' onClick= {Eliminar} style = {{position: 'absolute', top: 860, left: 1650, fontSize: 23}}>Eliminar Area</button>
+            <button  className='buttonS' onClick= {Modify} style = {{position: 'absolute', top: 700, left: 1650, fontSize: 23}}> Editar</button>
+            <button  className='buttonS' onClick = {Register} style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar Area</button>
+            <button  className='buttonS' onClick= {Drop} style = {{position: 'absolute', top: 860, left: 1650, fontSize: 23}}>Eliminar Area</button>
 
 
 
