@@ -17,17 +17,17 @@ function Areas(): JSX.Element{
         code: '',
         description: '',
         address: '',
-        floor: '1',
+        floor: '0',
         PDF: 'dsadsadas.pdf'
     });
   
     const techCompanies = [
-        { label: "Primer Piso", value: "Primer Piso" },
-        { label: "Segundo Piso", value: "Segundo Piso" },
-        { label: "Tercer Piso", value: "Tercer Piso" },
-        { label: "Cuarto Piso", value: "Cuarto Piso" },
-        { label: "Sótano", value:"Sótano" },
-        { label: "Atico", value: "Atico" },
+        { label: "Primer Piso", value: "0" },
+        { label: "Segundo Piso", value: "1" },
+        { label: "Tercer Piso", value: "2" },
+        { label: "Cuarto Piso", value: "3" },
+        { label: "Sótano", value:"4" },
+        { label: "Atico", value: "5" },
       ];
   
 
@@ -35,7 +35,6 @@ function Areas(): JSX.Element{
     const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
         setSelectedOption(value);
-        console.log(value);
       };
 
       function importar (){
@@ -44,13 +43,33 @@ function Areas(): JSX.Element{
       }
 
       function Registrar (){
-      let floor = form.floor as unknown;
-      controller.registerArea(form.code, form.description, [form.PDF], form.address, floor as Floor);
+        //let floor = Number(form.floor).valueOf();
+        let floor = Number(selectedOption === undefined? 0: selectedOption);
+        if( form.code.trim() !== ''){
+          controller.registerArea(form.code, form.description, [form.PDF], form.address, floor);
+          window.location.reload();
+        }else{
+          console.log('No deben existir espacios en blanco');
+        }
+      }
+
+      function Buscar(){
+        let areaS = controller.seeArea(form.code);
+        console.log(areaS);
       }
       
+      function Eliminar(){
+        controller.deleteArea(form.code);
+      }
+
       const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setForm({ ...form, [event.target.name]: event.target.value })
-        form.floor = selectedOption as string;
+        // form.floor = selectedOption as string;
+        // if (form.floor === undefined){
+        //   setSelectedOption('0');
+        // }
+        setForm({ ...form, [event.target.name]: event.target.value });
+        console.log(form);
+    
       }
 
 
@@ -70,7 +89,7 @@ function Areas(): JSX.Element{
             <input name = 'address' id = 'address' onChange = {changeHandler} type="text"  className='input-global' style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold'}} />
 
             <label style = {{position: 'absolute', top: 800, left: 300, fontSize: 32, fontWeight: 'bold'}}> Piso </label>
-            <select onChange = {selectChange} className= 'dropdown' name= 'floor' style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold'}}>
+            <select onChange = {selectChange} className= 'dropdown' name= 'floor'  style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold'}}>
             {techCompanies.map((options) => (
             <option key={options.label} value={options.value}>
             {options.label}
@@ -79,11 +98,11 @@ function Areas(): JSX.Element{
             </select>
 
             <button  className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
-            <button  className='buttonS' style = {{position: 'absolute', top: 190, left: 1350, fontSize: 23}}>Buscar</button>
+            <button  className='buttonS' onClick = {Buscar} style = {{position: 'absolute', top: 190, left: 1350, fontSize: 23}}>Buscar</button>
 
             <button  className='buttonS' style = {{position: 'absolute', top: 700, left: 1650, fontSize: 23}}> Editar</button>
             <button  className='buttonS' onClick = {Registrar} style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar Area</button>
-            <button  className='buttonS' style = {{position: 'absolute', top: 860, left: 1650, fontSize: 23}}>Eliminar Area</button>
+            <button  className='buttonS' onClick= {Eliminar} style = {{position: 'absolute', top: 860, left: 1650, fontSize: 23}}>Eliminar Area</button>
 
 
 

@@ -61,7 +61,7 @@ class Area {
 
 enum Floor{
     Primer, Segundo, Tercer,
-    Sotana
+    Cuarto, Sotano, Atico
 }
 
 export { Area, Floor };
