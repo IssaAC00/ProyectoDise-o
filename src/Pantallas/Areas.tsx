@@ -121,7 +121,6 @@ function Areas(): JSX.Element{
 
             <button  className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
             <button  className='buttonS' onClick = {Searh} style = {{position: 'absolute', top: 180, left: 1150, fontSize: 23}}>Buscar</button>
-
             <button  className='buttonS' onClick= {Modify} style = {{position: 'absolute', top: 700, left: 1650, fontSize: 23}}> Editar</button>
             <button  className='buttonS' onClick = {Register} style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar Area</button>
             <button  className='buttonS' onClick= {Drop} style = {{position: 'absolute', top: 860, left: 1650, fontSize: 23}}>Eliminar Area</button>
