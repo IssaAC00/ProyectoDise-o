@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import  Navbar  from "../componentes/topbar"
+import Navbar  from "../componentes/topbar"
 import Checkbox from "../componentes/Checkbox";
 import "./consulta.css"
 
@@ -10,8 +10,7 @@ function Consultas (): JSX.Element {
         primeroDesde: '',
         segundoDesde: '',
         primeroHasta: '',
-        consulta: '',
-        email: 'dsadsadas.pdf'
+        consulta: ''
     });
 
     const [selectedOption, setSelectedOption] = useState<String>();
