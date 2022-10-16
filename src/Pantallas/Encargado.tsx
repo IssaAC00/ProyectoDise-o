@@ -38,7 +38,7 @@ function Encargado (): JSX.Element {
         function set(){
 
                 console.log('tontera')
-                console.log('tontera')
+                
         }
               
 
