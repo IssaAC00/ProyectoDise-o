@@ -36,10 +36,19 @@ function SuperUsuario(): JSX.Element{
         console.log(form);
     }
 
+    function setFormValues(idU: string, passwordU: string, rolU: string){
+        setForm({
+          email: idU,
+          password: passwordU,
+          rol: rolU,
+        })
+      }
+
     function Register(){
         if(form.email.trim() !== '' && form.password.trim() !== ''){
             controller.registerUser(form.email, form.password, Number(form.rol));
             alert('Usuario registrado correctamente');
+            setFormValues('','', form.rol);
             console.log(controller.seeUser(form.email));
         }else{
             console.log('Todos los campos deben ir llenos');
