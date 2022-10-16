@@ -27,7 +27,7 @@ export default function RoutesP() {
             <Routes>
                 <Route path="/" element={<Login/>}/>
                 <Route path="/Area" element={<Areas />} />
-                <Route path="/Elementos" element={<Elementos />} />
+                <Route path="/AreaElementos" element={<Elementos />} />
                 <Route path="/Contraseña" element={<Contraseña />} />
                 <Route path="/SuperUsuario" element={<SuperUsuario />} />
                 <Route path="/Deterioro" element={<Deterioro />} />
