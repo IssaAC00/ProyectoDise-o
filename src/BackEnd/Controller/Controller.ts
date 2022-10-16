@@ -168,6 +168,7 @@ class Controller{
         //Validar email y contra
         let factoryDutyManager = new FactoryDutyManager();
         let newDutyManager = factoryDutyManager.getInspection(optionDM, id, name, email, labor, managerName, idManager);
+        console.log(newDutyManager);
         this.adminDutyManager.add(newDutyManager);
     }
     

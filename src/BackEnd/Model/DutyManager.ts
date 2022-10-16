@@ -96,11 +96,11 @@ class FactoryDutyManager{
     public getInspection(choiceDuty: number, id: number, name: string, email: string, labor: Set<TypeWork>
                             , managerName?: string, idManager?: number): DutyManager{
         switch (choiceDuty) {
-            case 1:
+            case 0:
                 return new InternalPerson(id, name, email, labor);
-            case 2:
+            case 1:
                 return new ExternalPerson(id, name, email, labor);
-            case 3:
+            case 2:
                 return new LegalPerson(id, name, email, labor, managerName!, idManager!);
             default:
                 return null!;
