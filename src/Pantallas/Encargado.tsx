@@ -7,7 +7,7 @@ import Checkbox from "../componentes/Checkbox";
 
 function Encargado (): JSX.Element {
 
-        const [form, setForm] = useState({
+        const [form, setForm] = useState({ 
                 id: '',
                 idtype: '',
                 job: '',

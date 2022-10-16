@@ -5,7 +5,7 @@ interface Props {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   label: string;
   value: string;
-}
+} 
 
 const Checkbox = (props: Props) => {
   return (
