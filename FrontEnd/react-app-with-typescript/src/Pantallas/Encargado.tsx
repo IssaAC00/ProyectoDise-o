@@ -15,12 +15,15 @@ function Encargado (): JSX.Element {
             });
         
         const [selectedOption, setSelectedOption] = useState<String>();
+        var options = [{id:'Cedula Juridica',nm:"Cedula Juridica", topl: 200, leftl: 1340, top: 0, left: -40 },
+        {id:'Cedula Fisica',nm:"Cedula Fisica",top: 0, left: -40,topl: 200, leftl: 1500}];
 
 
      
         function cedulaSelectionHandler(event: React.ChangeEvent<HTMLInputElement>) {
-                setSelectedOption(event.target.value);
                 console.log(selectedOption)
+                setSelectedOption(event.target.value);
+               
         }
 
         
@@ -47,38 +50,18 @@ function Encargado (): JSX.Element {
                 <label style = {{position: 'absolute', top: 600, left: 300, fontSize: 32, fontWeight: 'bold'}}> Email </label>
                 <input name = 'email' id = 'email' onChange = {changeHandler} type="text"  className='input-global' style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold'}} />
                 
+
+
                 
-                <input
-                        type="radio"
-                        name="CédulaJ"
-                        value="Cédula Juridica"
-                        id="CédulaJuridica"
-                        onChange={cedulaSelectionHandler}
-                        style = {{position: 'absolute', top: 200, left: 1200, fontSize: 32, fontWeight: 'bold'}}
-                        />
+                {options.map((item,i) => {
+                return (
+                <div key={item.id} >
+                <label className="radio-inline" style={{position: 'absolute', top:item.topl, left:item.leftl}} >
+                <input style={{ position: 'absolute', top:item.top, left:item.left}} type="radio" name="myRadio"  value={item.id} onChange={cedulaSelectionHandler} />{item.nm}</label>
+                </div>
+                );
+                })}
 
-                <label 
-                        htmlFor="cedulaJ"
-                        style = {{position: 'absolute', top: 196, left: 1240, fontSize: 23, fontWeight: 'bold'}}
-                        >
-                        Cédula Juridica</label>
-
-                        <input
-                        type="radio"
-                        name="CédulaF"
-                        value="Cédula Física"
-                        id="CédulaFísica"
-                        onChange={cedulaSelectionHandler}
-                        style = {{position: 'absolute', top: 200, left: 1500, fontSize: 32, fontWeight: 'bold'}}
-                        />
-
-                <label 
-                        htmlFor="cedulaF"
-                        style = {{position: 'absolute', top: 196, left: 1540, fontSize: 23, fontWeight: 'bold'}}
-                        >
-                        Cédula Física</label>
-               
-               
                
                
                
