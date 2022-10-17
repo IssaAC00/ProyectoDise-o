@@ -111,7 +111,7 @@ function Areas(): JSX.Element{
             <input name = 'address' value={form.address} id = 'address' onChange = {changeHandler} type="text"  className='input-global' style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold'}} />
 
             <label style = {{position: 'absolute', top: 800, left: 300, fontSize: 32, fontWeight: 'bold'}}> Piso </label>
-            <select onChange = {selectChange} value= {form.floor}   className= 'dropdown' name= 'floor'  style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold'}}>
+            <select onChange = {selectChange} value= {form.floor}   className= 'dropdown' name= 'floor'  style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold', color:'white'}}>
             {techCompanies.map((options) => (
             <option key={options.label} value={options.value}>
             {options.label}

@@ -84,7 +84,7 @@ function PlanInspeccion (): JSX.Element {
                 <input name = 'Estado'  id = 'Estado'  type="text"  className='input-global' style = {{position: 'absolute', top: 700 , left: 1850, fontSize: 23, fontWeight: 'bold'}} />
 
                 <label style = {{position: 'absolute', top: 200, left: 300, fontSize: 32, fontWeight: 'bold'}}> Encargado </label>
-                <select onChange = {selectChange} className= 'dropdown'  style = {{position: 'absolute', top: 170, left: 500, fontSize: 23, fontWeight: 'bold'}}>
+                <select onChange = {selectChange} className= 'dropdown'  style = {{position: 'absolute', top: 170, left: 500, fontSize: 23, fontWeight: 'bold', color:'white'}}>
                 {Encargado.map((options) => (
                 <option key={options.label} value={options.value}>
                 {options.label}
@@ -93,7 +93,7 @@ function PlanInspeccion (): JSX.Element {
                 </select>
 
                 <label style = {{position: 'absolute', top: 500, left: 1600, fontSize: 32, fontWeight: 'bold'}}> Resultado </label>
-                <select onChange = {selectChangeResultado} className= 'dropdown'  style = {{position: 'absolute', top: 470, left: 1790, fontSize: 23, fontWeight: 'bold'}}>
+                <select onChange = {selectChangeResultado} className= 'dropdown'  style = {{position: 'absolute', top: 470, left: 1790, fontSize: 23, fontWeight: 'bold', color:'white'}}>
                 {resultado.map((options) => (
                 <option key={options.label} value={options.value}>
                 {options.label}
@@ -102,7 +102,7 @@ function PlanInspeccion (): JSX.Element {
                 </select>
 
                 <label style = {{position: 'absolute', top: 550, left: 300, fontSize: 32, fontWeight: 'bold'}}> {selectedOption} </label>
-                <select onChange = {selectChangeArea} className= 'dropdown'  style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold'}}>
+                <select onChange = {selectChangeArea} className= 'dropdown'  style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold', color:'white'}}>
                 {Areas.map((options) => (
                 <option key={options.label} value={options.value}>
                 {options.label}

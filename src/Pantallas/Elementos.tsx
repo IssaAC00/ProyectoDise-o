@@ -96,7 +96,7 @@ function Elementos(): JSX.Element{
             <input name = 'location' value={form.location} id = 'location' onChange = {changeHandler}  className='input-global' style = {{position: 'absolute', top: 550, left: 500, fontSize: 23}} type="text" placeholder="Digite la ubicacion"  />
 
             <label style = {{position: 'absolute', top: 800, left: 300, fontSize: 32, fontWeight: 'bold'}}> Area </label>
-            <select onChange = {selectChange} value= {form.area} className= 'dropdown'  style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold'}}>
+            <select onChange = {selectChange} value= {form.area} className= 'dropdown'  style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold', color:'white'}}>
                 {roles.map((options) => (
                 <option style = {{color: 'black', fontWeight: 'bold'}} key={options.label} value={options.value}>
                 {options.label}

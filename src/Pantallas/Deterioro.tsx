@@ -91,7 +91,7 @@ function Deterioro (): JSX.Element {
  
 
             <label style = {{position: 'absolute', top: 600, left: 300, fontSize: 32, fontWeight: 'bold'}}> Tipo Deterioro </label>
-            <select onChange = {selectChange} value={form.type} className= 'dropdown'  style = {{position: 'absolute', top: 578, left: 600, fontSize: 23, fontWeight: 'bold'}}>
+            <select onChange = {selectChange} value={form.type} className= 'dropdown'  style = {{position: 'absolute', top: 578, left: 600, fontSize: 23, fontWeight: 'bold', color:'white'}}>
             {techCompanies.map((options) => (
             <option key={options.label} value={options.value}>
             {options.label}
