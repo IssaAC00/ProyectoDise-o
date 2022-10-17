@@ -8,27 +8,54 @@ import {   Nav, Navbar as NavbarBs } from "react-bootstrap"
 import { NavLink, useNavigate } from "react-router-dom"
 import {controller} from '../BackEnd/Controller/Controller'
 import '../componentes/ajustePaginas.css'
+import { Rol, User } from '../BackEnd/Model/User';
 
 function Login (): JSX.Element {
 
     const navigate = useNavigate(); 
 
+    const [form, setForm] = useState({
+        email: '',
+        password: '',
+    });
+
     function Prueba(){
-        controller.registerPolaige('1', 'Prueba', null!);
+       
     };
     
     function Ingresar(){
+        //let pass = controller.login(form.email, form.password);
+        // if(pass){
+            
+        //     let user = controller.seeUser(form.email)
+        //     switch (user.rol) {
+        //         case Rol.Adminitrador:
+        //             navigate('/Area');
+        //             break;
+        //         case Rol.Super:
+        //             navigate('/SuperUsuario');
+        //             break;
+        //         default:
+        //             break;
+        //     }
+        // }else{
+        //     alert('Revise bien los datos');
+        // }
         navigate('/Area');
       };
+
+      const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setForm({ ...form, [event.target.name]: event.target.value });
+      }
 
         return (
             <div  style = {{backgroundImage:`url(${fondo})`, height: '1200px'}}>
                 <Navbar />
                 <div className='login-container' >
                 <label style = {{color: 'white', position: 'absolute', top: 70, left: 65, fontSize: 23, fontWeight: 'bold'}}>Usuario</label>
-                <input type="text" placeholder="_________________" className='Input-container' style={{ width: 300 , height: 60, color: 'black' }}/>
+                <input name = 'email' value= {form.email} id = 'email' type="text"  onChange = {changeHandler} placeholder="_________________" className='Input-container' style={{ width: 300 , height: 60, color: 'black' }}/>
                 <label style = {{color: 'white', position: 'absolute', top: 230, left: 65, fontSize: 23, fontWeight: 'bold'}}>Contraseña</label>
-                <input type="password" placeholder="_________________" className='Input-Clave' style={{ width: 300 , height: 60, color: 'black' }} />
+                <input name = 'password' value= {form.password} id = 'password' type="password"  onChange = {changeHandler} placeholder="_________________" className='Input-Clave' style={{ width: 300 , height: 60, color: 'black' }} />
                 </div>
                 <button onClick={Ingresar} className='buttonS' style = {{position: 'absolute', top: 710, left: 600, fontSize: 23, fontWeight: 'bold'}}>Ingresar</button>
                 <Nav >

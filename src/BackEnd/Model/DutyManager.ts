@@ -99,8 +99,6 @@ class FactoryDutyManager{
             case 0:
                 return new InternalPerson(id, name, email, labor);
             case 1:
-                return new ExternalPerson(id, name, email, labor);
-            case 2:
                 return new LegalPerson(id, name, email, labor, managerName!, idManager!);
             default:
                 return null!;

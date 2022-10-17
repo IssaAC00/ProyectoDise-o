@@ -176,10 +176,12 @@ class Controller{
         return this.adminDutyManager.search(idDutyManager);
     }//preguntar como se va a ver
 
-    public modifyDutyManager(id: number, name: string, email: string, labor: Set<TypeWork>){
-        //Validar nombre && type
-        //let newDutyManager = new DutyManager(id, name, email, labor);
-        //this.adminDutyManager.modify(newDutyManager);
+    public modifyDutyManager(optionDM:number, id: number, name: string, email: string, labor: Set<TypeWork>, 
+                            managerName?: string, idManager?: number){
+        let factoryDutyManager = new FactoryDutyManager();
+        let newDutyManager = factoryDutyManager.getInspection(optionDM, id, name, email, labor, managerName, idManager);
+        console.log(newDutyManager);
+        this.adminDutyManager.modify(newDutyManager);
     }
 
     public deleteDutyManager(id: number){
@@ -191,4 +193,9 @@ let controller = new Controller();
 controller.registerArea('2a', 'Amarillo', ['pdf.pdf'], 'Entrando por arriba', 0);
 controller.registerArea('2c', 'Rojo', ['pdf.pdf'], 'Entrando por arriba', 0);
 controller.registerArea('2b', 'Verde', ['pdf.pdf'], 'Entrando por arriba', 0);
+
+controller.registerUser('jbarrientossandoval@gmail.com', 'Pecorine2018', 0);
+controller.registerUser('alcon@gmail.com', 'Pascal2018', 1);
+controller.registerUser('aguila@gmail.com', 'Precuela2018', 2);
+
 export { controller }
