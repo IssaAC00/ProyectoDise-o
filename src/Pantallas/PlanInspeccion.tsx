@@ -11,8 +11,8 @@ function PlanInspeccion (): JSX.Element {
     const [SelectedResultado, setSelectedResultado] = useState<String>();
     const [SelectedArea, setSelectedArea] = useState<String>();
     const [selectedOptionRadio, setSelectedOptionRadio] = useState<String>();
-    var options = [{id:'Area',nm:"Area", topl: 290, leftl: 500, top: 0, left: -40 },
-    {id:'Elemento',nm:"Elemento",top: 0, left: -40,topl: 290, leftl: 800}];
+    var options = [{id:'Area',value:"Area", topl: 290, leftl: 500, top: 0, left: -40 },
+    {id:'Elemento',value:"Elemento",top: 0, left: -40,topl: 290, leftl: 800}];
 
     const Encargado = [
         { label: "Luis", value: '1' },
@@ -54,8 +54,9 @@ function PlanInspeccion (): JSX.Element {
       };
 
     function selectionHandler(event: React.ChangeEvent<HTMLInputElement>) {
-        console.log(selectedOption)
-        setSelectedOptionRadio(event.target.value);   
+      let value = event.target.value
+      setSelectedOption(value);  
+      console.log(selectedOption)
     };
 
     function importar (){
@@ -100,7 +101,7 @@ function PlanInspeccion (): JSX.Element {
                 ))}
                 </select>
 
-                <label style = {{position: 'absolute', top: 550, left: 300, fontSize: 32, fontWeight: 'bold'}}> Areas </label>
+                <label style = {{position: 'absolute', top: 550, left: 300, fontSize: 32, fontWeight: 'bold'}}> {selectedOption} </label>
                 <select onChange = {selectChangeArea} className= 'dropdown'  style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold'}}>
                 {Areas.map((options) => (
                 <option key={options.label} value={options.value}>
@@ -113,7 +114,7 @@ function PlanInspeccion (): JSX.Element {
                 return (
                 <div key={item.id} >
                 <label className="radio-inline" style={{position: 'absolute', top:item.topl, left:item.leftl , fontSize: 20 }} >
-                <input style={{ position: 'absolute', top:item.top, left:item.left }} type="radio" name="myRadio"  value={item.id} onChange={selectionHandler} />{item.nm}</label>
+                <input style={{ position: 'absolute', top:item.top, left:item.left }} type="radio" name="myRadio" onChange={selectionHandler} value={item.value} />{item.value}</label>
                 </div>
                 );
                 })}
@@ -127,10 +128,10 @@ function PlanInspeccion (): JSX.Element {
                     <label onClick={importar}>Adjuntar Imagen </label>
                 </div>    
 
-                <button  className='buttonS' style = {{position: 'absolute', top: 390, left: 1350, fontSize: 23}}>Buscar</button>
+                <button  className='buttonS' style = {{position: 'absolute', top: 380, left: 1100, fontSize: 23}}>Buscar</button>
                 <button  className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
                 <button  className='buttonS' style = {{position: 'absolute', top: 780, left: 500, fontSize: 23}}> Editar</button>
-                <button  className='buttonS' style = {{position: 'absolute', top: 780, left: 750, fontSize: 23}}>Registrar </button>
+                <button  className='buttonS' style = {{position: 'absolute', top: 780, left: 790, fontSize: 23}}>Registrar </button>
                
 
             </div>
