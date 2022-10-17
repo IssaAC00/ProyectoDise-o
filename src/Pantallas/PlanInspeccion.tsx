@@ -3,6 +3,7 @@ import  Navbar  from "../componentes/topbar"
 import {DatePicker} from '@material-ui/pickers'
 import './planInspeccion.css'
 import '../componentes/inputEstiloGlobal.css'
+import {controller} from '../BackEnd/Controller/Controller'
 
 function PlanInspeccion (): JSX.Element {
     const [value, setValue] = React.useState<Date | null>(new Date());
@@ -11,27 +12,25 @@ function PlanInspeccion (): JSX.Element {
     const [SelectedResultado, setSelectedResultado] = useState<String>();
     const [SelectedArea, setSelectedArea] = useState<String>();
     const [selectedOptionRadio, setSelectedOptionRadio] = useState<String>();
-    var options = [{id:'Area',value:"Area", topl: 290, leftl: 500, top: 0, left: -40 },
-    {id:'Elemento',value:"Elemento",top: 0, left: -40,topl: 290, leftl: 800}];
+    var options = [{id:'Area',value:"0", topl: 290, leftl: 500, top: 0, left: -40 },
+    {id:'Elemento',value:"1",top: 0, left: -40,topl: 290, leftl: 800}];
 
-    const Encargado = [
-        { label: "Luis", value: '1' },
-        { label: "Luis Miguel", value: '2' },
-        { label: "Luis Miguel Fernando", value: '3' },
-   
-      ];
+    const Encargado = controller.seeAllDutyManager().map( 
+      (list) => ({label: list.name, value: list.id}));
 
-    const Areas = [
-        { label: "Amarillo", value: '1' },
-        { label: "Rojo", value: '2' },
-        { label: "Verde", value: '3' },
+    // const Areas = [
+    //     { label: "Amarillo", value: '1' },
+    //     { label: "Rojo", value: '2' },
+    //     { label: "Verde", value: '3' },
    
-      ];
+    //   ];
+
+      const [Areas, setArea] = useState([{label: '', value: ''}]);
 
       const resultado = [
-        { label: "Terminado", value: '1' },
-        { label: "En Proceso", value: '2' },
-        { label: "Finalizado", value: '3' },
+        { label: "Terminado", value: '0' },
+        { label: "En Proceso", value: '1' },
+        { label: "Finalizado", value: '2' },
    
       ];
 
@@ -55,8 +54,14 @@ function PlanInspeccion (): JSX.Element {
 
     function selectionHandler(event: React.ChangeEvent<HTMLInputElement>) {
       let value = event.target.value
-      setSelectedOption(value);  
-      console.log(selectedOption)
+      setSelectedOptionRadio(value); 
+      if(Number(value) === 0){
+        setArea( controller.seeAllArea().map( 
+          (list) => ({label: list.description, value: list.id})));
+      }else{
+        setArea( controller.seeAllElement().map( 
+          (list) => ({label: list.description, value: list.id})));
+      }
     };
 
     function importar (){
@@ -101,7 +106,7 @@ function PlanInspeccion (): JSX.Element {
                 ))}
                 </select>
 
-                <label style = {{position: 'absolute', top: 550, left: 300, fontSize: 32, fontWeight: 'bold'}}> {selectedOption} </label>
+                <label style = {{position: 'absolute', top: 550, left: 300, fontSize: 32, fontWeight: 'bold'}}> {selectedOptionRadio === '0' ? 'Area' : 'Elemento'} </label>
                 <select onChange = {selectChangeArea} className= 'dropdown'  style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold', color:'white'}}>
                 {Areas.map((options) => (
                 <option key={options.label} value={options.value}>
@@ -114,7 +119,7 @@ function PlanInspeccion (): JSX.Element {
                 return (
                 <div key={item.id} >
                 <label className="radio-inline" style={{position: 'absolute', top:item.topl, left:item.leftl , fontSize: 20 }} >
-                <input style={{ position: 'absolute', top:item.top, left:item.left }} type="radio" name="myRadio" onChange={selectionHandler} value={item.value} />{item.value}</label>
+                <input style={{ position: 'absolute', top:item.top, left:item.left }} id= {item.id} type="radio" name="myRadio" onChange={selectionHandler} value={item.value} />{item.id}</label>
                 </div>
                 );
                 })}

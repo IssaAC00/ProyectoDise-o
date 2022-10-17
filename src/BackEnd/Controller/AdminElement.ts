@@ -24,6 +24,11 @@ class AdminElement{
 
     }
 
+    public seeAll(): Element[]{
+        return this._elements;
+
+    }
+
     public modify(element: Element):boolean{
         this._elements.forEach((item, index, arr) => {
             if (item.id === element.id){

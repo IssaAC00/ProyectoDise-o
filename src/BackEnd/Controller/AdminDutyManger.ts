@@ -24,6 +24,11 @@ class AdminDutyManager{
 
     }
 
+    public seeAll(): DutyManager[]{
+        return this._dutyManagers;
+
+    }
+
     public modify(dutyManager: DutyManager): boolean{
         this._dutyManagers.forEach((item, index, arr) => {
             if (item.id === dutyManager.id){

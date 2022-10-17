@@ -12,6 +12,7 @@ import { Rol, User } from '../Model/User'
 import { DutyManager, TypeWork, FactoryDutyManager} from '../Model/DutyManager'
 
 class Controller{
+
     private adminArea: AdminArea = new AdminArea();
     private adminElement: AdminElement = new AdminElement();
     private adminDutyManager: AdminDutyManager = new AdminDutyManager;
@@ -83,6 +84,10 @@ class Controller{
     public seeElement(idElement: string): Element{
         return this.adminElement.search(idElement);
     }//preguntar como se va a ver
+
+    public seeAllElement(): Element[]{
+        return this.adminElement.seeAll();
+    }
 
     public modifyElement(id: string, description: string, images: string[], location: string, idArea: string){
         //Validar nombre && type
@@ -176,6 +181,10 @@ class Controller{
         return this.adminDutyManager.search(idDutyManager);
     }//preguntar como se va a ver
 
+    public seeAllDutyManager(): DutyManager[]{
+        return this.adminDutyManager.seeAll();
+    }
+
     public modifyDutyManager(optionDM:number, id: number, name: string, email: string, labor: Set<TypeWork>, 
                             managerName?: string, idManager?: number){
         let factoryDutyManager = new FactoryDutyManager();
@@ -190,12 +199,21 @@ class Controller{
 }
 
 let controller = new Controller();
-controller.registerArea('2a', 'Amarillo', ['pdf.pdf'], 'Entrando por arriba', 0);
-controller.registerArea('2c', 'Rojo', ['pdf.pdf'], 'Entrando por arriba', 0);
-controller.registerArea('2b', 'Verde', ['pdf.pdf'], 'Entrando por arriba', 0);
+controller.registerArea('1a', 'Amarillo', ['pdf.pdf'], 'Entrando por arriba', 0);
+controller.registerArea('1c', 'Rojo', ['pdf.pdf'], 'Entrando por arriba', 0);
+controller.registerArea('1b', 'Verde', ['pdf.pdf'], 'Entrando por arriba', 0);
+
+controller.registerElement('2a', 'Pintura', ['pdf.pdf'], 'En la pared', '1a');
+controller.registerElement('2c', 'Mantel', ['pdf.pdf'], 'En el techo', '1b');
+controller.registerElement('2b', 'Verde', ['pdf.pdf'], 'Abajo', '1c');
 
 controller.registerUser('jbarrientossandoval@gmail.com', 'Pecorine2018', 0);
 controller.registerUser('alcon@gmail.com', 'Pascal2018', 1);
 controller.registerUser('aguila@gmail.com', 'Precuela2018', 2);
+
+let list: Set<TypeWork> = new Set(); 
+
+controller.registerDutyManager(0, 117870341, 'Josue Barrientos S', 'jbarrientossandoval@gmail.com', list.add(0).add(1));
+controller.registerDutyManager(1, 103425142, 'Jokemi', 'jbs@gmail.com', list.add(1).add(2), 'Jose S', 1234523);
 
 export { controller }
