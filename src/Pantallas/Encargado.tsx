@@ -9,7 +9,7 @@ import { controller } from "../BackEnd/Controller/Controller";
 
 
 function Encargado (): JSX.Element {
-
+        const [disabled, setDisabled] = useState(true);
 
 
         const [form, setForm] = useState({ 
@@ -20,8 +20,8 @@ function Encargado (): JSX.Element {
             });
         
         const [selectedOption, setSelectedOption] = useState<String>();
-        var options = [{id:'Cedula Juridica',nm:"Cedula Juridica", value:"0", topl: 200, leftl: 1340, top: 0, left: -40 },
-        {id:'Cedula Fisica',nm:"Cedula Fisica", value:"1",top: 0, left: -40,topl: 200, leftl: 1520}];
+        var options = [{id:'Cedula Juridica',nm:"Cedula Juridica", value:"0", topl: 200, leftl: 1540, top: 0, left: -40 },
+        {id:'Cedula Fisica',nm:"Cedula Fisica", value:"1",top: 0, left: -40,topl: 200, leftl: 1720}];
         
 
         const [isCheckedA, setIsCheckedA] = useState(false);
@@ -51,9 +51,15 @@ function Encargado (): JSX.Element {
         function cedulaSelectionHandler(event: React.ChangeEvent<HTMLInputElement>) {
                 let value = event.target.value
                 setSelectedOption(value);
-                form.idtype = value;
-                console.log(form.idtype);
-        }
+                if ( value == '0'){
+                  setDisabled(false);
+                  form.idtype = value;}
+                else{
+                        setDisabled(true);
+                        form.idtype = value;
+                        console.log('aqui'+ value);
+                }      
+         }
 
         
         const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,6 +113,10 @@ function Encargado (): JSX.Element {
                 <label style = {{position: 'absolute', top: 600, left: 300, fontSize: 32, fontWeight: 'bold'}}> Email </label>
                 <input name = 'email' id = 'email' onChange = {changeHandler} type="text"  className='input-global' style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold'}} />
                 
+                <label style = {{position: 'absolute', top: 250, left: 1400, fontSize: 20, fontWeight: 'bold'}}> Cédula Encargado</label>
+                <input  className='input-global'   disabled={disabled} style = {{position: 'absolute', top: 235, left: 1600, fontSize: 20 , height: 45, width: 250}}/>
+                <label style = {{position: 'absolute', top: 350, left: 1400, fontSize: 20, fontWeight: 'bold'}}> Nombre Encargado</label>
+                <input  className='input-global'  style = {{position: 'absolute', top: 335, left: 1600, fontSize: 20 , height: 45, width: 250}}  disabled={disabled} />
 
 
                 
@@ -152,7 +162,7 @@ function Encargado (): JSX.Element {
                 <button  className='buttonS' style = {{position: 'absolute', top: 700, left: 1650, fontSize: 23}}> Editar</button>
                 <button  className='buttonS' onClick= {Register} style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar </button>
                 <button  className='buttonS' style = {{position: 'absolute', top: 860, left: 1650, fontSize: 23}}>Eliminar </button>
-        
+                <button  className='buttonS'  style = {{position: 'absolute', top: 180, left: 1050, fontSize: 23}}>Buscar</button>
 
                
                
