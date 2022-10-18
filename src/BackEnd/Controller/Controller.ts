@@ -109,13 +109,14 @@ class Controller{
         let factoryInspection = new FactoryInspections(); 
         let dutyManager = this.adminDutyManager.search(idDutyManager);
         let objectInspect: Area | Element;
-        if(optionInspection === 1){
+        if(optionInspection === 0){
             objectInspect = this.adminArea.search(idObjectInspect);
         }else{
             objectInspect = this.adminElement.search(idObjectInspect);
         }
         let newInspection = factoryInspection.getInspection(optionInspection, id, description, iDate, eDate, dDate, dutyManager,
                                                             PDF, result, state, objectInspect);
+        console.log(newInspection)
         this.adminInspection.add(newInspection);
     }
     

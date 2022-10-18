@@ -15,59 +15,89 @@ function PlanInspeccion (): JSX.Element {
     var options = [{id:'Area',value:"0", topl: 290, leftl: 500, top: 0, left: -40 },
     {id:'Elemento',value:"1",top: 0, left: -40,topl: 290, leftl: 800}];
 
-    const Encargado = controller.seeAllDutyManager().map( 
-      (list) => ({label: list.name, value: list.id}));
+    const Encargado = controller
+      .seeAllDutyManager()
+      .map((list) => ({ label: list.name, value: list.id }));
 
-    // const Areas = [
-    //     { label: "Amarillo", value: '1' },
-    //     { label: "Rojo", value: '2' },
-    //     { label: "Verde", value: '3' },
-   
-    //   ];
-
-      const [Areas, setArea] = useState([{label: '', value: ''}]);
+    const [Areas, setArea] = useState(
+      controller
+        .seeAllArea()
+        .map((list) => ({ label: list.description, value: list.id }))
+    );
+        
+      const [form, setForm] = useState({
+        duty: String(Encargado[0].value),
+        typeInspection: "0",
+        codeAE: String(Areas[0].value),
+        code: "",
+        iDate: value,
+        eDate: fin,
+      });
 
       const resultado = [
-        { label: "Terminado", value: '0' },
-        { label: "En Proceso", value: '1' },
-        { label: "Finalizado", value: '2' },
-   
+        { label: "Terminado", value: "0" },
+        { label: "En Proceso", value: "1" },
+        { label: "Finalizado", value: "2" },
       ];
 
-    const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+      const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
         setSelectedOption(value);
+        form.duty = value;
         console.log(value);
       };
-      
-    const selectChangeResultado = (event: React.ChangeEvent<HTMLSelectElement>) => {
+
+      const selectChangeResultado = (
+        event: React.ChangeEvent<HTMLSelectElement>
+      ) => {
         const value = event.target.value;
         setSelectedResultado(value);
         console.log(value);
       };
-    
-    const selectChangeArea = (event: React.ChangeEvent<HTMLSelectElement>) => {
+
+      const selectChangeArea = (
+        event: React.ChangeEvent<HTMLSelectElement>
+      ) => {
         const value = event.target.value;
         setSelectedArea(value);
+        form.codeAE = value;
         console.log(value);
       };
 
-    function selectionHandler(event: React.ChangeEvent<HTMLInputElement>) {
-      let value = event.target.value
-      setSelectedOptionRadio(value); 
-      if(Number(value) === 0){
-        setArea( controller.seeAllArea().map( 
-          (list) => ({label: list.description, value: list.id})));
-      }else{
-        setArea( controller.seeAllElement().map( 
-          (list) => ({label: list.description, value: list.id})));
+      function selectionHandler(event: React.ChangeEvent<HTMLInputElement>) {
+        let value = event.target.value;
+        setSelectedOptionRadio(value);
+        form.typeInspection = value;
+        if (Number(value) === 0) {
+          setArea(
+            controller
+              .seeAllArea()
+              .map((list) => ({ label: list.description, value: list.id }))
+          );
+        } else {
+          setArea(
+            controller
+              .seeAllElement()
+              .map((list) => ({ label: list.description, value: list.id }))
+          );
+        }
       }
-    };
 
-    function importar (){
-        console.log('hola')
+      const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setForm({ ...form, [event.target.name]: event.target.value });
+        console.log(form);
+      };
 
-    }
+      function importar() {
+        console.log("hola");
+      }
+
+      function Register(){
+        //Modificar todavia le falta refinar
+        controller.registerInspection(Number(form.typeInspection), Number(form.code), '', value as Date, fin as Date, null!, 
+                                        Number(form.duty), null!, 1,2, form.codeAE); 
+        console.log(controller.seeInspection(Number(form.code)));
+      }
 
 
         return(
@@ -77,13 +107,13 @@ function PlanInspeccion (): JSX.Element {
 
             <div style={{position: 'absolute', top: 200, left: 1700}}>
                 <label style = {{ fontSize: 24, fontWeight: 'bold'}}> Fecha Inicio </label>
-                <DatePicker value={value} onChange={(newValue) => setValue(newValue)}/>
+                <DatePicker format="dd/MM/yyyy" value={value} onChange={(newValue) => {setValue(newValue);}}/>
                 <label style = {{ fontSize: 24, fontWeight: 'bold'}}> Fecha Final</label>
-                <DatePicker value={fin} onChange={(newValue) => setFin(newValue)}/>
+                <DatePicker format="dd/MM/yyyy" value={fin} onChange={(newValue) => {setFin(newValue);}}/>
             </div>
 
                 <label style = {{position: 'absolute', top: 400, left: 300, fontSize: 32, fontWeight: 'bold'}}> Código </label>
-                <input name = 'code'  id = 'code'  type="text"  className='input-global'  style = {{position: 'absolute', top: 350, left: 500, fontSize: 32}} />
+                <input name = 'code'  id = 'code'  value= {form.code} onChange = {changeHandler} type="text"  className='input-global'  style = {{position: 'absolute', top: 350, left: 500, fontSize: 32}} />
 
                 <label style = {{position: 'absolute', top: 730, left: 1600, fontSize: 32, fontWeight: 'bold'}}> Estado </label>
                 <input name = 'Estado'  id = 'Estado'  type="text"  className='input-global' style = {{position: 'absolute', top: 700 , left: 1850, fontSize: 23, fontWeight: 'bold'}} />
@@ -106,7 +136,7 @@ function PlanInspeccion (): JSX.Element {
                 ))}
                 </select>
 
-                <label style = {{position: 'absolute', top: 550, left: 300, fontSize: 32, fontWeight: 'bold'}}> {selectedOptionRadio === '0' ? 'Area' : 'Elemento'} </label>
+                <label style = {{position: 'absolute', top: 550, left: 300, fontSize: 32, fontWeight: 'bold'}}> {form.typeInspection === '0' ? 'Area' : 'Elemento'} </label>
                 <select onChange = {selectChangeArea} className= 'dropdown'  style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold', color:'white'}}>
                 {Areas.map((options) => (
                 <option key={options.label} value={options.value}>
@@ -136,7 +166,7 @@ function PlanInspeccion (): JSX.Element {
                 <button  className='buttonS' style = {{position: 'absolute', top: 380, left: 1100, fontSize: 23}}>Buscar</button>
                 <button  className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
                 <button  className='buttonS' style = {{position: 'absolute', top: 780, left: 500, fontSize: 23}}> Editar</button>
-                <button  className='buttonS' style = {{position: 'absolute', top: 780, left: 790, fontSize: 23}}>Registrar </button>
+                <button  onClick= {Register} className='buttonS' style = {{position: 'absolute', top: 780, left: 790, fontSize: 23}}>Registrar </button>
                
 
             </div>

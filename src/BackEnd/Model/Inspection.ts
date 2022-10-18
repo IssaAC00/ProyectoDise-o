@@ -162,9 +162,9 @@ class FactoryInspections{
         eDate: Date, dDate: Date, dutymanager: DutyManager,
         PDF: string, result: TypeWork, state: State, objectInspect: Element|Area): Inspection{
         switch (choiceInspection) {
-            case 1:
+            case 0:
                 return new InspectionArea(id, description, iDate, eDate, dDate, dutymanager, PDF, result, state, objectInspect as Area);
-            case 2:
+            case 1:
                 return new InspectionElement(id, description, iDate, eDate, dDate, dutymanager, PDF, result, state, objectInspect as Element);
             default:
                 return null!;
