@@ -22,22 +22,26 @@ function Login (): JSX.Element {
     function Prueba(){
        
     };
+
+    function nextPage(user: User){
+      	switch (user.rol) {
+          case Rol.Adminitrador:
+              navigate('/Area');
+              break;
+          case Rol.Super:
+              navigate('/SuperUsuario');
+              break;
+          default:
+              break;
+        }
+    }
     
     function Ingresar(){
         //let pass = controller.login(form.email, form.password);
         // if(pass){
             
         //     let user = controller.seeUser(form.email)
-        //     switch (user.rol) {
-        //         case Rol.Adminitrador:
-        //             navigate('/Area');
-        //             break;
-        //         case Rol.Super:
-        //             navigate('/SuperUsuario');
-        //             break;
-        //         default:
-        //             break;
-        //     }
+        //     nextPage(user);
         // }else{
         //     alert('Revise bien los datos');
         // }

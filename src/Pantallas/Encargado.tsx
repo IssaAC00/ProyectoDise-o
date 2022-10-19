@@ -15,7 +15,6 @@ function Encargado (): JSX.Element {
 
         const [form, setForm] = useState({ 
                 id: '',
-                idtype: '0',
                 name: '',
                 email: '',
                 managerName: '',
@@ -23,18 +22,6 @@ function Encargado (): JSX.Element {
 
             });
 
-        
-        function setFormValues(idD: string, typeD: string, nameD: string, emailD: string, managerD: string, managerND: string){
-                setForm({
-                  id: idD,
-                  idtype: typeD,
-                  name: nameD,
-                  email:emailD,
-                  managerId: managerD,
-                  managerName: managerND
-        
-                })
-        }
 
         function checkButtonChange(list: Set<TypeWork>){
                 if(list.has(0)){
@@ -76,9 +63,21 @@ function Encargado (): JSX.Element {
                 }
         }
             
-        const [selectedOption, setSelectedOption] = useState<String>();
+        const [selectedOption, setSelectedOption] = useState<string>();
         var options = [{id:'Cedula Juridica',nm:"Cedula Fisica", value:"0", topl: 200, leftl: 1540, top: 0, left: -40 },
         {id:'Cedula Fisica',nm:"Cedula Juridica", value:"1",top: 0, left: -40,topl: 200, leftl: 1720}];
+
+        function setFormValues(idD: string, typeD: string, nameD: string, emailD: string, managerD: string, managerND: string){
+                setForm({
+                  id: idD,
+                  name: nameD,
+                  email:emailD,
+                  managerId: managerD,
+                  managerName: managerND
+        
+                })
+                setSelectedOption(typeD);
+        }
         
 
         const [isCheckedA, setIsCheckedA] = useState(false);
@@ -109,11 +108,11 @@ function Encargado (): JSX.Element {
                 let value = event.target.value
                 setSelectedOption(value);
                 if ( value == '1'){
-                  setDisabled(false);
-                  form.idtype = value;}
+                        setDisabled(false);
+                        setSelectedOption(value);}
                 else{
                         setDisabled(true);
-                        form.idtype = value;
+                        setSelectedOption(value);
                         console.log('aqui'+ value);
                 }      
          }
@@ -124,41 +123,64 @@ function Encargado (): JSX.Element {
                 console.log(form);
         }
 
+        function validarLegal(type: number, id: number, name: string): boolean{
+                if(type === 1){
+                        if(!isNaN(id) && name !== ''){
+                                return true;
+                        }
+                        return false;
+                }
+                return true;
+        }
+
         function Register(){
                 let listType: Set<TypeWork> = new Set();
                 saveCheckButton(listType);
-                controller.registerDutyManager(Number(selectedOption), Number(form.id), form.name, form.email, listType, 
-                                                form.managerName, Number(form.managerId));
-                
-                setFormValues('', form.idtype, '','','','');
+                let typeDuty = Number(selectedOption), idDuty = Number(form.id), managerId = Number(form.managerId);
+                if(!isNaN(typeDuty) && !isNaN(idDuty) && form.name.trim() !== '' && validarLegal(typeDuty, managerId, form.name)){
+                        controller.registerDutyManager(typeDuty, idDuty, form.name, form.email, listType, 
+                                form.managerName, managerId);
+                        setFormValues('', selectedOption as string, '','','','');
+                        alert('Encargado agregado exitosamente');
+                }else{
+                        alert('No deben existir espacios en blanco');
+                }
         }
 
         function Search(){
                 let duty = controller.seeDutyManager(Number(form.id));
-                console.log(duty.constructor.name);
-                console.log(form.idtype);
-                if(duty.constructor.name === 'LegalPerson' && form.idtype == '1'){
-                        setFormValues(String(duty.id), form.idtype, duty.name,duty.email, 
-                                        String((duty as LegalPerson).idManager), (duty as LegalPerson).managerName);
-                }else if(duty.constructor.name === 'InternalPerson' && form.idtype == '0'){
-                        console.log('Entro 2');
-                        setFormValues(String(duty.id), form.idtype, duty.name,duty.email, '', '');
+                if(duty !== null){
+                        if(duty.constructor.name === 'LegalPerson' && selectedOption == '1'){
+                                setFormValues(String(duty.id), selectedOption, duty.name,duty.email, 
+                                                String((duty as LegalPerson).idManager), (duty as LegalPerson).managerName);
+                        }else if(duty.constructor.name === 'InternalPerson' && selectedOption == '0'){
+                                setFormValues(String(duty.id), selectedOption, duty.name,duty.email, '', '');
+                        }
+                        console.log(duty.labor)
+                        checkButtonChange(duty.labor);
+                } else {
+                        alert("No se ha encontrado encarago con esa cedula");
+                        setFormValues(form.id, selectedOption as string, '','','', '');
                 }
-                checkButtonChange(duty.labor);
         }
 
         function Drop(){
                 controller.deleteDutyManager(Number(form.id));
-                setFormValues('', form.idtype, '','','','');
+                setFormValues('', selectedOption as string, '','','','');
         }
 
         function Modify(){
                 let listType: Set<TypeWork> = new Set();
                 saveCheckButton(listType);
-        
-                controller.modifyDutyManager(Number(selectedOption), Number(form.id), form.name, form.email, listType, 
-                                                form.managerName, Number(form.managerId));
-                setFormValues('', form.idtype, '','','','');
+                let typeDuty = Number(selectedOption), idDuty = Number(form.id), managerId = Number(form.managerId);
+                if(!isNaN(typeDuty) && !isNaN(idDuty) && form.name.trim() !== '' && validarLegal(typeDuty, managerId, form.name)){
+                        controller.modifyDutyManager(typeDuty, idDuty, form.name, form.email, listType, 
+                                                form.managerName, managerId);
+                        setFormValues('', selectedOption as string, '','','','');
+                        alert('Encargado modificado exitosamente');
+                }else{
+                        alert('No deben existir espacios en blanco');
+                }
                 
         }
 

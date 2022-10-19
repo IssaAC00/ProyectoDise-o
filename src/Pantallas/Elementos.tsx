@@ -9,14 +9,14 @@ import '../componentes/buttonS.css'
 
 function Elementos(): JSX.Element{
 
-    const [selectedOption, setSelectedOption] = useState<String>();
+    // Se selecciona el area que se desea guardar el elemento
+    const [selectedOption, setSelectedOption] = useState<string>(controller.seeAllArea()[0].id);
 
 
     const [form, setForm] = useState({
         code: '',
         description: '',
         location: '',
-        area: controller.seeAllArea()[0].id,
         PDF: '' 
       });
 
@@ -26,56 +26,56 @@ function Elementos(): JSX.Element{
     const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
         setSelectedOption(value);
-        console.log(value);
-        form.area = value;
       };
     
     function importar (){
       console.log('hola')
     }
 
-    function setFormValues(idE: string, descriptionE: string, locationE: string, areaE: string, PDFE: string){
+    function setFormValues(idE: string, descriptionE: string, locationE: string, PDFE: string, areaE: string){
       setForm({
         code: idE,
         description: descriptionE,
         location: locationE,
-        area: areaE,
         PDF: PDFE
-      })
+      });
+      setSelectedOption(areaE);
     }
 
     function Register(){
       if( form.code.trim() !== '' && form.description.trim() !== '' && form.location !== ''){
-          controller.registerElement(form.code, form.description, [form.PDF], form.location, form.area);
-          console.log(form.area);
-          setFormValues('','', '', '', form.area);
-          alert("Agregado exitosamente")
+          controller.registerElement(form.code, form.description, [form.PDF], form.location, selectedOption);
+          setFormValues('','', '', '', selectedOption);
+          alert("Elememto agregado exitosamente");
         }else{
-          console.log('No deben existir espacios en blanco');
+          alert('No deben existir espacios en blanco');
         }
     }
 
     function Modify(){
       if( form.code.trim() !== '' && form.description.trim() !== ''){
-        controller.modifyElement(form.code, form.description, [form.PDF], form.location, form.area);
-        
-        setFormValues('','', '', '', form.area);
-        alert("Modificado exitosamente")
+        controller.modifyElement(form.code, form.description, [form.PDF], form.location, selectedOption);
+        setFormValues('','', '', '', selectedOption);
+        alert("Elememto agregado exitosamente");
       }else{
-        console.log('No deben existir espacios en blanco');
+        alert('No deben existir espacios en blanco');
       }
     }
 
     function Drop(){
-      controller.deleteElement(form.code);
-      setFormValues('','', '', '', form.area);
+      let deleteElement = controller.deleteElement(form.code);
+      setFormValues('','', '', '', selectedOption);
       alert("Eliminado exitosamente")      
     }
 
     function Search(){
       let element = controller.seeElement(form.code);
-      setFormValues(element.id , element.description, element.location,element.images.at(0)?.toString() as string, element.area.id);
-      console.log(element);
+      if (element != null) {
+        setFormValues(element.id , element.description, element.location,element.images.at(0)?.toString() as string, element.area.id);
+      } else {
+        alert("No se ha encontrado elemento con ese código");
+        setFormValues(form.code,'','', selectedOption,'');
+      }
     }
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -96,7 +96,7 @@ function Elementos(): JSX.Element{
             <input name = 'location' value={form.location} id = 'location' onChange = {changeHandler}  className='input-global' style = {{position: 'absolute', top: 550, left: 500, fontSize: 23}} type="text" placeholder="Digite la ubicacion"  />
 
             <label style = {{position: 'absolute', top: 800, left: 300, fontSize: 32, fontWeight: 'bold'}}> Area </label>
-            <select onChange = {selectChange} value= {form.area} className= 'dropdown'  style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold', color:'white'}}>
+            <select onChange = {selectChange} value= {selectedOption} className= 'dropdown'  style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold', color:'white'}}>
                 {roles.map((options) => (
                 <option style = {{color: 'black', fontWeight: 'bold'}} key={options.label} value={options.value}>
                 {options.label}

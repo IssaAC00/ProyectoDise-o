@@ -11,13 +11,12 @@ import { Floor } from '../BackEnd/Model/Area';
 
 function Areas(): JSX.Element{
 
-    const [selectedOption, setSelectedOption] = useState<String>();
+    const [selectedOption, setSelectedOption] = useState<string>('0');
 
     const [form, setForm] = useState({
         code: '',
         description: '',
         address: '',
-        floor: '0',
         PDF: '' 
     });
   
@@ -35,7 +34,6 @@ function Areas(): JSX.Element{
     const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
         setSelectedOption(value);
-        form.floor = value;
       };
 
       function importar (){
@@ -48,42 +46,51 @@ function Areas(): JSX.Element{
           code: idA,
           description: descriptionA,
           address: locationA,
-          floor: floorA,
           PDF: PDFA
-
         })
+        setSelectedOption(floorA);
       }
 
       function Register (){
-        
-        if( form.code.trim() !== '' && form.description.trim() !== '' && form.address.trim() !== '',
-            form.floor.trim() !== ''){
-          controller.registerArea(form.code, form.description, [form.PDF], form.address, Number(form.floor));
-          //window.location.reload();
-          setFormValues('','','', form.floor,'');
-          alert("Agregado exitosamente")
+        let floor = Number(selectedOption);
+        console.log(isNaN(floor));
+        if( form.code.trim() !== '' && form.description.trim() !== '' && form.address.trim() !== '' &&
+            !isNaN(floor)){
+          controller.registerArea(form.code, form.description, [form.PDF], form.address, floor);
+          setFormValues('','','', selectedOption,'');
+          alert("Area agregada exitosamente")
         }else{
           console.log('No deben existir espacios en blanco');
         }
       }
 
-      function Searh(){
+      function Searh() {
         let areaS = controller.seeArea(form.code);
-        setFormValues(areaS.id, areaS.description, areaS.location, String(areaS.floor), areaS.images.at(0)?.toString() as string);
-        console.log(areaS);
+        if (areaS != null) {
+          setFormValues(areaS.id, areaS.description, areaS.location, String(areaS.floor), areaS.images.at(0)?.toString() as string);
+        } else {
+          alert("No se ha encontrado area con ese código");
+          setFormValues(form.code,'','', selectedOption,'');
+        }
       }
       
-      function Drop(){
-        controller.deleteArea(form.code);
-        setFormValues('','','', form.floor,'');
-        alert("Eliminado exitosamente")
+      function Drop() {
+        let deleteArea = controller.deleteArea(form.code);
+        setFormValues('','','', selectedOption,'');
+        // if (deleteAreA) {
+        //   setFormValues('', '', '', selectedOption, '');
+        //   alert("Area eliminada exitosamente")
+        // } else {
+        //   alert("No se ha encontado area con ese codigo")
+        // }
       }
 
       function Modify(){
-        if( form.code.trim() !== '' && form.description.trim() !== '' && form.address.trim() !== '',
-            form.floor.trim() !== ''){
-          controller.modifyArea(form.code, form.description, [form.PDF], form.address, Number(form.floor));
-          setFormValues('','','', form.floor,'');
+        let floor = Number(selectedOption);
+        if( form.code.trim() !== '' && form.description.trim() !== '' && form.address.trim() !== '' &&
+            floor !== NaN){
+          controller.modifyArea(form.code, form.description, [form.PDF], form.address, floor);
+          setFormValues('','','', selectedOption,'');
           alert("Editado exitosamente")
         }else{
           console.log('No deben existir espacios en blanco');
@@ -111,7 +118,7 @@ function Areas(): JSX.Element{
             <input name = 'address' value={form.address} id = 'address' onChange = {changeHandler} type="text"  className='input-global' style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold'}} />
 
             <label style = {{position: 'absolute', top: 800, left: 300, fontSize: 32, fontWeight: 'bold'}}> Piso </label>
-            <select onChange = {selectChange} value= {form.floor}   className= 'dropdown' name= 'floor'  style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold', color:'white'}}>
+            <select onChange = {selectChange} value= {selectedOption as string}   className= 'dropdown' name= 'floor'  style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold', color:'white'}}>
             {techCompanies.map((options) => (
             <option key={options.label} value={options.value}>
             {options.label}

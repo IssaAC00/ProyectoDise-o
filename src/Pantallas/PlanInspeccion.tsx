@@ -99,6 +99,23 @@ function PlanInspeccion (): JSX.Element {
         console.log(controller.seeInspection(Number(form.code)));
       }
 
+      function Drop(){
+        controller.deleteInspection(Number(form.code));
+      }
+
+      function Modify(){
+        //Modificar todavia le falta refinar
+        controller.modifyInspection(Number(form.typeInspection), Number(form.code), '', value as Date, fin as Date, null!, 
+                                        Number(form.duty), null!, 1,2, form.codeAE); 
+        console.log(controller.seeInspection(Number(form.code)));
+      }
+
+      function Search(){
+        let inspection = controller.seeInspection(Number(form.code));
+        //mostrar en pantalla
+      }
+      
+
 
         return(
 
@@ -163,9 +180,9 @@ function PlanInspeccion (): JSX.Element {
                     <label onClick={importar}>Adjuntar Imagen </label>
                 </div>    
 
-                <button  className='buttonS' style = {{position: 'absolute', top: 380, left: 1100, fontSize: 23}}>Buscar</button>
-                <button  className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
-                <button  className='buttonS' style = {{position: 'absolute', top: 780, left: 500, fontSize: 23}}> Editar</button>
+                <button  onClick= {Search} className='buttonS' style = {{position: 'absolute', top: 380, left: 1100, fontSize: 23}}>Buscar</button>
+                <button  onClick= {Drop} className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
+                <button  onClick= {Modify} className='buttonS' style = {{position: 'absolute', top: 780, left: 500, fontSize: 23}}> Editar</button>
                 <button  onClick= {Register} className='buttonS' style = {{position: 'absolute', top: 780, left: 790, fontSize: 23}}>Registrar </button>
                
 

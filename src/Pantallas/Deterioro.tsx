@@ -9,7 +9,7 @@ import { Spolaige } from '../BackEnd/Model/Spolaige'
 function Deterioro (): JSX.Element {
 
 
-    const [selectedOption, setSelectedOption] = useState<String>();
+    const [selectedOption, setSelectedOption] = useState<string>('0');
   
     const techCompanies = [
         { label: "Natural", value: '0' },
@@ -19,55 +19,63 @@ function Deterioro (): JSX.Element {
 
       const [form, setForm] = useState({
         code: '',
-        description: '',
-        type: '0' 
+        description: ''
       });
   
     const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
         setSelectedOption(value);
-        console.log(value);
-        form.type = value;
     };
 
     function setFormValues(idS: string, descriptionS: string, rolS: string){
       setForm({
         code: idS,
-        description: descriptionS,
-        type: rolS
+        description: descriptionS
       })
+      setSelectedOption(rolS);
     }
 
     function Register(){
+      let type = Number(selectedOption);
       if( form.code.trim() !== '' && form.description.trim() !== ''){
-          controller.registerPolaige(form.code, form.description, Number(form.type));
-          setFormValues('','', form.type);
-          alert("Agregado exitosamente")
+          controller.registerPolaige(form.code, form.description, type);
+          setFormValues('','', selectedOption);
+          alert("Deterioro agregado exitosamente")
         }else{
-          console.log('No deben existir espacios en blanco');
+          alert('No deben existir espacios en blanco');
         }
     }
 
     function Modify(){
+      let type = Number(selectedOption);
       if( form.code.trim() !== '' && form.description.trim() !== ''){
-        controller.modifyPolaige(form.code, form.description, Number(form.type));
-        setFormValues('','', form.type);
-        alert("Modificado exitosamente")
+        controller.modifyPolaige(form.code, form.description, type);
+        setFormValues('','', selectedOption);
+        alert("Deterioro agregado exitosamente")
       }else{
-        console.log('No deben existir espacios en blanco');
+        alert('No deben existir espacios en blanco');
       }
     }
 
     function Drop(){
-      controller.deleteSpolaige(form.code);
-      setFormValues('','', form.type);
+      let deleteS = controller.deleteSpolaige(form.code);
+      // if (deleteS) {
+      //   setFormValues('','', selectedOption);
+      //   alert("Area eliminada exitosamente")
+      // } else {
+      //   alert("No se ha encontado area con ese codigo")
+      // }
       alert("Eliminado exitosamente")      
     }
 
     function Search(){
-      let polaigeS = controller.seePolaige(form.code);
-      setFormValues(polaigeS.id , polaigeS.description, String(polaigeS.type));
-      console.log(polaigeS);
+      let spolaigeS = controller.seePolaige(form.code);
+      if (spolaigeS != null) {
+        setFormValues(spolaigeS.id , spolaigeS.description, String(spolaigeS.type));
+      } else {
+        alert("No se ha encontrado area con ese código");
+        setFormValues(form.code, '', selectedOption);
+      }
     }
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,7 +99,7 @@ function Deterioro (): JSX.Element {
  
 
             <label style = {{position: 'absolute', top: 600, left: 300, fontSize: 32, fontWeight: 'bold'}}> Tipo Deterioro </label>
-            <select onChange = {selectChange} value={form.type} className= 'dropdown'  style = {{position: 'absolute', top: 578, left: 600, fontSize: 23, fontWeight: 'bold', color:'white'}}>
+            <select onChange = {selectChange} value={selectedOption} className= 'dropdown'  style = {{position: 'absolute', top: 578, left: 600, fontSize: 23, fontWeight: 'bold', color:'white'}}>
             {techCompanies.map((options) => (
             <option key={options.label} value={options.value}>
             {options.label}
