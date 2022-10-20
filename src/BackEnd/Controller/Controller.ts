@@ -109,13 +109,14 @@ class Controller{
         let factoryInspection = new FactoryInspections(); 
         let dutyManager = this.adminDutyManager.search(idDutyManager);
         let objectInspect: Area | Element;
-        if(optionInspection === 1){
+        if(optionInspection === 0){
             objectInspect = this.adminArea.search(idObjectInspect);
         }else{
             objectInspect = this.adminElement.search(idObjectInspect);
         }
         let newInspection = factoryInspection.getInspection(optionInspection, id, description, iDate, eDate, dDate, dutyManager,
                                                             PDF, result, state, objectInspect);
+        console.log(newInspection)
         this.adminInspection.add(newInspection);
     }
     
@@ -124,15 +125,25 @@ class Controller{
     }//preguntar como se va a ver
 
     //Cuando se haga el register
-    public modifyInspection(id: string, description: string, images: string[], location: string, idArea: string){
+    public modifyInspection(optionInspection: number, id: number, description: string, iDate: Date, eDate: Date, dDate: Date,
+        idDutyManager: number, PDF: string, result: TypeWork, state: State, idObjectInspect: string) {
         //Validar nombre && type
-        let area = this.adminArea.search(idArea);
-        let newElement = new Element(id, description, images, location, area);
-        this.adminElement.modify(newElement);
+        let factoryInspection = new FactoryInspections();
+        let dutyManager = this.adminDutyManager.search(idDutyManager);
+        let objectInspect: Area | Element;
+        if (optionInspection === 0) {
+            objectInspect = this.adminArea.search(idObjectInspect);
+        } else {
+            objectInspect = this.adminElement.search(idObjectInspect);
+        }
+        let newInspection = factoryInspection.getInspection(optionInspection, id, description, iDate, eDate, dDate, dutyManager,
+            PDF, result, state, objectInspect);
+        console.log(newInspection)
+        this.adminInspection.modify(newInspection);
     }
 
-    public deleteInspection(id: number){
-        this.adminInspection.delete(id);
+    public deleteInspection(idInspection: number){
+        this.adminInspection.delete(idInspection);
     }
 
     //User
@@ -212,8 +223,9 @@ controller.registerUser('alcon@gmail.com', 'Pascal2018', 1);
 controller.registerUser('aguila@gmail.com', 'Precuela2018', 2);
 
 let list: Set<TypeWork> = new Set(); 
+let list2: Set<TypeWork> = new Set(); 
 
 controller.registerDutyManager(0, 117870341, 'Josue Barrientos S', 'jbarrientossandoval@gmail.com', list.add(0).add(1));
-controller.registerDutyManager(1, 103425142, 'Jokemi', 'jbs@gmail.com', list.add(1).add(2), 'Jose S', 1234523);
+controller.registerDutyManager(1, 103425142, 'Jokemi', 'jbs@gmail.com', list2.add(1).add(2), 'Jose S', 1234523);
 
 export { controller }
