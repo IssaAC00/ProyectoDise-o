@@ -3,11 +3,11 @@ import { Request, Response } from 'express'
 import { connect } from '../BasesDatos/dbMysQL'
 import { USUARIO } from '../interface/Post'
 
-export async function getPosts( req: Request,  res: Response): Promise<Response | void> {
+export async function getPosts( res: Response): Promise<Response | void> {
     try {
         const conn = await connect();
         const posts = await conn.query('SELECT * FROM Usuario ');
-        res.json(posts)
+        res.json(posts[0]);
     }
     catch (e) {
         console.log(e)
