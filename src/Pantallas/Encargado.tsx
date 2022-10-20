@@ -5,13 +5,13 @@ import { ExternalPerson, LegalPerson, TypeWork } from "../BackEnd/Model/DutyMana
 import { convertCompilerOptionsFromJson } from "typescript";
 import { controller } from "../BackEnd/Controller/Controller";
 import id from "date-fns/esm/locale/id/index.js";
-
+import { NavLink, useNavigate } from "react-router-dom"
 
 
 
 function Encargado (): JSX.Element {
         const [disabled, setDisabled] = useState(true);
-
+        const navigate = useNavigate(); 
 
         const [form, setForm] = useState({ 
                 id: '',
@@ -21,7 +21,10 @@ function Encargado (): JSX.Element {
                 managerId: ''
 
             });
-
+            function Volver (){
+                navigate('/');
+        
+              }
 
         function checkButtonChange(list: Set<TypeWork>){
                 if(list.has(0)){
@@ -246,8 +249,7 @@ function Encargado (): JSX.Element {
                 value="2"
                 />
                 </div>
-
-                <button  className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
+                <button onClick={Volver} className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
                 <button  className='buttonS' onClick= {Modify} style = {{position: 'absolute', top: 700, left: 1650, fontSize: 23}}> Editar</button>
                 <button  className='buttonS' onClick= {Register} style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar </button>
                 <button  className='buttonS' onClick= {Drop} style = {{position: 'absolute', top: 860, left: 1650, fontSize: 23}}>Eliminar </button>

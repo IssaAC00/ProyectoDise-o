@@ -3,12 +3,13 @@ import  Navbar  from "../componentes/TopBarSuperUsuario"
 import fondo from '../imagenes/fondo.png';
 import React, { useState } from "react";
 import {controller} from '../BackEnd/Controller/Controller'
-
+import { NavLink, useNavigate } from "react-router-dom"
 
 
 function SuperUsuario(): JSX.Element{
     
     const [selectedOption, setSelectedOption] = useState<String>();
+    const navigate = useNavigate(); 
 
     const [form, setForm] = useState({
         email: '',
@@ -22,7 +23,10 @@ function SuperUsuario(): JSX.Element{
         { label: "Operativo", value: '2' },
       ];
     
-    
+      function Volver (){
+        navigate('/');
+
+      }
     
     const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
@@ -74,7 +78,7 @@ function SuperUsuario(): JSX.Element{
                 </option>
                 ))}
                 </select>
-
+                <button onClick={Volver} className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
                 <button className='buttonS' onClick= {Register} style = {{position: 'absolute', top: 370, left: 190, fontSize: 15, fontWeight: 'bold'}}>Registrar</button>
             </div>
         </div>

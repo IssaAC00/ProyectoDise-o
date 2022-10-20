@@ -3,11 +3,12 @@ import Navbar  from "../componentes/topbar"
 import Checkbox from "../componentes/Checkbox";
 import "./consulta.css"
 import {DatePicker} from '@material-ui/pickers'
-
+import { NavLink, useNavigate } from "react-router-dom"
 
 function Consultas (): JSX.Element {
     const [value, setValue] = React.useState<Date | null>(new Date());
     const [fin, setFin] = React.useState<Date | null>(new Date());
+    const navigate = useNavigate(); 
 
     const [form, setForm] = useState({ 
         primeroDesde: '',
@@ -15,6 +16,11 @@ function Consultas (): JSX.Element {
         primeroHasta: '',
         consulta: ''
     });
+
+    function Volver (){
+        navigate('/');
+
+      }
 
     const [selectedOption, setSelectedOption] = useState<String>();
     
@@ -87,7 +93,8 @@ function Consultas (): JSX.Element {
                 );
                 })}
             
-            <button  className='buttonS' style = {{position: 'absolute', top: 950, left: 500, fontSize: 23, fontWeight: 'bold'}}>Volver</button>
+          
+            <button onClick={Volver} className='buttonS' style = {{position: 'absolute', top: 950, left: 500, fontSize: 23}}>Volver</button>
 
         </div>
     )

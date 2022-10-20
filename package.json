@@ -16,6 +16,7 @@
     "bootstrap": "^5.2.2",
     "date-fns": "^2.29.3",
     "express": "^4.18.2",
+    "mysql": "^2.18.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
@@ -33,7 +34,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "preinstall": "npx npm-force-resolutions",
-    "heroku-postbuild": "npm install" 
+    "heroku-postbuild": "npm install"
   },
   "eslintConfig": {
     "extends": [
@@ -52,5 +53,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/mysql": "^2.15.21"
   }
 }

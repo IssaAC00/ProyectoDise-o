@@ -4,13 +4,15 @@ import '../componentes/inputEstiloGlobal.css'
 import React, { useState } from "react";
 import "./areas.css"
 import '../componentes/buttonS.css'
+import { NavLink, useNavigate } from "react-router-dom"
 
 
 function TareasEncargado (): JSX.Element {
 
-
+  
     const [selectedOption, setSelectedOption] = useState<String>();
     const [selectedOption2, setSelectedOption2] = useState<String>();
+    const navigate = useNavigate(); 
   
     const techCompanies = [
         { label: "Primer Piso", value: '1' },
@@ -40,7 +42,10 @@ function TareasEncargado (): JSX.Element {
         console.log(value);
       };
 
+      function Volver (){
+        navigate('/');
 
+      }
       
     const selectChange2 = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
@@ -76,7 +81,7 @@ function TareasEncargado (): JSX.Element {
             </select>    
         
         
-            <button  className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
+            <button onClick={Volver} className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
     
     
     

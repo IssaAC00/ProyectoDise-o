@@ -5,12 +5,13 @@ import '../componentes/buttonS.css'
 import '../componentes/inputEstiloGlobal.css'
 import { controller } from '../BackEnd/Controller/Controller'
 import { Spolaige } from '../BackEnd/Model/Spolaige'
+import { NavLink, useNavigate } from "react-router-dom"
 
 function Deterioro (): JSX.Element {
 
 
     const [selectedOption, setSelectedOption] = useState<string>('0');
-  
+    const navigate = useNavigate(); 
     const techCompanies = [
         { label: "Natural", value: '0' },
         { label: "Circunstancial", value: '1' },
@@ -33,6 +34,11 @@ function Deterioro (): JSX.Element {
         description: descriptionS
       })
       setSelectedOption(rolS);
+    }
+
+    function Volver (){
+      navigate('/');
+
     }
 
     function Register(){
@@ -107,7 +113,7 @@ function Deterioro (): JSX.Element {
             ))}
             </select>
 
-            <button  className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
+            <button onClick={Volver} className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
             <button  className='buttonS' onClick= {Search} style = {{position: 'absolute', top: 190, left: 1350, fontSize: 23}}>Buscar</button>
 
             <button  className='buttonS' onClick= {Modify} style = {{position: 'absolute', top: 700, left: 1650, fontSize: 23}}> Editar</button>

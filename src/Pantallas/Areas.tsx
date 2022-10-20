@@ -6,12 +6,13 @@ import "./areas.css"
 import '../componentes/buttonS.css'
 import { controller } from '../BackEnd/Controller/Controller';
 import { Floor } from '../BackEnd/Model/Area';
-
+import { NavLink, useNavigate } from "react-router-dom"
 
 
 function Areas(): JSX.Element{
 
     const [selectedOption, setSelectedOption] = useState<string>('0');
+    const navigate = useNavigate(); 
 
     const [form, setForm] = useState({
         code: '',
@@ -38,6 +39,11 @@ function Areas(): JSX.Element{
 
       function importar (){
             console.log('hola')
+
+      }
+
+      function Volver (){
+        navigate('/');
 
       }
 
@@ -126,7 +132,7 @@ function Areas(): JSX.Element{
             ))}
             </select>
 
-            <button  className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
+            <button  className='buttonS' onClick = {Volver}style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
             <button  className='buttonS' onClick = {Searh} style = {{position: 'absolute', top: 180, left: 1150, fontSize: 23}}>Buscar</button>
             <button  className='buttonS' onClick= {Modify} style = {{position: 'absolute', top: 700, left: 1650, fontSize: 23}}> Editar</button>
             <button  className='buttonS' onClick = {Register} style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar Area</button>

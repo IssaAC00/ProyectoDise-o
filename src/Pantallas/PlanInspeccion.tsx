@@ -4,8 +4,10 @@ import {DatePicker} from '@material-ui/pickers'
 import './planInspeccion.css'
 import '../componentes/inputEstiloGlobal.css'
 import {controller} from '../BackEnd/Controller/Controller'
+import { NavLink, useNavigate } from "react-router-dom"
 
 function PlanInspeccion (): JSX.Element {
+    const navigate = useNavigate();
     const [value, setValue] = React.useState<Date | null>(new Date());
     const [fin, setFin] = React.useState<Date | null>(new Date());
     const [selectedOption, setSelectedOption] = useState<String>();
@@ -24,6 +26,11 @@ function PlanInspeccion (): JSX.Element {
         .seeAllArea()
         .map((list) => ({ label: list.description, value: list.id }))
     );
+
+    function Volver (){
+      navigate('/');
+
+    }
         
       const [form, setForm] = useState({
         duty: String(Encargado[0].value),
@@ -181,7 +188,7 @@ function PlanInspeccion (): JSX.Element {
                 </div>    
 
                 <button  onClick= {Search} className='buttonS' style = {{position: 'absolute', top: 380, left: 1100, fontSize: 23}}>Buscar</button>
-                <button  onClick= {Drop} className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
+                <button onClick={Volver} className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
                 <button  onClick= {Modify} className='buttonS' style = {{position: 'absolute', top: 780, left: 500, fontSize: 23}}> Editar</button>
                 <button  onClick= {Register} className='buttonS' style = {{position: 'absolute', top: 780, left: 790, fontSize: 23}}>Registrar </button>
                

@@ -4,13 +4,14 @@ import React, { useState } from "react";
 import { controller } from "../BackEnd/Controller/Controller";
 import '../componentes/inputEstiloGlobal.css'
 import '../componentes/buttonS.css'
-
+import { NavLink, useNavigate } from "react-router-dom"
 
 
 function Elementos(): JSX.Element{
 
     // Se selecciona el area que se desea guardar el elemento
     const [selectedOption, setSelectedOption] = useState<string>(controller.seeAllArea()[0].id);
+    const navigate = useNavigate(); 
 
 
     const [form, setForm] = useState({
@@ -30,6 +31,11 @@ function Elementos(): JSX.Element{
     
     function importar (){
       console.log('hola')
+    }
+
+    function Volver (){
+      navigate('/');
+
     }
 
     function setFormValues(idE: string, descriptionE: string, locationE: string, PDFE: string, areaE: string){
@@ -108,7 +114,7 @@ function Elementos(): JSX.Element{
                 <button  className='buttonS' onClick= {Modify} style = {{position: 'absolute', top: 700, left: 1650, fontSize: 23}}> Editar</button>
                 <button  className='buttonS' onClick = {Register} style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar Area</button>
                 <button  className='buttonS' onClick= {Drop} style = {{position: 'absolute', top: 860, left: 1650, fontSize: 23}}>Eliminar Area</button>
-                <button  className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
+                <button onClick={Volver} className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
                 
                 <div className='importPDF'  style = {{position: 'absolute', top: 300, left: 1700}}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20%" height="40%" fill="currentColor" >
