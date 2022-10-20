@@ -37,14 +37,14 @@ function Login (): JSX.Element {
     }
     
     function Ingresar(){
-        //let pass = controller.login(form.email, form.password);
-        // if(pass){
+        let pass = controller.login(form.email, form.password);
+        if(pass){
             
-        //     let user = controller.seeUser(form.email)
-        //     nextPage(user);
-        // }else{
-        //     alert('Revise bien los datos');
-        // }
+            let user = controller.seeUser(form.email)
+            nextPage(user);
+        }else{
+            alert('Revise bien los datos');
+        }
         navigate('/Area');
       };
 
