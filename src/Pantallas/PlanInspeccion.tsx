@@ -36,9 +36,7 @@ function PlanInspeccion (): JSX.Element {
         duty: String(Encargado[0].value),
         typeInspection: "0",
         codeAE: String(Areas[0].value),
-        code: "",
-        iDate: value,
-        eDate: fin,
+        code: ""
       });
 
       const resultado = [
@@ -46,6 +44,18 @@ function PlanInspeccion (): JSX.Element {
         { label: "En Proceso", value: "1" },
         { label: "Finalizado", value: "2" },
       ];
+
+      function setFormValues(idDuty: string, typeI: string, codeAEI: string, codeI: string, iDate: Date,
+                              eDate: Date){
+        setForm({
+          duty: idDuty,
+          typeInspection: typeI,
+          codeAE: codeAEI,
+          code: codeI
+        })
+        setValue(iDate);
+        setFin(eDate);
+      }
 
       const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
@@ -101,8 +111,9 @@ function PlanInspeccion (): JSX.Element {
 
       function Register(){
         //Modificar todavia le falta refinar
-        controller.registerInspection(Number(form.typeInspection), Number(form.code), '', value as Date, fin as Date, null!, 
-                                        Number(form.duty), null!, 1,2, form.codeAE); 
+        controller.registerInspection(Number(form.typeInspection), Number(form.code), value as Date, fin as Date, null!, 
+                                        Number(form.duty), null!, null!, null!, form.codeAE); 
+        setFormValues(form.duty, form.typeInspection, form.codeAE, '',value as Date, fin as Date);
         console.log(controller.seeInspection(Number(form.code)));
       }
 
@@ -113,12 +124,16 @@ function PlanInspeccion (): JSX.Element {
       function Modify(){
         //Modificar todavia le falta refinar
         controller.modifyInspection(Number(form.typeInspection), Number(form.code), '', value as Date, fin as Date, null!, 
-                                        Number(form.duty), null!, 1,2, form.codeAE); 
+                                        Number(form.duty), null!, null!, null!, form.codeAE); 
+        setFormValues(form.duty, form.typeInspection, form.codeAE, '',value as Date, fin as Date);
         console.log(controller.seeInspection(Number(form.code)));
       }
 
       function Search(){
         let inspection = controller.seeInspection(Number(form.code));
+        console.log(inspection);
+        setFormValues(String(inspection.dutyManager.id), form.typeInspection, '' , String(inspection.id), inspection.initialDate
+                      , inspection.endDate);
         //mostrar en pantalla
       }
       

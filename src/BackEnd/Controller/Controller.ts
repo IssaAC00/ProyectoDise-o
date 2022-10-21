@@ -103,7 +103,7 @@ class Controller{
     //Inspection
 
 
-    public registerInspection(optionInspection: number, id: number, description: string, iDate: Date, eDate: Date, dDate: Date,
+    public registerInspection(optionInspection: number, id: number, iDate: Date, eDate: Date, dDate: Date,
                                     idDutyManager: number, PDF: string, result: TypeWork, state: State, idObjectInspect: string){
         //Validar id, description, busqueda area
         let factoryInspection = new FactoryInspections(); 
@@ -114,7 +114,7 @@ class Controller{
         }else{
             objectInspect = this.adminElement.search(idObjectInspect);
         }
-        let newInspection = factoryInspection.getInspection(optionInspection, id, description, iDate, eDate, dDate, dutyManager,
+        let newInspection = factoryInspection.getInspection(optionInspection, id, iDate, eDate, dDate, dutyManager,
                                                             PDF, result, state, objectInspect);
         console.log(newInspection)
         this.adminInspection.add(newInspection);
@@ -136,7 +136,7 @@ class Controller{
         } else {
             objectInspect = this.adminElement.search(idObjectInspect);
         }
-        let newInspection = factoryInspection.getInspection(optionInspection, id, description, iDate, eDate, dDate, dutyManager,
+        let newInspection = factoryInspection.getInspection(optionInspection, id, iDate, eDate, dDate, dutyManager,
             PDF, result, state, objectInspect);
         console.log(newInspection)
         this.adminInspection.modify(newInspection);

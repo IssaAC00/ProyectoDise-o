@@ -4,7 +4,6 @@ import { Element } from './Element'
 
 abstract class Inspection{
     protected _id: number;
-    protected _description: string;
     protected _initialDate: Date;
     protected _endDate: Date;
     protected _deliveryDate: Date;
@@ -13,12 +12,11 @@ abstract class Inspection{
     protected _result: TypeWork;
     protected _state: State;
 
-    constructor(id: number, description: string, initialDate:Date,
+    constructor(id: number, initialDate:Date,
                     endDate: Date, deliveryDate: Date, dutymanager: DutyManager,
                     PDF: string, result: TypeWork, state: State){
 
         this._id = id;
-        this._description = description;
         this._initialDate = initialDate;
         this._endDate = endDate;
         this._deliveryDate = deliveryDate;
@@ -30,10 +28,6 @@ abstract class Inspection{
 
     public get id(){
         return this._id;
-    }
-
-    public get description(){
-        return this._description;
     }
 
     public get initialDate(){
@@ -66,10 +60,6 @@ abstract class Inspection{
 
     public set id(id: number){
         this._id = id;
-    }
-
-    public set description(description: string){
-        this._description = description;
     }
 
     public set initialDate(initialDate: Date){
@@ -113,10 +103,10 @@ enum State{
 class InspectionArea extends Inspection{
     private _area: Area;
 
-    constructor(id: number, description: string, initialDate:Date,
+    constructor(id: number, initialDate:Date,
                     endDate: Date, deliveryDate: Date, dutymanager: DutyManager,
                     PDF: string, result: TypeWork, state: State, area: Area){
-        super(id, description, initialDate,endDate, deliveryDate, dutymanager,
+        super(id, initialDate,endDate, deliveryDate, dutymanager,
                 PDF, result, state);
 
         this._area = area;
@@ -135,10 +125,10 @@ class InspectionArea extends Inspection{
 class InspectionElement extends Inspection{
     private _element: Element;
 
-    constructor(id: number, description: string, initialDate:Date,
+    constructor(id: number, initialDate:Date,
                     endDate: Date, deliveryDate: Date, dutymanager: DutyManager,
                     PDF: string, result: TypeWork, state: State, element: Element){
-        super(id, description, initialDate,endDate, deliveryDate, dutymanager,
+        super(id, initialDate,endDate, deliveryDate, dutymanager,
                 PDF, result, state);
 
         this._element = element;
@@ -158,14 +148,14 @@ class InspectionElement extends Inspection{
 
 
 class FactoryInspections{
-    public getInspection(choiceInspection: number, id: number, description: string, iDate:Date,
+    public getInspection(choiceInspection: number, id: number, iDate:Date,
         eDate: Date, dDate: Date, dutymanager: DutyManager,
         PDF: string, result: TypeWork, state: State, objectInspect: Element|Area): Inspection{
         switch (choiceInspection) {
             case 0:
-                return new InspectionArea(id, description, iDate, eDate, dDate, dutymanager, PDF, result, state, objectInspect as Area);
+                return new InspectionArea(id, iDate, eDate, dDate, dutymanager, PDF, result, state, objectInspect as Area);
             case 1:
-                return new InspectionElement(id, description, iDate, eDate, dDate, dutymanager, PDF, result, state, objectInspect as Element);
+                return new InspectionElement(id, iDate, eDate, dDate, dutymanager, PDF, result, state, objectInspect as Element);
             default:
                 return null!;
         }
