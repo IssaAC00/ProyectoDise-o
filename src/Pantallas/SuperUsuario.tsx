@@ -3,23 +3,17 @@ import  Navbar  from "../componentes/TopBarSuperUsuario"
 import fondo from '../imagenes/fondo.png';
 import React, { useRef, useState } from "react";
 import {controller} from '../BackEnd/Controller/Controller'
-<<<<<<< HEAD
 import { NavLink, useNavigate } from "react-router-dom"
-=======
 import emailjs from '@emailjs/browser';
 
->>>>>>> 9e357607fafc25f0c669cffc932df69eb6968a80
 
 
 function SuperUsuario(): JSX.Element{
     
     const [selectedOption, setSelectedOption] = useState<String>();
-<<<<<<< HEAD
     const navigate = useNavigate(); 
-=======
     
     const formEmail = useRef(null);
->>>>>>> 9e357607fafc25f0c669cffc932df69eb6968a80
 
     const [form, setForm] = useState({
         email: '',
@@ -33,14 +27,11 @@ function SuperUsuario(): JSX.Element{
         { label: "Operativo", value: '2' },
       ];
     
-<<<<<<< HEAD
       function Volver (){
         navigate('/');
 
       }
     
-=======
->>>>>>> 9e357607fafc25f0c669cffc932df69eb6968a80
     const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
         setSelectedOption(value);
