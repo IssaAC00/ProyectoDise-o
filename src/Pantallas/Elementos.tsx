@@ -112,8 +112,8 @@ function Elementos(): JSX.Element{
                 
                 <button  className='buttonS' onClick = {Search} style = {{position: 'absolute', top: 180, left: 1150, fontSize: 23}}>Buscar</button>
                 <button  className='buttonS' onClick= {Modify} style = {{position: 'absolute', top: 700, left: 1650, fontSize: 23}}> Editar</button>
-                <button  className='buttonS' onClick = {Register} style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar Area</button>
-                <button  className='buttonS' onClick= {Drop} style = {{position: 'absolute', top: 860, left: 1650, fontSize: 23}}>Eliminar Area</button>
+                <button  className='buttonS' onClick = {Register} style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar Elemento</button>
+                <button  className='buttonS' onClick= {Drop} style = {{position: 'absolute', top: 860, left: 1650, fontSize: 23}}>Eliminar Elemento</button>
                 <button onClick={Volver} className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
                 
                 <div className='importPDF'  style = {{position: 'absolute', top: 300, left: 1700}}>

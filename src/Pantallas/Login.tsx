@@ -45,7 +45,6 @@ function Login (): JSX.Element {
         }else{
             alert('Revise bien los datos');
         }
-        navigate('/Area');
       };
 
       const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
