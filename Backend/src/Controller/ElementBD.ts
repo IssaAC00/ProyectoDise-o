@@ -7,7 +7,7 @@ import { Element } from '../interface/Post'
 export async function getElements(_req: Request, res: Response){
     try {
         const conn = await connect();
-        const elements = await conn.query('SELECT * FROM element ');
+        const elements = await conn.query('SELECT * FROM Element ');
         res.json(elements);
     }
     catch (e) {
@@ -18,7 +18,7 @@ export async function getElements(_req: Request, res: Response){
 export async function createElement(req: Request, res: Response) {
     const newElement: Element = req.body;
     const conn = await connect();
-    await conn.query('INSERT INTO element SET ?', [newElement]);
+    await conn.query('INSERT INTO Element SET ?', [newElement]);
     res.json({
         message: 'New Element Created'
     });
@@ -27,14 +27,14 @@ export async function createElement(req: Request, res: Response) {
 export async function getElement(req: Request, res: Response) {
     const id = req.params.postId;
     const conn = await connect();
-    const elements = await conn.query('SELECT * FROM element WHERE id = ?', [id]);
+    const elements = await conn.query('SELECT * FROM Element WHERE idElement = ?', [id]);
     res.json(elements[0]);
 }
 
 export async function deleteElement(req: Request, res: Response) {
     const id = req.params.postId;
     const conn = await connect();
-    await conn.query('DELETE FROM element WHERE id = ?', [id]);
+    await conn.query('DELETE FROM Element WHERE idElement = ?', [id]);
     res.json({
         message: 'Element deleted'
     });
@@ -44,7 +44,7 @@ export async function updateElement(req: Request, res: Response) {
     const id = req.params.postId;
     const updateElement: Element = req.body;
     const conn = await connect();
-    await conn.query('UPDATE element set ? WHERE id = ?', [updateElement, id]);
+    await conn.query('UPDATE Element set ? WHERE idElement = ?', [updateElement, id]);
     res.json({
         message: 'Element Updated'
     });

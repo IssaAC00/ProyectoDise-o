@@ -1,19 +1,19 @@
 import express, { Application } from 'express'
 
 
-// import Area from './Routes/Area'
+import area from './Routes/Area'
 // import dutyManager from './Routes/DutyManager'
 // import estado from './Routes/estado'
-// import floortype from './Routes/floortype'
+import floorType from './Routes/FloorType'
 // import inspeccion from './Routes/inspeccion'
 // import inspeccionArea from './Routes/inspeccionArea'
 // import inspeccionElemento from './Routes/inspeccionElemento'
 // import rol from './Routes/rol'
-// import spolaigeArea from './Routes/spolaigeArea'
+import spolaige from './Routes/Spolaige'
 // import typeSpolaige from './Routes/typeSpolaige'
 // import typeWork from './Routes/typeWork'
-import usuario from './Routes/usuarios'
-// import elemento from './Routes/Element'
+import usuario from './Routes/User'
+import element from './Routes/Element'
 
 
 
@@ -41,16 +41,16 @@ export class App {
 
     
     private routes() {
-        // this.app.use('/area', Area);
+        this.app.use('/area', area);
         // this.app.use('/dutymanager', dutyManager);
-        // this.app.use('/elemento', elemento);
+        this.app.use('/elemento', element);
         // this.app.use('/estado', estado);
-        // this.app.use('/floortype', floortype);
+        this.app.use('/floortype', floorType);
         // this.app.use('/inspeccion', inspeccion);
         // this.app.use('/inspeccionArea', inspeccionArea);
         // this.app.use('/inspeccionElemento', inspeccionElemento);
         // this.app.use('/rol', rol);
-        // this.app.use('/spolaigeArea', spolaigeArea);
+        this.app.use('/spolaige', spolaige);
         // this.app.use('/typeSpolaige', typeSpolaige);
         // this.app.use('/typeWork', typeWork);
         this.app.use('/usuarios', usuario);

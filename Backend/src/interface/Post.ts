@@ -1,26 +1,25 @@
-export interface USUARIO{
+export interface User{
     userMail: string;
     userPassword: string;
     rol: number;
 
 }
 
-export interface AREA{
-    id: string;
+export interface Area{
+    idArea: string;
     description: string;
     imagen: string;
-    ubicacion :string;
-    floorA: string;
+    ubication :string;
+    floorA: number;
 
 }
 
 export interface Element{
-    id: string;
+    idElement: string;
     description: string;
     imagen: string;
-    ubicacion :string;
-    detail: string;
-    area: string;
+    ubication :string;
+    areaID: string;
 }
 
 export interface dutyManager{
@@ -51,7 +50,7 @@ export interface estado{
 }
 
 
-export interface floortype{
+export interface Floortype{
     id: number;
     description: string;
 }
@@ -74,11 +73,10 @@ export interface rol{
     description: string;
 }
 
-export interface spolaige{
+export interface Spolaige{
     id: number;
     description: string;
-    type_typespolaige: string;
-    area_id: string;
+    type_typespolaige: number;
     
 }
 

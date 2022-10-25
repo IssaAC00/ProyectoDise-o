@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 
 import { connect } from '../BasesDatos/dbMysQL'
-import { USUARIO } from '../interface/Post'
+import { User } from '../interface/Post'
 
 // Promise<Response | void> 
 export async function getUsers(_req: Request, res: Response){
@@ -16,7 +16,7 @@ export async function getUsers(_req: Request, res: Response){
 }
 
 export async function createUser(req: Request, res: Response) {
-    const newUser: USUARIO = req.body;
+    const newUser: User = req.body;
     const conn = await connect();
     await conn.query('INSERT INTO USUARIO SET ?', [newUser]);
     res.json({
@@ -42,7 +42,7 @@ export async function deleteUser(req: Request, res: Response) {
 
 export async function updateUser(req: Request, res: Response) {
     const id = req.params.postId;
-    const updateUser: USUARIO = req.body;
+    const updateUser: User = req.body;
     const conn = await connect();
     await conn.query('UPDATE Usuario set ? WHERE userMail = ?', [updateUser, id]);
     res.json({
