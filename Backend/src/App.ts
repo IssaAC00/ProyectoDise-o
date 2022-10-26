@@ -12,7 +12,7 @@ import floorType from './Routes/FloorType'
 import spolaige from './Routes/Spolaige'
 // import typeSpolaige from './Routes/typeSpolaige'
 // import typeWork from './Routes/typeWork'
-import usuario from './Routes/User'
+import user from './Routes/User'
 import element from './Routes/Element'
 
 
@@ -43,7 +43,7 @@ export class App {
     private routes() {
         this.app.use('/area', area);
         // this.app.use('/dutymanager', dutyManager);
-        this.app.use('/elemento', element);
+        this.app.use('/element', element);
         // this.app.use('/estado', estado);
         this.app.use('/floortype', floorType);
         // this.app.use('/inspeccion', inspeccion);
@@ -53,7 +53,7 @@ export class App {
         this.app.use('/spolaige', spolaige);
         // this.app.use('/typeSpolaige', typeSpolaige);
         // this.app.use('/typeWork', typeWork);
-        this.app.use('/usuarios', usuario);
+        this.app.use('/user', user);
     }
 
 
