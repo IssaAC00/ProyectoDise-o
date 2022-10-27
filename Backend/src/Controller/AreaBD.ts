@@ -16,36 +16,52 @@ export async function getAreas(_req: Request, res: Response){
 }
 
 export async function createArea(req: Request, res: Response) {
-    const newArea: Area = req.body;
-    const conn = await MySQL.getInstance().getConnect();
-    await conn.query('INSERT INTO Area SET ?', [newArea]);
-    res.json({
-        message: 'New Area Created'
-    });
+    try{
+        const newArea: Area = req.body;
+        const conn = await MySQL.getInstance().getConnect();
+        await conn.query('INSERT INTO Area SET ?', [newArea]);
+        res.json({
+            message: 'New Area Created'
+        });
+    }catch(e){
+        console.log(e);
+    }
 }
 // revisar userMail
 export async function getArea(req: Request, res: Response) {
-    const id = req.params.postId;
-    const conn = await MySQL.getInstance().getConnect();
-    const posts = await conn.query('SELECT * FROM Area WHERE idArea = ?', [id]);
-    res.json(posts[0]);
+    try{
+        const id = req.params.postId;
+        const conn = await MySQL.getInstance().getConnect();
+        const posts = await conn.query('SELECT * FROM Area WHERE idArea = ?', [id]);
+        res.json(posts[0]);
+    }catch(e){
+        console.log(e)
+    }
 }
 
 export async function deleteArea(req: Request, res: Response) {
-    const id = req.params.postId;
-    const conn = await MySQL.getInstance().getConnect();
-    await conn.query('DELETE FROM Area WHERE idArea = ?', [id]);
-    res.json({
-        message: 'Area deleted'
-    });
+    try{
+        const id = req.params.postId;
+        const conn = await MySQL.getInstance().getConnect();
+        await conn.query('DELETE FROM Area WHERE idArea = ?', [id]);
+        res.json({
+            message: 'Area deleted'
+        });
+    }catch(e){
+        console.log(e)
+    }
 }
 
 export async function updateArea(req: Request, res: Response) {
-    const id = req.params.postId;
-    const updateArea: Area = req.body;
-    const conn = await MySQL.getInstance().getConnect();
-    await conn.query('UPDATE Area set ? WHERE idArea = ?', [updateArea, id]);
-    res.json({
-        message: 'Area Updated'
-    });
+    try{
+        const id = req.params.postId;
+        const updateArea: Area = req.body;
+        const conn = await MySQL.getInstance().getConnect();
+        await conn.query('UPDATE Area set ? WHERE idArea = ?', [updateArea, id]);
+        res.json({
+            message: 'Area Updated'
+        }); 
+    }catch(e){
+        console.log(e)
+    }
 }

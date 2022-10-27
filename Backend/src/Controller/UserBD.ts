@@ -30,27 +30,39 @@ export async function createUser(req: Request, res: Response) {
 }
 
 export async function getUser(req: Request, res: Response) {
-    const id = req.params.postId;
-    const conn = MySQL.getInstance().getConnect();
-    const users = await conn.query('SELECT * FROM Usuario WHERE userMail = ?', [id]);
-    res.json(users[0]);
+    try{
+        const id = req.params.postId;
+        const conn = MySQL.getInstance().getConnect();
+        const users = await conn.query('SELECT * FROM Usuario WHERE userMail = ?', [id]);
+        res.json(users[0]);
+    }catch(e){
+        console.log(e);
+    }
 }
 
 export async function deleteUser(req: Request, res: Response) {
-    const id = req.params.postId;
-    const conn = MySQL.getInstance().getConnect();
-    await conn.query('DELETE FROM Usuario WHERE userMail = ?', [id]);
-    res.json({
-        message: 'User deleted'
-    });
+    try{
+        const id = req.params.postId;
+        const conn = MySQL.getInstance().getConnect();
+        await conn.query('DELETE FROM Usuario WHERE userMail = ?', [id]);
+        res.json({
+            message: 'User deleted'
+        });
+    }catch(e){
+        console.log(e);
+    }
 }
 
 export async function updateUser(req: Request, res: Response) {
-    const id = req.params.postId;
-    const updateUser: User = req.body;
-    const conn = MySQL.getInstance().getConnect();
-    await conn.query('UPDATE Usuario set ? WHERE userMail = ?', [updateUser, id]);
-    res.json({
-        message: 'User Updated'
-    });
+    try{
+        const id = req.params.postId;
+        const updateUser: User = req.body;
+        const conn = MySQL.getInstance().getConnect();
+        await conn.query('UPDATE Usuario set ? WHERE userMail = ?', [updateUser, id]);
+        res.json({
+            message: 'User Updated'
+        });
+    }catch(e){
+        console.log(e);
+    }
 }

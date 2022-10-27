@@ -16,36 +16,56 @@ export async function getElements(_req: Request, res: Response){
 }
 
 export async function createElement(req: Request, res: Response) {
-    const newElement: Element = req.body;
-    const conn = await await MySQL.getInstance().getConnect();
-    await conn.query('INSERT INTO Element SET ?', [newElement]);
-    res.json({
-        message: 'New Element Created'
-    });
+    try{
+        const newElement: Element = req.body;
+        const conn = await await MySQL.getInstance().getConnect();
+        await conn.query('INSERT INTO Element SET ?', [newElement]);
+        res.json({
+            message: 'New Element Created'
+        });
+    }catch(e){
+        console.log(e);
+    }
+    
 }
 // revisar userMail
 export async function getElement(req: Request, res: Response) {
-    const id = req.params.postId;
-    const conn = await MySQL.getInstance().getConnect();
-    const elements = await conn.query('SELECT * FROM Element WHERE idElement = ?', [id]);
-    res.json(elements[0]);
+    try{
+        const id = req.params.postId;
+        const conn = await MySQL.getInstance().getConnect();
+        const elements = await conn.query('SELECT * FROM Element WHERE idElement = ?', [id]);
+        res.json(elements[0]);
+    }catch(e){
+        console.log(e);
+    }
+    
 }
 
 export async function deleteElement(req: Request, res: Response) {
-    const id = req.params.postId;
-    const conn = await MySQL.getInstance().getConnect();
-    await conn.query('DELETE FROM Element WHERE idElement = ?', [id]);
-    res.json({
-        message: 'Element deleted'
-    });
+    try{
+        const id = req.params.postId;
+        const conn = await MySQL.getInstance().getConnect();
+        await conn.query('DELETE FROM Element WHERE idElement = ?', [id]);
+        res.json({
+            message: 'Element deleted'
+        });
+    }catch(e){
+        console.log(e);
+    }
+    
 }
 
 export async function updateElement(req: Request, res: Response) {
-    const id = req.params.postId;
-    const updateElement: Element = req.body;
-    const conn = await MySQL.getInstance().getConnect();
-    await conn.query('UPDATE Element set ? WHERE idElement = ?', [updateElement, id]);
-    res.json({
-        message: 'Element Updated'
-    });
+    try{
+        const id = req.params.postId;
+        const updateElement: Element = req.body;
+        const conn = await MySQL.getInstance().getConnect();
+        await conn.query('UPDATE Element set ? WHERE idElement = ?', [updateElement, id]);
+        res.json({
+            message: 'Element Updated'
+        });
+    }catch(e){
+        console.log(e);
+    }
+    
 }

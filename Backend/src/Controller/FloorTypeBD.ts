@@ -16,36 +16,54 @@ export async function getFloorTypes(_req: Request, res: Response){
 }
 
 export async function createFloorType(req: Request, res: Response) {
-    const newFloorType: Floortype = req.body;
-    const conn = await MySQL.getInstance().getConnect();
-    await conn.query('INSERT INTO FloorType SET ?', [newFloorType]);
-    res.json({
-        message: 'New Floor Type Created'
-    });
+    try{
+        const newFloorType: Floortype = req.body;
+        const conn = await MySQL.getInstance().getConnect();
+        await conn.query('INSERT INTO FloorType SET ?', [newFloorType]);
+        res.json({
+            message: 'New Floor Type Created'
+        });
+    }catch(e){
+        console.log(e);
+    }
+    
 }
 // revisar userMail
 export async function getFloorType(req: Request, res: Response) {
-    const id = req.params.postId;
-    const conn = await MySQL.getInstance().getConnect();
-    const floorType = await conn.query('SELECT * FROM FloorType WHERE id = ?', [id]);
-    res.json(floorType[0]);
+    try{
+        const id = req.params.postId;
+        const conn = await MySQL.getInstance().getConnect();
+        const floorType = await conn.query('SELECT * FROM FloorType WHERE id = ?', [id]);
+        res.json(floorType[0]);
+    }catch(e){
+        console.log(e);
+    }
+    
 }
 
 export async function deleteFloorType(req: Request, res: Response) {
-    const id = req.params.postId;
-    const conn = await MySQL.getInstance().getConnect();
-    await conn.query('DELETE FROM FloorType WHERE id = ?', [id]);
-    res.json({
-        message: 'Floor Type deleted'
-    });
+    try{
+        const id = req.params.postId;
+        const conn = await MySQL.getInstance().getConnect();
+        await conn.query('DELETE FROM FloorType WHERE id = ?', [id]);
+        res.json({
+            message: 'Floor Type deleted'
+        });
+    }catch(e){
+        console.log(e);
+    }
 }
 
 export async function updateFloorType(req: Request, res: Response) {
-    const id = req.params.postId;
-    const updateFloorType: Floortype = req.body;
-    const conn = await MySQL.getInstance().getConnect();
-    await conn.query('UPDATE FloorType set ? WHERE id = ?', [updateFloorType, id]);
-    res.json({
-        message: 'Floor type Updated'
-    });
+    try{
+        const id = req.params.postId;
+        const updateFloorType: Floortype = req.body;
+        const conn = await MySQL.getInstance().getConnect();
+        await conn.query('UPDATE FloorType set ? WHERE id = ?', [updateFloorType, id]);
+        res.json({
+            message: 'Floor type Updated'
+        });
+    }catch(e){
+        console.log(e);
+    }
 }
