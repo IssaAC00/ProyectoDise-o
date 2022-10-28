@@ -24,23 +24,23 @@ export interface Element{
 
 export interface dutyManager{
     DNIManager: number;
-    nameDutyManager: string;
-    emailDutyManager: string;
-    typeWork :string;
+    name: string;
+    email: string;
+    inspection :boolean;
+    restauration :boolean;
+    conservation :boolean;
 }
 
-export interface inspeccion{
-    id: String;
+export interface inspection{
+    idInspection: String;
     description: string;
-    initialInspection: Date;
-    endDateInspection :Date;
-    dateRealice: Date;
-    dutyManager: number;
+    initialDate: Date;
+    endDate :Date;
+    deliveryDate: Date;
     pdf: string;
-    idxinspeccionarArea: string;
-    idxinspeccionarElemento: string;
-    result: string;
-    estado: string;
+    dutyManager: number;
+    state: number;
+    result: number;
 }
 
 
@@ -93,9 +93,15 @@ export interface typeWork{
     description: string;
 }
 
+export interface internalPerson {
+    DNIManager: number;
+}
 
-
-
+export interface legalPerson {
+    DNIManager: number;
+    DNILegalManager: number;
+    nameLegal: string;
+}
 
 
 

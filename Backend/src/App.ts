@@ -2,7 +2,7 @@ import express, { Application } from 'express'
 
 
 import area from './Routes/Area'
-// import dutyManager from './Routes/DutyManager'
+import dutyManager from './Routes/DutyManager'
 // import estado from './Routes/estado'
 import floorType from './Routes/FloorType'
 // import inspeccion from './Routes/inspeccion'
@@ -42,7 +42,7 @@ export class App {
     
     private routes() {
         this.app.use('/area', area);
-        // this.app.use('/dutymanager', dutyManager);
+        this.app.use('/dutymanager', dutyManager);
         this.app.use('/element', element);
         // this.app.use('/estado', estado);
         this.app.use('/floortype', floorType);
