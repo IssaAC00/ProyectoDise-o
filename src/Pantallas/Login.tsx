@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './Login.css'
 import '../componentes/buttonS.css'
 import  Navbar  from "../componentes/TopBarLogin"
@@ -9,9 +9,10 @@ import { NavLink, useNavigate } from "react-router-dom"
 import {controller} from '../BackEnd/Controller/Controller'
 import '../componentes/ajustePaginas.css'
 import { Rol, User } from '../BackEnd/Model/User';
+import axios from "axios";
 
 function Login (): JSX.Element {
-
+    const url = "http://localhost:5001/User";
     const navigate = useNavigate(); 
 
     const [form, setForm] = useState({
@@ -19,9 +20,35 @@ function Login (): JSX.Element {
         password: '',
     });
 
-    function Prueba(){
+    interface User  {
+        userMail: string;
+        userPassword: string;
+        rol: number;
+    }
+
+    const [datos, setDatos] = useState<User | null >(null);
+
+    const handleSubmit=async()=>{
+        await axios.get(url+`/${form.email}`)
+        .then(response => {
+            setDatos(response.data);
+            console.log(datos);
+            console.log(response.data);
+            return response.data;
+        }).catch(error => {
+            console.log(error);
+        })
+
+    }
+
+    useEffect(() => {
        
-    };
+
+    }, []);
+
+
+
+
 
     function nextPage(user: User){
       /* 	switch (user.rol) {
@@ -46,11 +73,13 @@ function Login (): JSX.Element {
         }else{
             alert('Revise bien los datos');
         } */
+        handleSubmit();
         navigate('/Area');
       };
 
       const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [event.target.name]: event.target.value });
+        console.log(form);
       }
 
         return (
