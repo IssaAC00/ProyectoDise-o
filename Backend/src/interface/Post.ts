@@ -43,19 +43,15 @@ export interface inspection{
     result: number;
 }
 
-
-export interface estado{
+export interface state{
     id: number;
     description: string;
 }
-
 
 export interface Floortype{
     id: number;
     description: string;
 }
-
-
 
 export interface inspeccionArea{
     id: number;
@@ -66,7 +62,6 @@ export interface inspeccionElemento{
     id: number;
     idxinspeccionar: string;
 }
-
 
 export interface rol{
     id: number;
@@ -80,13 +75,10 @@ export interface Spolaige{
     
 }
 
-
 export interface typespolaige{
     id: number;
     description: string;
 }
-
-
 
 export interface typeWork{
     id: number;
@@ -102,19 +94,3 @@ export interface legalPerson {
     DNILegalManager: number;
     nameLegal: string;
 }
-
-
-
-
-
-
-
-
-
-/* CREATE TABLE USUARIO (
-    userMail VARCHAR(150) PRIMARY KEY,
-    userPassword VARCHAR(150),
-    rol integer,
-    FOREIGN KEY (rol) REFERENCES Rol (id)
-);
- */
