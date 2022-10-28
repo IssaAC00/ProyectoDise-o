@@ -113,7 +113,7 @@ function Areas(): JSX.Element{
     return (
         
         <div>
-            <Navbar />
+           <Navbar label="Areas"/>
             <label style = {{position: 'absolute', top: 200, left: 300, fontSize: 32, fontWeight: 'bold'}}> Código </label>
             <input name = 'code' value={form.code} id = 'code' onChange = {changeHandler} type="text"  className='input-global'  style = {{position: 'absolute', top: 150, left: 500, fontSize: 32}} />
 

@@ -67,8 +67,8 @@ function Encargado (): JSX.Element {
         }
             
         const [selectedOption, setSelectedOption] = useState<string>();
-        var options = [{id:'Cedula Juridica',nm:"Cedula Fisica", value:"0", topl: 200, leftl: 1540, top: 0, left: -40 },
-        {id:'Cedula Fisica',nm:"Cedula Juridica", value:"1",top: 0, left: -40,topl: 200, leftl: 1720}];
+        var options = [{id:'Cedula Juridica',nm:"Cedula Fisica", value:"0", topl: 200, leftl: 1540, top: 0, left: -40 , fontWeight: 'bold' },
+        {id:'Cedula Fisica',nm:"Cedula Juridica", value:"1",top: 6 , left: -30,topl: 200, leftl: 1820, fontWeight: 'bold'}];
 
         function setFormValues(idD: string, typeD: string, nameD: string, emailD: string, managerD: string, managerND: string){
                 setForm({
@@ -194,7 +194,7 @@ function Encargado (): JSX.Element {
         return (
 
             <div> 
-                <Navbar />
+                <Navbar label="Encargados"/>
 
                 <label style = {{position: 'absolute', top: 200, left: 300, fontSize: 32, fontWeight: 'bold'}}> Cédula </label>
                 <input name = 'id' id = 'id' value= {form.id} onChange = {changeHandler} type="text"  className='input-global'  style = {{position: 'absolute', top: 150, left: 500, fontSize: 32}} />
@@ -205,25 +205,25 @@ function Encargado (): JSX.Element {
                 <label style = {{position: 'absolute', top: 600, left: 300, fontSize: 32, fontWeight: 'bold'}}> Email </label>
                 <input name = 'email' id = 'email' value= {form.email}  onChange = {changeHandler} type="text"  className='input-global' style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold'}} />
                 
-                <label style = {{position: 'absolute', top: 250, left: 1400, fontSize: 20, fontWeight: 'bold'}}> Cédula Encargado</label>
-                <input  className='input-global'  name = 'managerId' id = 'managerId' value= {form.managerId} onChange = {changeHandler} disabled={disabled} style = {{position: 'absolute', top: 235, left: 1600, fontSize: 20 , height: 45, width: 250}}/>
-                <label style = {{position: 'absolute', top: 350, left: 1400, fontSize: 20, fontWeight: 'bold'}}> Nombre Encargado</label>
-                <input  className='input-global' name = 'managerName' id = 'managerName' value= {form.managerName} onChange = {changeHandler} style = {{position: 'absolute', top: 335, left: 1600, fontSize: 20 , height: 45, width: 250}}  disabled={disabled} />
+                <label style = {{position: 'absolute', top: 290, left: 1400, fontSize: 32, fontWeight: 'bold'}}> Cédula Encargado</label>
+                <input    name = 'managerId' id = 'managerId' value= {form.managerId} onChange = {changeHandler} disabled={disabled} style = {{position: 'absolute', top: 260, left: 1700, fontSize: 20 , height: 105, width:  400}}/>
+                <label style = {{position: 'absolute', top: 438, left: 1400, fontSize: 32, fontWeight: 'bold'}}> Nombre Encargado</label>
+                <input  name = 'managerName' id = 'managerName' value= {form.managerName} onChange = {changeHandler} style = {{position: 'absolute', top: 395, left: 1700, fontSize: 20 , height: 105, width: 400 }}  disabled={disabled} />
 
 
                 
                 {options.map((item,i) => {
                 return (
                 <div key={item.id} >
-                <label className="radio-inline" style={{position: 'absolute', top:item.topl, left:item.leftl , fontSize: 20 }} >
+                <label className="radio-inline" style={{position: 'absolute', top:item.topl, left:item.leftl , fontSize: 32 }} >
                 <input style={{ position: 'absolute', top:item.top, left:item.left }} type="radio" name="myRadio" onChange={cedulaSelectionHandler} value={item.value} />{item.nm}</label>
                 </div>
                 );
                 })}
 
                 
-                <label style = {{position: 'absolute', top: 460, left: 1300, fontSize: 32, fontWeight: 'bold'}}> Labor:  </label>             
-                <div style={{ position: 'absolute', top: 500, left: 1400, fontSize:28}}>
+                <label style = {{position: 'absolute', top: 560, left: 1300, fontSize: 32, fontWeight: 'bold'}}> Labor:  </label>             
+                <div style={{ position: 'absolute', top: 600, left: 1400, fontSize:28}}>
                 <Checkbox
                 handleChange={handleChangeA}
                 isChecked={isCheckedA}
@@ -232,7 +232,7 @@ function Encargado (): JSX.Element {
                 />
                 </div>
 
-                <div style={{ position: 'absolute', top: 540, left: 1400, fontSize:28}}>
+                <div style={{ position: 'absolute', top: 640, left: 1400, fontSize:28}}>
                 <Checkbox
                 handleChange={handleChangeB}
                 isChecked={isCheckedB}
@@ -241,7 +241,7 @@ function Encargado (): JSX.Element {
                 />
                 </div>
 
-                <div style={{ position: 'absolute', top: 580, left: 1400, fontSize:28}}>
+                <div style={{ position: 'absolute', top: 680, left: 1400, fontSize:28}}>
                 <Checkbox
                 handleChange={handleChangeC}
                 isChecked={isCheckedC}

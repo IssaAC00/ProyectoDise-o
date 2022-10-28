@@ -58,7 +58,7 @@ function TareasEncargado (): JSX.Element {
 
     return (
     <div>
-        <Navbar />
+        <Navbar label="Tareas Encargado"/>
         
         
         <label style = {{position: 'absolute', top: 200, left: 300, fontSize: 32, fontWeight: 'bold'}}> Encargados </label>

@@ -24,7 +24,7 @@ function Login (): JSX.Element {
     };
 
     function nextPage(user: User){
-      	switch (user.rol) {
+      /* 	switch (user.rol) {
           case Rol.Adminitrador:
               navigate('/Area');
               break;
@@ -33,18 +33,19 @@ function Login (): JSX.Element {
               break;
           default:
               break;
-        }
+        } */
+        navigate('/Area');
     }
     
     function Ingresar(){
-        let pass = controller.login(form.email, form.password);
+        /* let pass = controller.login(form.email, form.password);
         if(pass){
             
             let user = controller.seeUser(form.email)
             nextPage(user);
         }else{
             alert('Revise bien los datos');
-        }
+        } */
         navigate('/Area');
       };
 

@@ -95,7 +95,7 @@ function Deterioro (): JSX.Element {
 
         
         <div>
-            <Navbar />
+           <Navbar label="Deterioro"/>
 
             <label style = {{position: 'absolute', top: 200, left: 300, fontSize: 32, fontWeight: 'bold'}}> Código </label>
             <input type="text"  name = 'code' value={form.code} id = 'code' onChange = {changeHandler} className='input-global'  style = {{position: 'absolute', top: 150, left: 500, fontSize: 32}} />

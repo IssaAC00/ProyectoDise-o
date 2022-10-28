@@ -14,8 +14,8 @@ function PlanInspeccion (): JSX.Element {
     const [SelectedResultado, setSelectedResultado] = useState<String>();
     const [SelectedArea, setSelectedArea] = useState<String>();
     const [selectedOptionRadio, setSelectedOptionRadio] = useState<String>();
-    var options = [{id:'Area',value:"0", topl: 290, leftl: 500, top: 0, left: -40 },
-    {id:'Elemento',value:"1",top: 0, left: -40,topl: 290, leftl: 800}];
+    var options = [{id:'Area',value:"0", topl: 290, leftl: 500, top: 7, left: -40 },
+    {id:'Elemento',value:"1",top: 7, left: -40,topl: 290, leftl: 800}];
 
     const Encargado = controller
       .seeAllDutyManager()
@@ -142,7 +142,7 @@ function PlanInspeccion (): JSX.Element {
         return(
 
             <div>
-               <Navbar />
+               <Navbar label="Plan Inspección"/>
 
             <div style={{position: 'absolute', top: 200, left: 1700}}>
                 <label style = {{ fontSize: 24, fontWeight: 'bold'}}> Fecha Inicio </label>
@@ -187,7 +187,7 @@ function PlanInspeccion (): JSX.Element {
                 {options.map((item,i) => {
                 return (
                 <div key={item.id} >
-                <label className="radio-inline" style={{position: 'absolute', top:item.topl, left:item.leftl , fontSize: 20 }} >
+                <label className="radio-inline" style={{position: 'absolute', top:item.topl, left:item.leftl , fontSize: 32 }} >
                 <input style={{ position: 'absolute', top:item.top, left:item.left }} id= {item.id} type="radio" name="myRadio" onChange={selectionHandler} value={item.value} />{item.id}</label>
                 </div>
                 );

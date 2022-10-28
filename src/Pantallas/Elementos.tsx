@@ -91,15 +91,15 @@ function Elementos(): JSX.Element{
     return (
 
         <div>
-            <Navbar/>
+            <Navbar label="Elementos"/>
             <label style = {{position: 'absolute', top: 200, left: 300, fontSize: 32, fontWeight: 'bold'}}> Código </label>
-            <input name = 'code' value={form.code} id = 'code' onChange = {changeHandler}  className='input-global'  style = {{position: 'absolute', top: 150, left: 500, fontSize: 23}} type="text" placeholder="Digite el código"  />
+            <input name = 'code' value={form.code} id = 'code' onChange = {changeHandler}  className='input-global'  style = {{position: 'absolute', top: 150, left: 500, fontSize: 23}} type="text"   />
 
             <label style = {{position: 'absolute', top: 400, left: 300, fontSize: 32, fontWeight: 'bold'}}> Descripción </label>
-            <input name = 'description' value={form.description} id = 'description' onChange = {changeHandler}  className='input-global' style = {{position: 'absolute', top: 350, left: 500, fontSize: 23}} type="text" placeholder="Digite la descripción"  />
+            <input name = 'description' value={form.description} id = 'description' onChange = {changeHandler}  className='input-global' style = {{position: 'absolute', top: 350, left: 500, fontSize: 23}} type="text"   />
 
             <label style = {{position: 'absolute', top: 600, left: 300, fontSize: 32, fontWeight: 'bold'}}> Ubicación </label>
-            <input name = 'location' value={form.location} id = 'location' onChange = {changeHandler}  className='input-global' style = {{position: 'absolute', top: 550, left: 500, fontSize: 23}} type="text" placeholder="Digite la ubicacion"  />
+            <input name = 'location' value={form.location} id = 'location' onChange = {changeHandler}  className='input-global' style = {{position: 'absolute', top: 550, left: 500, fontSize: 23}} type="text"  />
 
             <label style = {{position: 'absolute', top: 800, left: 300, fontSize: 32, fontWeight: 'bold'}}> Area </label>
             <select onChange = {selectChange} value= {selectedOption} className= 'dropdown'  style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold', color:'white'}}>
@@ -112,8 +112,8 @@ function Elementos(): JSX.Element{
                 
                 <button  className='buttonS' onClick = {Search} style = {{position: 'absolute', top: 180, left: 1150, fontSize: 23}}>Buscar</button>
                 <button  className='buttonS' onClick= {Modify} style = {{position: 'absolute', top: 700, left: 1650, fontSize: 23}}> Editar</button>
-                <button  className='buttonS' onClick = {Register} style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar Area</button>
-                <button  className='buttonS' onClick= {Drop} style = {{position: 'absolute', top: 860, left: 1650, fontSize: 23}}>Eliminar Area</button>
+                <button  className='buttonS' onClick = {Register} style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar </button>
+                <button  className='buttonS' onClick= {Drop} style = {{position: 'absolute', top: 860, left: 1650, fontSize: 23}}>Eliminar </button>
                 <button onClick={Volver} className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
                 
                 <div className='importPDF'  style = {{position: 'absolute', top: 300, left: 1700}}>
