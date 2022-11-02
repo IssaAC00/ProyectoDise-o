@@ -33,7 +33,6 @@ export interface dutyManager{
 
 export interface inspection{
     idInspection: String;
-    description: string;
     initialDate: Date;
     endDate :Date;
     deliveryDate: Date;
@@ -54,13 +53,13 @@ export interface Floortype{
 }
 
 export interface inspeccionArea{
-    id: number;
-    idxinspeccionar: string;
+    inspeccion_id: number;
+    idArea: string;
 }
 
 export interface inspeccionElemento{
-    id: number;
-    idxinspeccionar: string;
+    inspeccion_id: number;
+    idElement: string;
 }
 
 export interface rol{

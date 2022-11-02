@@ -5,7 +5,7 @@ import area from './Routes/Area'
 import dutyManager from './Routes/DutyManager'
 // import estado from './Routes/estado'
 import floorType from './Routes/FloorType'
-// import inspeccion from './Routes/inspeccion'
+import inspection from './Routes/Inspection'
 // import inspeccionArea from './Routes/inspeccionArea'
 // import inspeccionElemento from './Routes/inspeccionElemento'
 // import rol from './Routes/rol'
@@ -46,7 +46,7 @@ export class App {
         this.app.use('/element', element);
         // this.app.use('/estado', estado);
         this.app.use('/floortype', floorType);
-        // this.app.use('/inspeccion', inspeccion);
+        this.app.use('/inspection', inspection);
         // this.app.use('/inspeccionArea', inspeccionArea);
         // this.app.use('/inspeccionElemento', inspeccionElemento);
         // this.app.use('/rol', rol);
