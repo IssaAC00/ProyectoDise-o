@@ -151,3 +151,45 @@ export async function updateInspectionElement(req: Request, res: Response) {
         console.log(e);
     }
 }
+// RETORNA LAS INSPECCIONES EN ORDEN POR EL ESTADO 
+export async function getInspectionXState(req: Request, res: Response) {
+    try{
+        const id = req.params.postId;
+        const conn = await MySQL.getInstance().getConnect();
+        const posts = await conn.query('SELECT Inspection.idInspection, State.description FROM Inspection INNER JOIN State ON Inspection.state= State.id ORDER BY  State.id;');
+        res.json(posts[0]);
+    }catch(e){
+        console.log(e);
+    }
+}
+
+//RETORNA LAS INSPECCIONES EN ORDEN POR EL ESTADO Y EL DUTY MANAGER
+
+export async function getInspectionXStateXDuty(req: Request, res: Response) {
+    try{
+        const id = req.params.postId;
+        const conn = await MySQL.getInstance().getConnect();
+        const posts = await conn.query('SELECT Inspection.idInspection, State.description, DutyManager.name FROM Inspection INNER JOIN State ON Inspection.state= State.id INNER JOIN  DutyManager on Inspection.dutyManager= DutyManager.DNIManager ORDER BY State.id, DutyManager.DNIManager;');
+        res.json(posts[0]);
+    }catch(e){
+        console.log(e);
+    }
+}
+
+// RETORNA LAS INSPECCIONES SEGUN EL INTERVALO DE TIEMPO 
+
+
+export async function getInspectionXDate(req: Request, res: Response) {
+    try{
+        const DateInitial = req.params.postId;// cambiar 
+        const DateFinal= req.params.postId;// cambiar
+        const conn = await MySQL.getInstance().getConnect();
+        const posts = await conn.query('SELECT Inspection.idInspection,Inspection.InitialDate,Inspection.endDate ,Inspection.deliveryDate,Inspection.dutyManager ,Inspection.pdf, Inspection.result,State.description  FROM Inspection '+
+        'INNER JOIN State  ON Inspection.state= State.id AND Inspection.endDate>= ?', [DateInitial]+
+        ' and Inspection.InitialDate>= ?', [DateFinal]);
+
+        res.json(posts[0]);
+    }catch(e){
+        console.log(e);
+    }
+}

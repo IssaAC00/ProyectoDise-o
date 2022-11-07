@@ -64,6 +64,7 @@ export async function createDutyManagerLegal(req: Request, res: Response) {
 export async function getDutyManagerInternal(req: Request, res: Response) {
     try{
         const id = req.params.postId;
+        
         const conn = await MySQL.getInstance().getConnect();
         const posts = await conn.query('select DM.DNIManager, DM.name, DM.email, DM.inspection, DM.conservation, DM.restauration '+ 
                                         'from DutyManager as DM inner join InternalPerson as IP on DM.DNIManager = IP.DNIMANAGER '+
@@ -141,3 +142,34 @@ export async function updateDutyManagerLegal(req: Request, res: Response) {
         console.log(e);
     }
 }
+
+// inspeccion x INTERNAL person 
+export async function getDutyManagerInternalXinspection (req: Request, res: Response) {
+    try{
+        const id = req.params.postId;
+        const conn = await MySQL.getInstance().getConnect();
+        const posts = await conn.query('SELECT Inspection.idInspection, State.description, DutyManager.name FROM Inspection INNER JOIN State ON Inspection.state= State.id INNER JOIN  DutyManager on Inspection.dutyManager= DutyManager.DNIManager '+
+        'INNER JOIN InternalPerson on DutyManager.DNIManager= ? ',[id]+
+        'ORDER BY State.id, DutyManager.DNIManager');
+        res.json(posts[0]);
+    }catch(e){
+        console.log(e);
+    }
+    
+}
+
+// inpeccion x LEGAL person 
+export async function getDutyManagerLegalXInspection(req: Request, res: Response) {
+    try{
+        const id = req.params.postId;
+        const conn = await MySQL.getInstance().getConnect();
+        const posts = await conn.query('SELECT Inspection.idInspection, State.description, LegalPerson.nameLegal, LegalPerson.DNILegalManager FROM Inspection INNER JOIN State ON Inspection.state= State.id '+
+        'INNER JOIN  LegalPerson on Inspection.dutyManager= ? ',[id] +
+        'ORDER BY State.id, LegalPerson.DNIManager;');
+        res.json(posts[0]);
+    }catch(e){
+        console.log(e);
+    }
+    
+}
+
