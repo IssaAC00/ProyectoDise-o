@@ -1,9 +1,20 @@
 import { User } from '../Model/User'
+import axios from "axios";
 
 class AdminUser{
     private _users: User[] = [];
+    private daoUser:DAOUser;
 
-    constructor(){}
+    constructor(){
+        this.daoUser = new DAOUser();
+    }
+
+    public async load(){
+        if(this.daoUser.ready){
+            this._users = await this.daoUser.getUsers();
+            console.log(this._users);
+        }
+    }
 
     public search(email: string): User{
         for(const user of this._users){
@@ -38,6 +49,42 @@ class AdminUser{
         this._users = this._users.filter(item => item !== user);
         return true;
     }
+}
+
+class DAOUser{
+    private _ready: boolean = true;
+    private readonly url = "http://localhost:5001/User";
+    constructor(){
+
+    }
+
+    public async getUsers() {
+        let result = await axios.get(this.url)
+        .then(response => {
+            this._ready = false;
+            return response.data[0].map((userDB: any) => (
+                new User(userDB.userMail, userDB.userPassword, userDB.rol)
+            ));
+        })
+        .catch(error => {
+            console.log(error);
+        })
+        return result;
+    }
+
+    public async dropUser(){
+
+    }
+
+    public async updateUser(){
+        
+    }
+
+    
+    public get ready() : boolean {
+        return this._ready;
+    }
+    
 }
 
 export{ AdminUser };

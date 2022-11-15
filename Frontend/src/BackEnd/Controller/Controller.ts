@@ -46,6 +46,9 @@ class Controller{
     }
 
     //Area
+    public loadAreas(){
+        this.adminArea.load();
+    }
 
     public registerArea(id: string, description: string, images: string[], location: string, floor: Floor){
         //Validar id, description 
@@ -148,6 +151,10 @@ class Controller{
 
     //User
 
+    public loadUsers(){
+        this.adminUser.load();
+    }
+
     public registerUser(email: string, password: string, rol: Rol){
         //Validar email y contra
         let newUser = new User(email, password, rol);
@@ -170,7 +177,7 @@ class Controller{
 
     public login(email: string, password: string): boolean{
         let user = this.adminUser.search(email);
-        if(user !== undefined && user.password === password){
+        if(user !== null && user.password === password){
             return true;
         }
         return false;
@@ -184,7 +191,7 @@ class Controller{
         //Validar email y contra
         let factoryDutyManager = new FactoryDutyManager();
         let newDutyManager = factoryDutyManager.getInspection(optionDM, id, name, email, labor, managerName, idManager);
-        console.log(newDutyManager);
+        // console.log(newDutyManager);
         this.adminDutyManager.add(newDutyManager);
     }
     
@@ -210,17 +217,17 @@ class Controller{
 }
 
 let controller = new Controller();
-controller.registerArea('1a', 'Amarillo', ['pdf.pdf'], 'Entrando por arriba', 0);
-controller.registerArea('1c', 'Rojo', ['pdf.pdf'], 'Entrando por arriba', 0);
-controller.registerArea('1b', 'Verde', ['pdf.pdf'], 'Entrando por arriba', 0);
+// controller.registerArea('1a', 'Amarillo', ['pdf.pdf'], 'Entrando por arriba', 0);
+// controller.registerArea('1c', 'Rojo', ['pdf.pdf'], 'Entrando por arriba', 0);
+// controller.registerArea('1b', 'Verde', ['pdf.pdf'], 'Entrando por arriba', 0);
 
 controller.registerElement('2a', 'Pintura', ['pdf.pdf'], 'En la pared', '1a');
 controller.registerElement('2c', 'Mantel', ['pdf.pdf'], 'En el techo', '1b');
 controller.registerElement('2b', 'Verde', ['pdf.pdf'], 'Abajo', '1c');
 
-controller.registerUser('jbarrientossandoval@gmail.com', 'Pecorine2018', 0);
-controller.registerUser('alcon@gmail.com', 'Pascal2018', 1);
-controller.registerUser('aguila@gmail.com', 'Precuela2018', 2);
+// controller.registerUser('jbarrientossandoval@gmail.com', 'Pecorine2018', 0);
+// controller.registerUser('alcon@gmail.com', 'Pascal2018', 1);
+// controller.registerUser('aguila@gmail.com', 'Precuela2018', 2);
 
 let list: Set<TypeWork> = new Set(); 
 let list2: Set<TypeWork> = new Set(); 

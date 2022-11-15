@@ -8,7 +8,7 @@ export interface User{
 export interface Area{
     idArea: string;
     description: string;
-    imagen: string;
+    image: string;
     ubication :string;
     floorA: number;
 

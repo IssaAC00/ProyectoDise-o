@@ -1,9 +1,21 @@
 import { Area } from '../Model/Area'
+import axios from "axios";
 
 class AdminArea{
-    private _areas: Area[] = [];
+    private _areas: Area[];
+    private daoArea: DAOArea; 
 
-    constructor(){}
+    constructor(){
+        this._areas = [];
+        this.daoArea = new DAOArea();
+    }
+
+    public async load(){
+        if (this.daoArea.ready){
+            this._areas = await this.daoArea.getAreas();
+        }
+        
+    }
 
     public search(id: string): Area{
         for(const area of this._areas){
@@ -42,6 +54,43 @@ class AdminArea{
         this._areas = this._areas.filter(item => item !== area);
         return true;
     }
+}
+
+class DAOArea{
+    private _ready: boolean = true;
+    private readonly url = "http://localhost:5001/Area";
+    constructor(){
+
+    }
+
+    public async getAreas() {
+        let result = await axios.get(this.url)
+        .then(response => {
+            this._ready = false;
+            console.log(response.data[0]);
+            return response.data[0].map((areaDB: any) => (
+                new Area(areaDB.idArea, areaDB.description, [areaDB.image], areaDB.ubication, areaDB.floorA)
+            ));
+        })
+        .catch(error => {
+            console.log(error);
+        })
+        return result;
+    }
+
+    public async dropArea(){
+
+    }
+
+    public async updateArea(){
+        
+    }
+
+    
+    public get ready() : boolean {
+        return this._ready;
+    }
+    
 }
 
 export {AdminArea};

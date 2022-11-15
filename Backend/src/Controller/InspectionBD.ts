@@ -185,8 +185,7 @@ export async function getInspectionXDate(req: Request, res: Response) {
         const DateFinal= req.params.postId;// cambiar
         const conn = await MySQL.getInstance().getConnect();
         const posts = await conn.query('SELECT Inspection.idInspection,Inspection.InitialDate,Inspection.endDate ,Inspection.deliveryDate,Inspection.dutyManager ,Inspection.pdf, Inspection.result,State.description  FROM Inspection '+
-        'INNER JOIN State  ON Inspection.state= State.id AND Inspection.endDate>= ?', [DateInitial]+
-        ' and Inspection.InitialDate>= ?', [DateFinal]);
+        'INNER JOIN State  ON Inspection.state= State.id AND Inspection.endDate>= ? and Inspection.InitialDate>= ?', [DateInitial,DateFinal]);
 
         res.json(posts[0]);
     }catch(e){

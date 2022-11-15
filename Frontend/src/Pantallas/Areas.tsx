@@ -1,7 +1,7 @@
 import '../componentes/dropdownS.css'
 import  Navbar  from "../componentes/topbar"
 import '../componentes/inputEstiloGlobal.css'
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./areas.css"
 import '../componentes/buttonS.css'
 import { controller } from '../BackEnd/Controller/Controller';
@@ -30,7 +30,9 @@ function Areas(): JSX.Element{
         { label: "Atico", value: "5" },
       ];
   
-
+      useEffect(() => {
+        controller.loadAreas();
+    }, []);
 
     const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;

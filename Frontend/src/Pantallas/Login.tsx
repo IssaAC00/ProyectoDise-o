@@ -10,6 +10,7 @@ import {controller} from '../BackEnd/Controller/Controller'
 import '../componentes/ajustePaginas.css'
 import { Rol, User } from '../BackEnd/Model/User';
 import axios from "axios";
+import swal from "sweetalert";
 
 function Login (): JSX.Element {
     const url = "http://localhost:5001/User";
@@ -19,12 +20,6 @@ function Login (): JSX.Element {
         email: '',
         password: '',
     });
-
-    interface User  {
-        userMail: string;
-        userPassword: string;
-        rol: number;
-    }
 
     const [datos, setDatos] = useState<User | null >(null);
 
@@ -42,8 +37,7 @@ function Login (): JSX.Element {
     }
 
     useEffect(() => {
-       
-
+        controller.loadUsers();
     }, []);
 
 
@@ -51,7 +45,7 @@ function Login (): JSX.Element {
 
 
     function nextPage(user: User){
-      /* 	switch (user.rol) {
+       	switch (user.rol) {
           case Rol.Adminitrador:
               navigate('/Area');
               break;
@@ -60,20 +54,23 @@ function Login (): JSX.Element {
               break;
           default:
               break;
-        } */
-        navigate('/Area');
+        }
+        // navigate('/Area');
     }
     
     function Ingresar(){
-        /* let pass = controller.login(form.email, form.password);
-        if(pass){
+        // let pass = controller.login(form.email, form.password);
+        // if(pass){
             
-            let user = controller.seeUser(form.email)
-            nextPage(user);
-        }else{
-            alert('Revise bien los datos');
-        } */
-        handleSubmit();
+        //     let user = controller.seeUser(form.email)
+        //     swal("Loegueado exitosamente","" ,"success");
+        //     if (user != null){
+        //         nextPage(user);
+        //     }
+        // }else{
+        //     swal("Usuario no encontrado","" ,"warning");
+        // } 
+        // handleSubmit();
         navigate('/Area');
       };
 

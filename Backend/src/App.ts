@@ -1,5 +1,5 @@
 import express, { Application } from 'express'
-
+import cors from "cors" 
 
 import area from './Routes/Area'
 import dutyManager from './Routes/DutyManager'
@@ -27,7 +27,6 @@ export class App {
         this.settings();
         this.middlewares();
         this.routes();
-       
     }
 
     private settings() {
@@ -35,7 +34,10 @@ export class App {
     }
 
     private middlewares() {
-    
+        const options = {
+            origin: 'http://localhost:3000',
+        }
+        this.app.use(cors(options))
         this.app.use(express.json());
     }
 
