@@ -21,6 +21,9 @@ class Controller{
     private adminUser: AdminUser = new AdminUser();
 
     // Spolaige
+    public async loadSpolaige(){
+        return this.adminSpolaige.load();
+    }
 
     public registerPolaige(id: string, description: string, type: TypeSpolaige){
         //Validar id, description && type 
@@ -46,8 +49,8 @@ class Controller{
     }
 
     //Area
-    public loadAreas(){
-        this.adminArea.load();
+    public async loadAreas(){
+        return this.adminArea.load();
     }
 
     public registerArea(id: string, description: string, images: string[], location: string, floor: Floor){
@@ -76,7 +79,9 @@ class Controller{
     }
 
     //Element
-
+    public loadElements(){
+        this.adminElement.load(this.adminArea);
+    }
     public registerElement(id: string, description: string, images: string[], location: string, idArea: string){
         //Validar id, description, busqueda area
         let area = this.adminArea.search(idArea);
@@ -185,6 +190,10 @@ class Controller{
 
     //DutyManager
 
+    public async loadDutyManagers(){
+        this.adminDutyManager.load();
+    }
+
     //Preguntar legal
     public registerDutyManager(optionDM:number, id: number, name: string, email: string, 
                                 labor: Set<TypeWork>, managerName?: string, idManager?: number){
@@ -221,9 +230,9 @@ let controller = new Controller();
 // controller.registerArea('1c', 'Rojo', ['pdf.pdf'], 'Entrando por arriba', 0);
 // controller.registerArea('1b', 'Verde', ['pdf.pdf'], 'Entrando por arriba', 0);
 
-controller.registerElement('2a', 'Pintura', ['pdf.pdf'], 'En la pared', '1a');
-controller.registerElement('2c', 'Mantel', ['pdf.pdf'], 'En el techo', '1b');
-controller.registerElement('2b', 'Verde', ['pdf.pdf'], 'Abajo', '1c');
+// controller.registerElement('2a', 'Pintura', ['pdf.pdf'], 'En la pared', '1a');
+// controller.registerElement('2c', 'Mantel', ['pdf.pdf'], 'En el techo', '1b');
+// controller.registerElement('2b', 'Verde', ['pdf.pdf'], 'Abajo', '1c');
 
 // controller.registerUser('jbarrientossandoval@gmail.com', 'Pecorine2018', 0);
 // controller.registerUser('alcon@gmail.com', 'Pascal2018', 1);
@@ -232,7 +241,7 @@ controller.registerElement('2b', 'Verde', ['pdf.pdf'], 'Abajo', '1c');
 let list: Set<TypeWork> = new Set(); 
 let list2: Set<TypeWork> = new Set(); 
 
-controller.registerDutyManager(0, 117870341, 'Josue Barrientos S', 'jbarrientossandoval@gmail.com', list.add(0).add(1));
-controller.registerDutyManager(1, 103425142, 'Jokemi', 'jbs@gmail.com', list2.add(1).add(2), 'Jose S', 1234523);
+// controller.registerDutyManager(0, 117870341, 'Josue Barrientos S', 'jbarrientossandoval@gmail.com', list.add(0).add(1));
+// controller.registerDutyManager(1, 103425142, 'Jokemi', 'jbs@gmail.com', list2.add(1).add(2), 'Jose S', 1234523);
 
 export { controller }

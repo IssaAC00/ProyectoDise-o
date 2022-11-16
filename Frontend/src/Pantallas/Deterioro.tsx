@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import  Navbar  from "../componentes/topbar"
 import "./areas.css"
 import '../componentes/buttonS.css'
@@ -35,6 +35,10 @@ function Deterioro (): JSX.Element {
       })
       setSelectedOption(rolS);
     }
+
+  useEffect(() => {
+    controller.loadSpolaige();
+  }, []);
 
     function Volver (){
       navigate('/');

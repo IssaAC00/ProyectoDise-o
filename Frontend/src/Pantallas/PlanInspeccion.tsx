@@ -83,6 +83,7 @@ function PlanInspeccion (): JSX.Element {
 
       function selectionHandler(event: React.ChangeEvent<HTMLInputElement>) {
         let value = event.target.value;
+        console.log(value);
         setSelectedOptionRadio(value);
         form.typeInspection = value;
         if (Number(value) === 0) {
@@ -95,7 +96,7 @@ function PlanInspeccion (): JSX.Element {
           setArea(
             controller
               .seeAllElement()
-              .map((list) => ({ label: list.description, value: list.id }))
+              .map((list) => ({ label: `${list.description} (${list.area.description})`, value: list.id }))
           );
         }
       }

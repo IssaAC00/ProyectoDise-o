@@ -17,7 +17,7 @@ export interface Area{
 export interface Element{
     idElement: string;
     description: string;
-    imagen: string;
+    image: string;
     ubication :string;
     areaID: string;
 }

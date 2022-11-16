@@ -1,6 +1,6 @@
 import  Navbar  from "../componentes/topbar"
 import "./elementos.css"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { controller } from "../BackEnd/Controller/Controller";
 import '../componentes/inputEstiloGlobal.css'
 import '../componentes/buttonS.css'
@@ -10,8 +10,9 @@ import { NavLink, useNavigate } from "react-router-dom"
 function Elementos(): JSX.Element{
 
     // Se selecciona el area que se desea guardar el elemento
-    const [selectedOption, setSelectedOption] = useState<string>(controller.seeAllArea()[0].id);
+    const [selectedOption, setSelectedOption] = useState<string>('');
     const navigate = useNavigate(); 
+    // controller.seeAllArea()[0].id
 
 
     const [form, setForm] = useState({
@@ -21,8 +22,21 @@ function Elementos(): JSX.Element{
         PDF: '' 
       });
 
-    const roles = controller.seeAllArea().map( 
-      (list) => ({label: list.description, value: list.id}));
+    const [roles,setRoles] = useState(controller.seeAllArea().map( 
+        (list) => ({label: list.description, value: list.id})));
+
+    useEffect(() => {
+      controller.loadAreas()
+      .then(response =>(
+        response != undefined ? 
+        setRoles(controller.seeAllArea().map( 
+          (list) => ({label: list.description, value: list.id}))) : ''
+      ))
+      .then(() => (
+        setSelectedOption(controller.seeAllArea()[0].id),
+        controller.loadElements()
+        ));
+    }, []);
 
     const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
@@ -103,7 +117,7 @@ function Elementos(): JSX.Element{
 
             <label style = {{position: 'absolute', top: 800, left: 300, fontSize: 32, fontWeight: 'bold'}}> Area </label>
             <select onChange = {selectChange} value= {selectedOption} className= 'dropdown'  style = {{position: 'absolute', top: 750, left: 500, fontSize: 23, fontWeight: 'bold', color:'white'}}>
-                {roles.map((options) => (
+                {roles.length !== 0 && selectedOption  != undefined && roles.map((options) => (
                 <option style = {{color: 'black', fontWeight: 'bold'}} key={options.label} value={options.value}>
                 {options.label}
                 </option>
