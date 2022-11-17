@@ -89,6 +89,22 @@ abstract class Inspection{
     public set state(state: State){
         this._state = state;
     }
+
+    public updateState(){
+        const dateNow = new Date(Date.now());
+        console.log(this._deliveryDate);
+        if(dateNow < this.initialDate){
+            this.state = State.PorSuceder;
+        }else if(this.initialDate <= dateNow && this._endDate >= dateNow && this._deliveryDate == null){
+            this.state = State.EnEjecucion;
+        }else if(this.initialDate <= dateNow && this._endDate >= dateNow && this._deliveryDate != null){
+            this.state = State.Ejecutada;
+        }else if(this._endDate < dateNow && this._deliveryDate != null){
+            this._state = State.EjecucionConRetraso;
+        }else if(this._endDate < dateNow && this._deliveryDate == null){
+            this._state = State.Retrasada;
+        }
+    }
 }
 
 enum State{

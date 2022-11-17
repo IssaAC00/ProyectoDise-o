@@ -37,16 +37,19 @@ class AdminInspection{
     }
 
     public add(inspection: Inspection):boolean{
+        inspection.updateState();
         this._inspections.push(inspection);
         return true;
     }
 
     public see(id: number): Inspection{
-        return this.search(id);
-
+        let inspection =  this.search(id);
+        inspection.updateState();
+        return inspection;
     }
 
     public modify(inspection: Inspection): boolean{
+        inspection.updateState();
         this._inspections.forEach((item, index, arr) => {
             if (item.id === inspection.id){
                 arr[index] = inspection;

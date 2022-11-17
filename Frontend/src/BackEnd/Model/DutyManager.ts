@@ -47,7 +47,8 @@ abstract class DutyManager{
 enum TypeWork{
     Restauracion,
     Inspeccion,
-    Conservacion
+    Conservacion,
+    Ninguno
 }
 
 class LegalPerson extends DutyManager{

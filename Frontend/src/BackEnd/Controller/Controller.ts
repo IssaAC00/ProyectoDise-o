@@ -127,7 +127,7 @@ class Controller{
         }
         let newInspection = factoryInspection.getInspection(optionInspection, id, iDate, eDate, dDate, dutyManager,
                                                             PDF, result, state, objectInspect);
-        console.log(newInspection)
+        //console.log(newInspection)
         this.adminInspection.add(newInspection);
     }
     

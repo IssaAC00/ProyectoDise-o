@@ -5,7 +5,7 @@ import './planInspeccion.css'
 import '../componentes/inputEstiloGlobal.css'
 import {controller} from '../BackEnd/Controller/Controller'
 import { NavLink, useNavigate } from "react-router-dom"
-import { InspectionArea, InspectionElement } from '../BackEnd/Model/Inspection';
+import { InspectionArea, InspectionElement, State } from '../BackEnd/Model/Inspection';
 
 function PlanInspeccion (): JSX.Element {
     const navigate = useNavigate();
@@ -15,6 +15,8 @@ function PlanInspeccion (): JSX.Element {
     const [SelectedResultado, setSelectedResultado] = useState<string>("3");
     const [SelectedArea, setSelectedArea] = useState<string>("");
     const [selectedOptionRadio, setSelectedOptionRadio] = useState<String>();
+    const [file, setFile] = useState<File|null>();
+    const [state, setState] = useState<string>("")
     var options = [{id:'Area',value:"0", topl: 290, leftl: 500, top: 7, left: -40 },
     {id:'Elemento',value:"1",top: 7, left: -40,topl: 290, leftl: 800}];
 
@@ -59,8 +61,6 @@ function PlanInspeccion (): JSX.Element {
         })
         setValue(iDate);
         setFin(eDate);
-        console.log(iDate);
-        console.log(eDate);
         setSelectedOption(idDuty);
         setSelectedResultado(result);
         setSelectedArea(codeAEI);
@@ -94,18 +94,20 @@ function PlanInspeccion (): JSX.Element {
         console.log(value);
         setSelectedOptionRadio(value);
         form.typeInspection = value;
-        if (Number(value) === 0) {
+        if (Number(value) == 0) {
           setArea(
             controller
               .seeAllArea()
               .map((list) => ({ label: list.description, value: list.id }))
           );
+          setForm({...form, codeAE: controller.seeAllArea()[0].id});
         } else {
           setArea(
             controller
               .seeAllElement()
               .map((list) => ({ label: `${list.description} (${list.area.description})`, value: list.id }))
           );
+          setForm({...form, codeAE: controller.seeAllElement()[0].id});
         }
       }
 
@@ -114,13 +116,37 @@ function PlanInspeccion (): JSX.Element {
         console.log(form);
       };
 
+      const handlerFile = (event: any) => {
+        const size = (event.target.files)?.length;
+        if(size != 0){
+          setFile(event.target.files[0]);
+        }
+      };
+
+      function getState(typeState: number): string{
+        if(typeState == 1){
+            return "Por suceder";
+        }else if(typeState == 0){
+            return "En ejecución";
+        }else if(typeState == 4){
+            return "Ejecutada";
+        }else if(typeState == 3){
+            return "Ejecución con retraso";
+        }else if(typeState == 2){
+            return "Retrasada";
+        }
+        return "";
+      };
+      
+
       function importar() {
         console.log("hola");
       }
 
       function Register(){
         //Modificar todavia le falta refinar
-        controller.registerInspection(Number(form.typeInspection), Number(form.code), value as Date, fin as Date, null!, Number(form.duty), null!, null!, null!, form.codeAE); 
+        console.log(form.codeAE);
+        controller.registerInspection(Number(form.typeInspection), Number(form.code), value as Date, fin as Date, null!, Number(form.duty), null!, Number(SelectedResultado), null!, form.codeAE); 
         setFormValues(form.duty, form.typeInspection, '0', form.codeAE, '',value as Date, fin as Date);
         console.log(controller.seeInspection(Number(form.code)));
       }
@@ -139,6 +165,7 @@ function PlanInspeccion (): JSX.Element {
 
       function Search(){
         let inspection = controller.seeInspection(Number(form.code));
+        console.log(inspection);
         let idAE: string;
         if(inspection.constructor.name == "InspectionArea"){
           idAE = (inspection as InspectionArea).area.id
@@ -146,6 +173,7 @@ function PlanInspeccion (): JSX.Element {
           idAE = (inspection as InspectionElement).element.id
         }
         setFormValues(String(inspection.dutyManager.id), form.typeInspection, String(inspection.result), idAE, String(inspection.id), inspection.initialDate, inspection.endDate);
+        setState(getState(inspection.state));
         //mostrar en pantalla
       }
       
@@ -167,7 +195,7 @@ function PlanInspeccion (): JSX.Element {
                 <input name = 'code'  id = 'code'  value= {form.code} onChange = {changeHandler} type="text"  className='input-global'  style = {{position: 'absolute', top: 350, left: 500, fontSize: 32}} />
 
                 <label style = {{position: 'absolute', top: 730, left: 1600, fontSize: 32, fontWeight: 'bold'}}> Estado </label>
-                <input name = 'Estado'  id = 'Estado'  type="text"  className='input-global' style = {{position: 'absolute', top: 700 , left: 1850, fontSize: 23, fontWeight: 'bold'}} />
+                <label style = {{position: 'absolute', top: 732 , left: 1800, fontSize: 30, fontWeight: 'bold'}} >{state}</label>
 
                 <label style = {{position: 'absolute', top: 200, left: 300, fontSize: 32, fontWeight: 'bold'}}> Encargado </label>
                 <select onChange = {selectChange} value={selectedOption} className= 'dropdown'  style = {{position: 'absolute', top: 170, left: 500, fontSize: 23, fontWeight: 'bold', color:'white'}}>
@@ -207,10 +235,7 @@ function PlanInspeccion (): JSX.Element {
 
 
                 <div className='importPDF'  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20%" height="20%" fill="currentColor" >
-                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                    <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
-                    </svg>
+                    <input type="file" onChange={handlerFile}></input>
                     <label onClick={importar}>Adjuntar Imagen </label>
                 </div>    
 
