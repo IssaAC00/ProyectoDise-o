@@ -20,9 +20,9 @@ function PlanInspeccion (): JSX.Element {
     var options = [{id:'Area',value:"0", topl: 290, leftl: 500, top: 7, left: -40 },
     {id:'Elemento',value:"1",top: 7, left: -40,topl: 290, leftl: 800}];
 
-    const Encargado = controller
+    const [Encargado, setEncargado] = useState(controller
       .seeAllDutyManager()
-      .map((list) => ({ label: list.name, value: list.id }));
+      .map((list) => ({ label: list.name, value: list.id })));
 
     const [Areas, setArea] = useState(
       controller
@@ -34,11 +34,11 @@ function PlanInspeccion (): JSX.Element {
       navigate('/');
 
     }
-        
+        //String(Encargado[0].value)
       const [form, setForm] = useState({
-        duty: String(Encargado[0].value),
+        duty: "",
         typeInspection: "0",
-        codeAE: String(Areas[0].value),
+        codeAE: "",
         code: ""
       });
 
@@ -50,7 +50,29 @@ function PlanInspeccion (): JSX.Element {
 
       useEffect(() => {
         controller.loadInspection();
+        controller.loadAreas()
+        .then(response =>(
+          response != undefined ? 
+          setArea(controller.seeAllArea().map( 
+            (list) => ({label: list.description, value: list.id}))) : ''
+        ))
+        .then(() => {
+          setForm({...form, codeAE: controller.seeAllArea()[0].id});
+          controller.loadElements()
+        });
+
+        controller.loadDutyManagers()
+          .then(response => (
+            response != undefined ? 
+            setEncargado(
+              controller.seeAllDutyManager()
+                .map((list) => ({ label: list.name, value: list.id }))) : ''
+          ))
+          .then(() =>{
+            setForm({...form, duty: String(controller.seeAllDutyManager()[0].id)});
+          });
       }, []);
+      
 
       function setFormValues(idDuty: string, typeI: string, result: string, codeAEI: string, codeI: string, iDate: Date, eDate: Date){
         setForm({

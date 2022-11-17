@@ -13,6 +13,7 @@ class AdminDutyManager{
     public async load(){
         if (this.daoDutyManager.ready){
             this._dutyManagers = await this.daoDutyManager.getDutyManager();
+            return this._dutyManagers;
         }
     }
 

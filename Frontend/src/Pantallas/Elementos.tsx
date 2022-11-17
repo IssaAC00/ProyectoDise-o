@@ -27,15 +27,15 @@ function Elementos(): JSX.Element{
 
     useEffect(() => {
       controller.loadAreas()
-      .then(response =>(
-        response != undefined ? 
-        setRoles(controller.seeAllArea().map( 
-          (list) => ({label: list.description, value: list.id}))) : ''
-      ))
-      .then(() => (
-        setSelectedOption(controller.seeAllArea()[0].id),
-        controller.loadElements()
-        ));
+        .then(response =>(
+          response != undefined ? 
+          setRoles(controller.seeAllArea().map( 
+            (list) => ({label: list.description, value: list.id}))) : ''
+        ))
+        .then(() => (
+          setSelectedOption(controller.seeAllArea()[0].id),
+          controller.loadElements()
+          ));
     }, []);
 
     const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

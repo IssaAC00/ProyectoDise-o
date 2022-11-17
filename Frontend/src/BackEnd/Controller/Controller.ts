@@ -194,7 +194,7 @@ class Controller{
     //DutyManager
 
     public async loadDutyManagers(){
-        this.adminDutyManager.load();
+        return this.adminDutyManager.load();
     }
 
     //Preguntar legal

@@ -7,10 +7,10 @@ import { NavLink, useNavigate } from "react-router-dom"
 import path from 'path';
 import createPDF from '../componentes/PDFService';
 
-const filePath = path.join(__dirname, '..', 'pdfFiles', 'something.pdf');
+//const filePath = path.join(__dirname, '..', 'pdfFiles', 'something.pdf');
 
 function crearPDF(){
-    createPDF(filePath);
+    //createPDF(filePath);
 }
 
 function Consultas (): JSX.Element {
