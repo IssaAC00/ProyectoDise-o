@@ -73,6 +73,7 @@ export async function updateSpolaige(req: Request, res: Response) {
 export async function AgentesDeterioro(_req: Request, res: Response){
     try {
         const conn = await MySQL.getInstance().getConnect();
+        //Le falta agrupar clasificacción y ordernar por ALFABETICAMENTE
         const spolaiges = await conn.query('select Spolaige.description, TypeSpolaige.id  from Spolaige INNER JOIN  TypeSpolaige ON Spolaige.type_typespolaige= TypeSpolaige.id order by TypeSpolaige.id');
         res.json(spolaiges);
     }

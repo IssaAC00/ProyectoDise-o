@@ -1,7 +1,10 @@
 import { Router } from 'express'
-import { getElements, createElement, getElement, deleteElement, updateElement } from '../Controller/ElementBD'
+import { getElements, createElement, getElement, deleteElement, updateElement, ElementoXArea} from '../Controller/ElementBD'
 
 const router = Router();
+
+router.route('/Query')
+    .get(ElementoXArea);
 
 router.route('/')
     .get(getElements)
