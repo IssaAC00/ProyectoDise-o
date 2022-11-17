@@ -4,6 +4,14 @@ import Checkbox from "../componentes/Checkbox";
 import "./consulta.css"
 import {DatePicker} from '@material-ui/pickers'
 import { NavLink, useNavigate } from "react-router-dom"
+import path from 'path';
+import createPDF from '../componentes/PDFService';
+
+const filePath = path.join(__dirname, '..', 'pdfFiles', 'something.pdf');
+
+function crearPDF(){
+    createPDF(filePath);
+}
 
 function Consultas (): JSX.Element {
     const [value, setValue] = React.useState<Date | null>(new Date());
@@ -79,7 +87,7 @@ function Consultas (): JSX.Element {
             <label style = {{position: 'absolute', top: 300, left: 770, fontSize: 23, fontWeight: 'bold'}}> Código </label>
             <input name = 'code' id = 'code'  type="text"  className='Input-consulta'  style = {{position: 'absolute', top: 280, left: 850, fontSize: 23}} />
 
-            <button  className='buttonS' style = {{position: 'absolute', top: 500, left: 500, fontSize: 23}}>Consultar Estado</button>
+            <button onClick={crearPDF} className='buttonS' style = {{position: 'absolute', top: 500, left: 500, fontSize: 23}}>Consultar Estado</button>
             <button  className='buttonS' style = {{position: 'absolute', top: 850, left: 1400, fontSize: 23}}>Agentes</button>
             <button  className='buttonS' style = {{position: 'absolute', top: 950, left: 1400, fontSize: 23}}>Area y Elemento</button>
             <button  className='buttonS' style = {{position: 'absolute', top: 1050, left: 1400, fontSize: 23}}>Encargados</button>
