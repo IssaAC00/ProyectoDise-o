@@ -95,8 +95,7 @@ function Areas(): JSX.Element{
 
       function Modify(){
         let floor = Number(selectedOption);
-        if( form.code.trim() !== '' && form.description.trim() !== '' && form.address.trim() !== '' &&
-            floor !== NaN){
+        if( form.code.trim() !== '' && form.description.trim() !== '' && form.address.trim() !== ''){
           controller.modifyArea(form.code, form.description, [form.PDF], form.address, floor);
           setFormValues('','','', selectedOption,'');
           alert("Editado exitosamente")
