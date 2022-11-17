@@ -1,7 +1,10 @@
 import { Router } from 'express'
-import { getSpolaiges, createSpolaige, getSpolaige, deleteSpolaige, updateSpolaige } from '../Controller/SpolaigeBD'
+import { getSpolaiges, createSpolaige, getSpolaige, deleteSpolaige, updateSpolaige, AgentesDeterioro} from '../Controller/SpolaigeBD'
 
 const router = Router();
+
+router.route('/Query')
+    .get(AgentesDeterioro);
 
 router.route('/')
     .get(getSpolaiges)

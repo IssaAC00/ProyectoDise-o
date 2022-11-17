@@ -1,18 +1,19 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import  Navbar  from "../componentes/topbar"
 import {DatePicker} from '@material-ui/pickers'
 import './planInspeccion.css'
 import '../componentes/inputEstiloGlobal.css'
 import {controller} from '../BackEnd/Controller/Controller'
 import { NavLink, useNavigate } from "react-router-dom"
+import { InspectionArea, InspectionElement } from '../BackEnd/Model/Inspection';
 
 function PlanInspeccion (): JSX.Element {
     const navigate = useNavigate();
     const [value, setValue] = React.useState<Date | null>(new Date());
     const [fin, setFin] = React.useState<Date | null>(new Date());
-    const [selectedOption, setSelectedOption] = useState<String>();
-    const [SelectedResultado, setSelectedResultado] = useState<String>();
-    const [SelectedArea, setSelectedArea] = useState<String>();
+    const [selectedOption, setSelectedOption] = useState<string>("");
+    const [SelectedResultado, setSelectedResultado] = useState<string>("3");
+    const [SelectedArea, setSelectedArea] = useState<string>("");
     const [selectedOptionRadio, setSelectedOptionRadio] = useState<String>();
     var options = [{id:'Area',value:"0", topl: 290, leftl: 500, top: 7, left: -40 },
     {id:'Elemento',value:"1",top: 7, left: -40,topl: 290, leftl: 800}];
@@ -40,13 +41,16 @@ function PlanInspeccion (): JSX.Element {
       });
 
       const resultado = [
-        { label: "Terminado", value: "0" },
-        { label: "En Proceso", value: "1" },
-        { label: "Finalizado", value: "2" },
+        { label: "Ninguno", value: "3" },
+        { label: "Restauración", value: "0" },
+        { label: "Conservación", value: "2" },
       ];
 
-      function setFormValues(idDuty: string, typeI: string, codeAEI: string, codeI: string, iDate: Date,
-                              eDate: Date){
+      useEffect(() => {
+        controller.loadInspection();
+      }, []);
+
+      function setFormValues(idDuty: string, typeI: string, result: string, codeAEI: string, codeI: string, iDate: Date, eDate: Date){
         setForm({
           duty: idDuty,
           typeInspection: typeI,
@@ -55,6 +59,11 @@ function PlanInspeccion (): JSX.Element {
         })
         setValue(iDate);
         setFin(eDate);
+        console.log(iDate);
+        console.log(eDate);
+        setSelectedOption(idDuty);
+        setSelectedResultado(result);
+        setSelectedArea(codeAEI);
       }
 
       const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -78,11 +87,11 @@ function PlanInspeccion (): JSX.Element {
         const value = event.target.value;
         setSelectedArea(value);
         form.codeAE = value;
-        console.log(value);
       };
 
       function selectionHandler(event: React.ChangeEvent<HTMLInputElement>) {
         let value = event.target.value;
+        console.log(value);
         setSelectedOptionRadio(value);
         form.typeInspection = value;
         if (Number(value) === 0) {
@@ -95,7 +104,7 @@ function PlanInspeccion (): JSX.Element {
           setArea(
             controller
               .seeAllElement()
-              .map((list) => ({ label: list.description, value: list.id }))
+              .map((list) => ({ label: `${list.description} (${list.area.description})`, value: list.id }))
           );
         }
       }
@@ -111,9 +120,8 @@ function PlanInspeccion (): JSX.Element {
 
       function Register(){
         //Modificar todavia le falta refinar
-        controller.registerInspection(Number(form.typeInspection), Number(form.code), value as Date, fin as Date, null!, 
-                                        Number(form.duty), null!, null!, null!, form.codeAE); 
-        setFormValues(form.duty, form.typeInspection, form.codeAE, '',value as Date, fin as Date);
+        controller.registerInspection(Number(form.typeInspection), Number(form.code), value as Date, fin as Date, null!, Number(form.duty), null!, null!, null!, form.codeAE); 
+        setFormValues(form.duty, form.typeInspection, '0', form.codeAE, '',value as Date, fin as Date);
         console.log(controller.seeInspection(Number(form.code)));
       }
 
@@ -125,15 +133,19 @@ function PlanInspeccion (): JSX.Element {
         //Modificar todavia le falta refinar
         controller.modifyInspection(Number(form.typeInspection), Number(form.code), '', value as Date, fin as Date, null!, 
                                         Number(form.duty), null!, null!, null!, form.codeAE); 
-        setFormValues(form.duty, form.typeInspection, form.codeAE, '',value as Date, fin as Date);
+        setFormValues(form.duty, form.typeInspection, '0', form.codeAE, '',value as Date, fin as Date);
         console.log(controller.seeInspection(Number(form.code)));
       }
 
       function Search(){
         let inspection = controller.seeInspection(Number(form.code));
-        console.log(inspection);
-        setFormValues(String(inspection.dutyManager.id), form.typeInspection, '' , String(inspection.id), inspection.initialDate
-                      , inspection.endDate);
+        let idAE: string;
+        if(inspection.constructor.name == "InspectionArea"){
+          idAE = (inspection as InspectionArea).area.id
+        }else{
+          idAE = (inspection as InspectionElement).element.id
+        }
+        setFormValues(String(inspection.dutyManager.id), form.typeInspection, String(inspection.result), idAE, String(inspection.id), inspection.initialDate, inspection.endDate);
         //mostrar en pantalla
       }
       
@@ -158,7 +170,7 @@ function PlanInspeccion (): JSX.Element {
                 <input name = 'Estado'  id = 'Estado'  type="text"  className='input-global' style = {{position: 'absolute', top: 700 , left: 1850, fontSize: 23, fontWeight: 'bold'}} />
 
                 <label style = {{position: 'absolute', top: 200, left: 300, fontSize: 32, fontWeight: 'bold'}}> Encargado </label>
-                <select onChange = {selectChange} className= 'dropdown'  style = {{position: 'absolute', top: 170, left: 500, fontSize: 23, fontWeight: 'bold', color:'white'}}>
+                <select onChange = {selectChange} value={selectedOption} className= 'dropdown'  style = {{position: 'absolute', top: 170, left: 500, fontSize: 23, fontWeight: 'bold', color:'white'}}>
                 {Encargado.map((options) => (
                 <option key={options.label} value={options.value}>
                 {options.label}
@@ -167,7 +179,7 @@ function PlanInspeccion (): JSX.Element {
                 </select>
 
                 <label style = {{position: 'absolute', top: 500, left: 1600, fontSize: 32, fontWeight: 'bold'}}> Resultado </label>
-                <select onChange = {selectChangeResultado} className= 'dropdown'  style = {{position: 'absolute', top: 470, left: 1790, fontSize: 23, fontWeight: 'bold', color:'white'}}>
+                <select onChange = {selectChangeResultado} value={SelectedResultado} className= 'dropdown'  style = {{position: 'absolute', top: 470, left: 1790, fontSize: 23, fontWeight: 'bold', color:'white'}}>
                 {resultado.map((options) => (
                 <option key={options.label} value={options.value}>
                 {options.label}
@@ -176,7 +188,7 @@ function PlanInspeccion (): JSX.Element {
                 </select>
 
                 <label style = {{position: 'absolute', top: 550, left: 300, fontSize: 32, fontWeight: 'bold'}}> {form.typeInspection === '0' ? 'Area' : 'Elemento'} </label>
-                <select onChange = {selectChangeArea} className= 'dropdown'  style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold', color:'white'}}>
+                <select onChange = {selectChangeArea} value={SelectedArea} className= 'dropdown'  style = {{position: 'absolute', top: 550, left: 500, fontSize: 23, fontWeight: 'bold', color:'white'}}>
                 {Areas.map((options) => (
                 <option key={options.label} value={options.value}>
                 {options.label}

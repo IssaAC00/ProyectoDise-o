@@ -1,13 +1,26 @@
 import { Spolaige} from '../Model/Spolaige'
+import axios from "axios";
 
 class AdminSpolaige{
-    private _spolaiges: Spolaige[] = [];
+    private _spolaiges: Spolaige[];
+    private daoSpolaige: DAOSpolaige;
 
-    constructor(){}
+    constructor(){
+        this._spolaiges = [];
+        this.daoSpolaige = new DAOSpolaige(); 
+    }
+
+    public async load(){
+        if (this.daoSpolaige.ready){
+            this._spolaiges = await this.daoSpolaige.getSpolaige();
+            return this._spolaiges;
+        }
+        
+    }
 
     private search(id: string): Spolaige{
         for(const spolaige of this._spolaiges){
-            if (spolaige.id === id) {
+            if (spolaige.id == id) {
                 return spolaige;
             }
         }
@@ -21,7 +34,6 @@ class AdminSpolaige{
 
     public see(id: string): Spolaige{
         return this.search(id);
-
     }
 
     public modify(spolaige: Spolaige):boolean{
@@ -37,6 +49,41 @@ class AdminSpolaige{
         let spolaige = this.search(id);
         this._spolaiges = this._spolaiges.filter(item => item !== spolaige);
         return true;
+    }
+}
+
+class DAOSpolaige{
+    private _ready: boolean = true;
+    private readonly url = "http://localhost:5001/spolaige";
+
+    constructor(){
+    }
+
+    public async getSpolaige() {
+        let result = await axios.get(this.url)
+        .then(response => {
+            this._ready = false;
+            return response.data[0].map((spolaigeDB: any) => (
+                new Spolaige(spolaigeDB.id, spolaigeDB.description, spolaigeDB.type_typespolaige)
+            ));
+        })
+        .catch(error => {
+            console.log(error);
+        })
+        return result;
+    }
+
+    public async dropSpolaige(){
+
+    }
+
+    public async updateSpolaige(){
+        
+    }
+
+    
+    public get ready() : boolean {
+        return this._ready;
     }
 }
 

@@ -152,19 +152,20 @@ export async function updateInspectionElement(req: Request, res: Response) {
     }
 }
 // RETORNA LAS INSPECCIONES EN ORDEN POR EL ESTADO 
+//Buena
 export async function getInspectionXState(req: Request, res: Response) {
     try{
         const id = req.params.postId;
         const conn = await MySQL.getInstance().getConnect();
         const posts = await conn.query('SELECT Inspection.idInspection, State.description FROM Inspection INNER JOIN State ON Inspection.state= State.id ORDER BY  State.id;');
-        res.json(posts[0]);
+        res.json(posts);
     }catch(e){
         console.log(e);
     }
 }
 
 //RETORNA LAS INSPECCIONES EN ORDEN POR EL ESTADO Y EL DUTY MANAGER
-
+// no se si sirve
 export async function getInspectionXStateXDuty(req: Request, res: Response) {
     try{
         const id = req.params.postId;

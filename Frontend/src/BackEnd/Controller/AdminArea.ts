@@ -13,6 +13,7 @@ class AdminArea{
     public async load(){
         if (this.daoArea.ready){
             this._areas = await this.daoArea.getAreas();
+            return this._areas;
         }
         
     }
@@ -67,7 +68,6 @@ class DAOArea{
         let result = await axios.get(this.url)
         .then(response => {
             this._ready = false;
-            console.log(response.data[0]);
             return response.data[0].map((areaDB: any) => (
                 new Area(areaDB.idArea, areaDB.description, [areaDB.image], areaDB.ubication, areaDB.floorA)
             ));

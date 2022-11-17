@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import  Navbar  from "../componentes/topbar"
 import Checkbox from "../componentes/Checkbox";
 import { ExternalPerson, LegalPerson, TypeWork } from "../BackEnd/Model/DutyManager";
@@ -25,6 +25,10 @@ function Encargado (): JSX.Element {
                 navigate('/');
         
               }
+
+        useEffect(() => {
+                controller.loadDutyManagers();
+        }, []);
 
         function checkButtonChange(list: Set<TypeWork>){
                 if(list.has(0)){
@@ -127,7 +131,7 @@ function Encargado (): JSX.Element {
         }
 
         function validarLegal(type: number, id: number, name: string): boolean{
-                if(type === 1){
+                if(type == 1){
                         if(!isNaN(id) && name !== ''){
                                 return true;
                         }
@@ -159,7 +163,6 @@ function Encargado (): JSX.Element {
                         }else if(duty.constructor.name === 'InternalPerson' && selectedOption == '0'){
                                 setFormValues(String(duty.id), selectedOption, duty.name,duty.email, '', '');
                         }
-                        console.log(duty.labor)
                         checkButtonChange(duty.labor);
                 } else {
                         alert("No se ha encontrado encarago con esa cedula");

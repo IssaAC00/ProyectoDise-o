@@ -73,13 +73,13 @@ export async function updateElement(req: Request, res: Response) {
 
 export async function ElementoXArea(req: Request, res: Response) {
     try{
-        const id = req.params.postId;
+        //const id = req.params.postId;
         const conn = await MySQL.getInstance().getConnect();
-        const elements = await conn.query('select * from Element where Element.areaID= ?', [id]);
-        res.json(elements[0]);
+        const elements = await conn.query('select Area.idArea, Element.idElement, Element.description, Element.ubication from Element INNER JOIN Area on Element.areaID = Area.idArea');
+        res.json(elements);
     }catch(e){
         console.log(e);
     }
-    //'select Area.idArea, Element.idElement, Element.description, Element.ubication from Area INNER JOIN Element on Area.idArea =?', [id]; 
+    //select * from Element where Element.areaID= ?, [id]; 
 
 }

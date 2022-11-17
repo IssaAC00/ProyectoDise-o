@@ -30,7 +30,7 @@ function Areas(): JSX.Element{
         { label: "Atico", value: "5" },
       ];
   
-      useEffect(() => {
+    useEffect(() => {
         controller.loadAreas();
     }, []);
 
@@ -61,7 +61,6 @@ function Areas(): JSX.Element{
 
       function Register (){
         let floor = Number(selectedOption);
-        console.log(isNaN(floor));
         if( form.code.trim() !== '' && form.description.trim() !== '' && form.address.trim() !== '' &&
             !isNaN(floor)){
           controller.registerArea(form.code, form.description, [form.PDF], form.address, floor);
