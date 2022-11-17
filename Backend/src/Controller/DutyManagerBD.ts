@@ -144,6 +144,7 @@ export async function updateDutyManagerLegal(req: Request, res: Response) {
 }
 
 // inspeccion x INTERNAL person 
+// Son todos
 export async function getDutyManagerInternalXinspection (req: Request, res: Response) {
     try{
         const id = req.params.postId;
@@ -159,6 +160,7 @@ export async function getDutyManagerInternalXinspection (req: Request, res: Resp
 }
 
 // inpeccion x LEGAL person 
+// Son todos
 export async function getDutyManagerLegalXInspection(req: Request, res: Response) {
     try{
         const id = req.params.postId;

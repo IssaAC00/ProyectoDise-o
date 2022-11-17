@@ -110,6 +110,9 @@ class Controller{
 
     //Inspection
 
+    public async loadInspection(){
+        this.adminInspection.load(this.adminDutyManager, this.adminArea, this.adminElement);
+    }
 
     public registerInspection(optionInspection: number, id: number, iDate: Date, eDate: Date, dDate: Date,
                                     idDutyManager: number, PDF: string, result: TypeWork, state: State, idObjectInspect: string){

@@ -1,6 +1,5 @@
 import { DutyManager, FactoryDutyManager, LegalPerson, TypeWork } from '../Model/DutyManager'
 import axios from "axios";
-import { response } from 'express';
 
 class AdminDutyManager{
     private _dutyManagers: DutyManager[] = [];
@@ -14,7 +13,6 @@ class AdminDutyManager{
     public async load(){
         if (this.daoDutyManager.ready){
             this._dutyManagers = await this.daoDutyManager.getDutyManager();
-            console.log(this._dutyManagers);
         }
     }
 
