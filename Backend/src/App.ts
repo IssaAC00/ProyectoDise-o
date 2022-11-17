@@ -1,5 +1,7 @@
 import express, { Application } from 'express'
 import cors from "cors" 
+import morgan from "morgan";
+import  path  from 'path';
 
 import area from './Routes/Area'
 import dutyManager from './Routes/DutyManager'
@@ -14,11 +16,13 @@ import spolaige from './Routes/Spolaige'
 // import typeWork from './Routes/typeWork'
 import user from './Routes/User'
 import element from './Routes/Element'
+import routeMongo from './Routes/RouteMongo';
 
 
 
 export class App {
     app: Application;
+
 
     constructor(
         private port?: number | string
@@ -38,6 +42,7 @@ export class App {
             origin: 'http://localhost:3000',
         }
         this.app.use(cors(options))
+        this.app.use(morgan('dev'))        
         this.app.use(express.json());
     }
 
@@ -55,7 +60,9 @@ export class App {
         this.app.use('/spolaige', spolaige);
         // this.app.use('/typeSpolaige', typeSpolaige);
         // this.app.use('/typeWork', typeWork);
+        this.app.use('/MongoDB', routeMongo);
         this.app.use('/user', user);
+        this.app.use('/uploads', express.static(path.resolve('uploads')))
     }
 
 
