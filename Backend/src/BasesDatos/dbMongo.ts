@@ -1,9 +1,16 @@
-import { connect, createConnection } from 'mongoose'
+import express from 'express';
+
+import mongoose from 'mongoose';
+import { config } from '../config';
 
 
-export async function startTConnection(){
-    await createConnection('mongodb+srv://admin:admin@cluster0.cw4inmx.mongodb.net/ImageDesign?retryWrites=true&w=majority').asPromise();
-    console.log('database is connected')
-    
+
+/** Connect to Mongo */
+export async function startConnection(){
+mongoose
+    .connect(config.mongo.url)
+    .then(() => {
+       console.log('connect to Mongo')
+    })
+    .catch((error) => console.log(error));
 }
-
