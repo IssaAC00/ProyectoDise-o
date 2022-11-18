@@ -2,10 +2,16 @@ import { Request, Response } from 'express'
 import modeloPhoto from '../interface/Schema'
 
 
-export function getPhoto(req: Request, res: Response){
+export async function getPhoto(_req: Request, res: Response){
+   const photos =  await modeloPhoto.find();
+    return res.json(photos);
 
+}
 
-
+export async function getPhotoByID(req: Request, res: Response) {
+    const { id }= req.params;
+    const photo = await modeloPhoto.findById(id);
+    return res.json(photo);
 }
 
 
