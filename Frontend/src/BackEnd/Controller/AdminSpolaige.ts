@@ -27,9 +27,19 @@ class AdminSpolaige{
         return null!;
     }
 
-    public add(spolaige: Spolaige):boolean{
-        this._spolaiges.push(spolaige);
-        return true;
+    private isSpolaige(spolaige: Spolaige): boolean{
+        return this.search(spolaige.id) == null;
+    }
+
+    public add(spolaige: Spolaige): boolean{
+        if(this.isSpolaige(spolaige)){
+            this._spolaiges.push(spolaige);
+            this.daoSpolaige.createSpolaige(spolaige);
+            console.log("Se ha agregado Spolaige")
+            return true;
+        }
+        console.log("No se ha agregado");
+        return false;
     }
 
     public see(id: string): Spolaige{
@@ -71,6 +81,20 @@ class DAOSpolaige{
             console.log(error);
         })
         return result;
+    }
+
+    private objectTOBD(spolaige: Spolaige){
+        return {
+            id: spolaige.id,
+            description: spolaige.description,
+            type_typespolaige: spolaige.type
+        }
+    }
+
+    public async createSpolaige(spolaige: Spolaige){
+        const spolaigeDB = this.objectTOBD(spolaige);
+        console.log(spolaigeDB)
+        await axios.post(this.url, spolaigeDB);
     }
 
     public async dropSpolaige(){

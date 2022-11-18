@@ -50,7 +50,6 @@ function Deterioro (): JSX.Element {
       if( form.code.trim() !== '' && form.description.trim() !== ''){
           controller.registerPolaige(form.code, form.description, type);
           setFormValues('','', selectedOption);
-          alert("Deterioro agregado exitosamente")
         }else{
           alert('No deben existir espacios en blanco');
         }

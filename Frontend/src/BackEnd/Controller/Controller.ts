@@ -27,7 +27,6 @@ class Controller{
 
     public registerPolaige(id: string, description: string, type: TypeSpolaige){
         //Validar id, description && type 
-
         let newSpolaige = new Spolaige(id, description, type);
         this.adminSpolaige.add(newSpolaige);
     }
