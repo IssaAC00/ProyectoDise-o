@@ -78,8 +78,8 @@ class Controller{
     }
 
     //Element
-    public loadElements(){
-        this.adminElement.load(this.adminArea);
+    public async loadElements(){
+        return this.adminElement.load(this.adminArea);
     }
     public registerElement(id: string, description: string, images: string[], location: string, idArea: string){
         //Validar id, description, busqueda area
