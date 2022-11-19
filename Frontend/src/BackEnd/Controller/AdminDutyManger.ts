@@ -1,4 +1,4 @@
-import { DutyManager, FactoryDutyManager, LegalPerson, TypeWork } from '../Model/DutyManager'
+import { DutyManager, ExternalPerson, FactoryDutyManager, LegalPerson, TypeWork } from '../Model/DutyManager'
 import axios from "axios";
 
 class AdminDutyManager{
@@ -26,9 +26,17 @@ class AdminDutyManager{
         return null!;
     }
 
+    private isDutyManager(duty: DutyManager){
+        return this.search(duty.id) == null;
+    }
+
     public add(dutyManager: DutyManager):boolean{
-        this._dutyManagers.push(dutyManager);
-        return true;
+        if(this.isDutyManager(dutyManager)){
+            this._dutyManagers.push(dutyManager);
+            this.daoDutyManager.createDuty(dutyManager);
+            return true;
+        }
+        return false;
     }
 
     public see(id: number): DutyManager{
@@ -114,6 +122,48 @@ class DAODutyManager{
         dutyExternal = await this.getDutyExternal();
         let dutymanagers = dutyInternals.concat(dutyExternal);
         return dutymanagers;
+    }
+
+    private internalTOBD(dutyManager: DutyManager){
+        return {
+            General: {
+                DNIManager: dutyManager.id,
+                name: dutyManager.name,
+                email: dutyManager.email,
+                inspection: dutyManager.labor.has(1),
+                conservation: dutyManager.labor.has(2),
+                restauration: dutyManager.labor.has(0)},
+            Specific: {
+                DNIManager: dutyManager.id
+            }
+        }
+    }
+
+    private externalTOBD(dutyManager: DutyManager){
+        return {
+            General: {
+                DNIManager: dutyManager.id,
+                name: dutyManager.name,
+                email: dutyManager.email,
+                inspection: dutyManager.labor.has(1),
+                conservation: dutyManager.labor.has(2),
+                restauration: dutyManager.labor.has(0)},
+            Specific: {
+                DNIManager: dutyManager.id,
+                DNILegalManager: (dutyManager as LegalPerson).idManager,
+                nameLegal: (dutyManager as LegalPerson).managerName
+            }
+        }
+    }
+
+    public async createDuty(dutyManager: DutyManager){
+        if (dutyManager.constructor.name == "InternalPerson"){
+            const internal = this.internalTOBD(dutyManager );
+            await axios.post(this.url + "/internal", internal);
+        }else{
+            const legal = this.externalTOBD(dutyManager);
+            await axios.post(this.url + "/legal", legal);
+        }
     }
 
     public async dropDutyManager(){

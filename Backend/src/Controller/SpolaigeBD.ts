@@ -18,6 +18,7 @@ export async function getSpolaiges(_req: Request, res: Response){
 export async function createSpolaige(req: Request, res: Response) {
     try{
         const newSpolaige: Spolaige = req.body;
+        console.log(req.body);
         const conn = await MySQL.getInstance().getConnect();
         await conn.query('INSERT INTO Spolaige SET ?', [newSpolaige]);
         res.json({

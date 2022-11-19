@@ -48,7 +48,6 @@ export async function createDutyManagerLegal(req: Request, res: Response) {
     try{
         const newDutyManager: dutyManager = req.body.General;
         const newLegal: legalPerson = req.body.Specific;
-        console.log(newDutyManager);
         const conn = await MySQL.getInstance().getConnect();
         await conn.query('INSERT INTO DutyManager SET ?', [newDutyManager]);
         await conn.query('INSERT INTO LegalPerson  SET ?', [newLegal]);

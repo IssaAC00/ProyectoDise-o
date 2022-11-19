@@ -49,7 +49,6 @@ function PlanInspeccion (): JSX.Element {
       ];
 
       useEffect(() => {
-        controller.loadInspection();
         controller.loadAreas()
         .then(response =>(
           response != undefined ? 
@@ -59,18 +58,20 @@ function PlanInspeccion (): JSX.Element {
         .then(() => {
           setForm({...form, codeAE: controller.seeAllArea()[0].id});
           controller.loadElements()
+          .then(()=>{
+            controller.loadDutyManagers()
+              .then(response => (
+                response != undefined ? 
+                setEncargado(
+                  controller.seeAllDutyManager()
+                    .map((list) => ({ label: list.name, value: list.id }))) : ''
+              ))
+              .then(() =>{
+                setForm({...form, duty: String(controller.seeAllDutyManager()[0].id)});
+                controller.loadInspection();
+              });
+          })
         });
-
-        controller.loadDutyManagers()
-          .then(response => (
-            response != undefined ? 
-            setEncargado(
-              controller.seeAllDutyManager()
-                .map((list) => ({ label: list.name, value: list.id }))) : ''
-          ))
-          .then(() =>{
-            setForm({...form, duty: String(controller.seeAllDutyManager()[0].id)});
-          });
       }, []);
       
 
@@ -167,8 +168,7 @@ function PlanInspeccion (): JSX.Element {
 
       function Register(){
         //Modificar todavia le falta refinar
-        console.log(form.codeAE);
-        controller.registerInspection(Number(form.typeInspection), Number(form.code), value as Date, fin as Date, null!, Number(form.duty), null!, Number(SelectedResultado), null!, form.codeAE); 
+        controller.registerInspection(Number(form.typeInspection), Number(form.code), value as Date, fin as Date, null!, Number(form.duty), null!, null!, null!, form.codeAE); 
         setFormValues(form.duty, form.typeInspection, '0', form.codeAE, '',value as Date, fin as Date);
         console.log(controller.seeInspection(Number(form.code)));
       }
@@ -189,13 +189,16 @@ function PlanInspeccion (): JSX.Element {
         let inspection = controller.seeInspection(Number(form.code));
         console.log(inspection);
         let idAE: string;
-        if(inspection.constructor.name == "InspectionArea"){
+        console.log(form.typeInspection)
+        if(inspection.constructor.name == "InspectionArea" && form.typeInspection == '0'){
           idAE = (inspection as InspectionArea).area.id
-        }else{
+          setFormValues(String(inspection.dutyManager.id), form.typeInspection, String(inspection.result), idAE, String(inspection.id), inspection.initialDate, inspection.endDate);
+          setState(getState(inspection.state));
+        }else if(inspection.constructor.name == "InspectionElement" && form.typeInspection == '1'){
           idAE = (inspection as InspectionElement).element.id
+          setFormValues(String(inspection.dutyManager.id), form.typeInspection, String(inspection.result), idAE, String(inspection.id), inspection.initialDate, inspection.endDate);
+          setState(getState(inspection.state));
         }
-        setFormValues(String(inspection.dutyManager.id), form.typeInspection, String(inspection.result), idAE, String(inspection.id), inspection.initialDate, inspection.endDate);
-        setState(getState(inspection.state));
         //mostrar en pantalla
       }
       

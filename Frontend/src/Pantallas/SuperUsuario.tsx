@@ -25,6 +25,7 @@ function SuperUsuario(): JSX.Element{
         { label: "Administrador", value: '0' },
         { label: "Super Usuario", value: '1' },
         { label: "Operativo", value: '2' },
+        { label: "Dirección", value: '3' }
       ];
     
       function Volver (){

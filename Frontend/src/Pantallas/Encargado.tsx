@@ -116,8 +116,8 @@ function Encargado (): JSX.Element {
                 setSelectedOption(value);
                 if ( value == '1'){
                         setDisabled(false);
-                        setSelectedOption(value);}
-                else{
+                        setSelectedOption(value);
+                }else{
                         setDisabled(true);
                         setSelectedOption(value);
                         console.log('aqui'+ value);

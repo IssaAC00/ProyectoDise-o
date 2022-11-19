@@ -1,6 +1,7 @@
-import { DutyManager, TypeWork } from './DutyManager'
-import { Area } from './Area'
-import { Element } from './Element'
+import { DutyManager, TypeWork } from './DutyManager';
+import { Area } from './Area';
+import { Element } from './Element';
+import { Spolaige } from './Spolaige';
 
 abstract class Inspection{
     protected _id: number;
@@ -8,13 +9,13 @@ abstract class Inspection{
     protected _endDate: Date;
     protected _deliveryDate: Date;
     protected _dutyManager: DutyManager;
-    protected _PDF: string;
+    protected _PDF: PDF;
     protected _result: TypeWork;
     protected _state: State;
 
     constructor(id: number, initialDate:Date,
                     endDate: Date, deliveryDate: Date, dutymanager: DutyManager,
-                    PDF: string, result: TypeWork, state: State){
+                    PDF: PDF, result: TypeWork, state: State){
 
         this._id = id;
         this._initialDate = initialDate;
@@ -78,7 +79,7 @@ abstract class Inspection{
         this._dutyManager = dutyManager;
     }
 
-    public set PDF(pdf: string){
+    public set PDF(pdf: PDF){
         this._PDF = pdf;
     }
 
@@ -92,7 +93,6 @@ abstract class Inspection{
 
     public updateState(){
         const dateNow = new Date(Date.now());
-        console.log(this._deliveryDate);
         if(dateNow < this.initialDate){
             this.state = State.PorSuceder;
         }else if(this.initialDate <= dateNow && this._endDate >= dateNow && this._deliveryDate == null){
@@ -121,7 +121,7 @@ class InspectionArea extends Inspection{
 
     constructor(id: number, initialDate:Date,
                     endDate: Date, deliveryDate: Date, dutymanager: DutyManager,
-                    PDF: string, result: TypeWork, state: State, area: Area){
+                    PDF: PDF, result: TypeWork, state: State, area: Area){
         super(id, initialDate,endDate, deliveryDate, dutymanager,
                 PDF, result, state);
 
@@ -143,7 +143,7 @@ class InspectionElement extends Inspection{
 
     constructor(id: number, initialDate:Date,
                     endDate: Date, deliveryDate: Date, dutymanager: DutyManager,
-                    PDF: string, result: TypeWork, state: State, element: Element){
+                    PDF: PDF, result: TypeWork, state: State, element: Element){
         super(id, initialDate,endDate, deliveryDate, dutymanager,
                 PDF, result, state);
 
@@ -166,7 +166,7 @@ class InspectionElement extends Inspection{
 class FactoryInspections{
     public getInspection(choiceInspection: number, id: number, iDate:Date,
         eDate: Date, dDate: Date, dutymanager: DutyManager,
-        PDF: string, result: TypeWork, state: State, objectInspect: Element|Area): Inspection{
+        PDF: PDF, result: TypeWork, state: State, objectInspect: Element|Area): Inspection{
         switch (choiceInspection) {
             case 0:
                 return new InspectionArea(id, iDate, eDate, dDate, dutymanager, PDF, result, state, objectInspect as Area);
@@ -178,4 +178,39 @@ class FactoryInspections{
     }
 }
 
+interface PDF{
+    attachPDF(): String;
+}
+
+class UploadPDF implements PDF{
+    attachPDF(): String {
+        return '';
+    }
+}
+
+class Form implements PDF{
+    private _register: Register[] = [];
+
+    attachPDF(): String {
+        return '';
+    }
+}
+
+class Register{
+    private _id: number;
+    private _spolaige: Spolaige;
+    private _image: string;
+    private _observation: string;
+    private _description: String;
+
+    constructor(id: number, spolaige: Spolaige, image: string, observation: string, description: string){
+        this._id = id;
+        this._spolaige = spolaige;
+        this._image = image;
+        this._observation = observation;
+        this._description = description;
+    }
+}
+
+export type{PDF};
 export { Inspection, State, InspectionArea, InspectionElement, FactoryInspections};

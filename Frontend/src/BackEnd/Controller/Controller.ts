@@ -7,7 +7,7 @@ import { AdminUser } from './AdminUser'
 import { Spolaige, TypeSpolaige } from '../Model/Spolaige'
 import { Area, Floor } from '../Model/Area'
 import { Element } from '../Model/Element'
-import { Inspection, FactoryInspections ,State, InspectionArea } from '../Model/Inspection'
+import { Inspection, FactoryInspections ,State, InspectionArea, PDF } from '../Model/Inspection'
 import { Rol, User } from '../Model/User'
 import { DutyManager, TypeWork, FactoryDutyManager} from '../Model/DutyManager'
 
@@ -27,7 +27,6 @@ class Controller{
 
     public registerPolaige(id: string, description: string, type: TypeSpolaige){
         //Validar id, description && type 
-
         let newSpolaige = new Spolaige(id, description, type);
         this.adminSpolaige.add(newSpolaige);
     }
@@ -79,8 +78,8 @@ class Controller{
     }
 
     //Element
-    public loadElements(){
-        this.adminElement.load(this.adminArea);
+    public async loadElements(){
+        return this.adminElement.load(this.adminArea);
     }
     public registerElement(id: string, description: string, images: string[], location: string, idArea: string){
         //Validar id, description, busqueda area
@@ -115,7 +114,7 @@ class Controller{
     }
 
     public registerInspection(optionInspection: number, id: number, iDate: Date, eDate: Date, dDate: Date,
-                                    idDutyManager: number, PDF: string, result: TypeWork, state: State, idObjectInspect: string){
+                                    idDutyManager: number, PDF: PDF, result: TypeWork, state: State, idObjectInspect: string){
         //Validar id, description, busqueda area
         let factoryInspection = new FactoryInspections(); 
         let dutyManager = this.adminDutyManager.search(idDutyManager);
@@ -127,7 +126,6 @@ class Controller{
         }
         let newInspection = factoryInspection.getInspection(optionInspection, id, iDate, eDate, dDate, dutyManager,
                                                             PDF, result, state, objectInspect);
-        //console.log(newInspection)
         this.adminInspection.add(newInspection);
     }
     
@@ -137,7 +135,7 @@ class Controller{
 
     //Cuando se haga el register
     public modifyInspection(optionInspection: number, id: number, description: string, iDate: Date, eDate: Date, dDate: Date,
-        idDutyManager: number, PDF: string, result: TypeWork, state: State, idObjectInspect: string) {
+        idDutyManager: number, PDF: PDF, result: TypeWork, state: State, idObjectInspect: string) {
         //Validar nombre && type
         let factoryInspection = new FactoryInspections();
         let dutyManager = this.adminDutyManager.search(idDutyManager);
@@ -149,7 +147,6 @@ class Controller{
         }
         let newInspection = factoryInspection.getInspection(optionInspection, id, iDate, eDate, dDate, dutyManager,
             PDF, result, state, objectInspect);
-        console.log(newInspection)
         this.adminInspection.modify(newInspection);
     }
 
@@ -203,7 +200,6 @@ class Controller{
         //Validar email y contra
         let factoryDutyManager = new FactoryDutyManager();
         let newDutyManager = factoryDutyManager.getInspection(optionDM, id, name, email, labor, managerName, idManager);
-        // console.log(newDutyManager);
         this.adminDutyManager.add(newDutyManager);
     }
     
@@ -219,7 +215,6 @@ class Controller{
                             managerName?: string, idManager?: number){
         let factoryDutyManager = new FactoryDutyManager();
         let newDutyManager = factoryDutyManager.getInspection(optionDM, id, name, email, labor, managerName, idManager);
-        console.log(newDutyManager);
         this.adminDutyManager.modify(newDutyManager);
     }
 
