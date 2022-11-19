@@ -80,6 +80,18 @@ class DAOElement{
         })
         return result;
     }
+
+    public async queryAreaxElement() {
+        let result = await axios.get(this.url+'/Query')
+        .then(response => {
+            this._ready = false;
+            return response.data[0].map((query: any) => ({idArea: query.idArea, idElement: query.idElement}));
+        })
+        .catch(error => {
+            console.log(error);
+        })
+        return result;
+    }
     
     public set adminArea(adminArea : AdminArea) {
         this._adminArea = adminArea;

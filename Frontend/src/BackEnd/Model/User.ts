@@ -33,7 +33,58 @@ class User{
 enum Rol{
     Adminitrador,
     Super,
-    Operativo
+    Operativo,
+    Direccion
+}
+
+class Resquest{
+    private _email: string;
+    private _rol: Rol;
+    private _state: boolean;
+    private _processMail: ProcessMail;
+
+    constructor(email: string, rol: Rol, state: boolean, processMail: ProcessMail){
+        this._email = email;
+        this._rol = rol;
+        this._state = state;
+        this._processMail = processMail;
+    }
+
+    public setProcessMail(processMail: ProcessMail){
+
+    }
+
+    public processRequest(){
+        
+    }
+}
+
+interface ProcessMail{
+    sendMail(user: User): boolean;
+}
+
+class MailAdministrator implements ProcessMail{
+    sendMail(user: User): boolean {
+        return true;
+    }
+}
+
+class MailOperator implements ProcessMail{
+    sendMail(user: User): boolean {
+        return true;
+    }
+}
+
+class MailDirector implements ProcessMail{
+    sendMail(user: User): boolean {
+        return true;
+    }
+}
+
+class MailSolicitudFallida implements ProcessMail{
+    sendMail(user: User): boolean {
+        return true;
+    }
 }
 
 export { Rol, User };
