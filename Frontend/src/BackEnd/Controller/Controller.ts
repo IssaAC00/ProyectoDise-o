@@ -73,8 +73,8 @@ class Controller{
         this.adminArea.modify(newArea);
     }
 
-    public deleteArea(id: string){
-        this.adminArea.delete(id);
+    public deleteArea(id: string): boolean{
+        return this.adminArea.delete(id);
     }
 
     //Element

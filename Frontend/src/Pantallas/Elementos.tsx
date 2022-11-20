@@ -10,7 +10,7 @@ import { NavLink, useNavigate } from "react-router-dom"
 function Elementos(): JSX.Element{
 
     // Se selecciona el area que se desea guardar el elemento
-    const [selectedOption, setSelectedOption] = useState<string>('');
+    const [selectedOption, setSelectedOption] = useState<string>("null");
     const navigate = useNavigate(); 
     // controller.seeAllArea()[0].id
 
@@ -22,18 +22,24 @@ function Elementos(): JSX.Element{
         PDF: '' 
       });
 
-    const [roles,setRoles] = useState(controller.seeAllArea().map( 
-        (list) => ({label: list.description, value: list.id})));
+      function initRoles(){
+        let list1 = controller.seeAllArea().map( 
+          (list: any) => ({label: list.description, value: list.id}));
+        let list2: [{label: any, value: any}] = [{label: '', value: "null"}];
+        let newList =  list2.concat(list1);
+        return newList;
+      }
+
+    const [roles,setRoles] = useState(initRoles());
 
     useEffect(() => {
       controller.loadAreas()
         .then(response =>(
           response != undefined ? 
-          setRoles(controller.seeAllArea().map( 
-            (list) => ({label: list.description, value: list.id}))) : ''
+          setRoles(initRoles()) : ''
         ))
         .then(() => (
-          setSelectedOption(controller.seeAllArea()[0].id),
+          setSelectedOption("null"),
           controller.loadElements()
           ));
     }, []);
@@ -91,7 +97,7 @@ function Elementos(): JSX.Element{
     function Search(){
       let element = controller.seeElement(form.code);
       if (element != null) {
-        setFormValues(element.id , element.description, element.location,element.images.at(0)?.toString() as string, element.area.id);
+        setFormValues(element.id , element.description, element.location,element.images.at(0)?.toString() as string, element.area == null ? ' ':element.area.id);
       } else {
         alert("No se ha encontrado elemento con ese código");
         setFormValues(form.code,'','', selectedOption,'');

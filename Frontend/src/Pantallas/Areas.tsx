@@ -5,8 +5,8 @@ import React, { useEffect, useState } from "react";
 import "./areas.css"
 import '../componentes/buttonS.css'
 import { controller } from '../BackEnd/Controller/Controller';
-import { Floor } from '../BackEnd/Model/Area';
-import { NavLink, useNavigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 
 function Areas(): JSX.Element{
@@ -63,7 +63,7 @@ function Areas(): JSX.Element{
         let floor = Number(selectedOption);
         if( form.code.trim() !== '' && form.description.trim() !== '' && form.address.trim() !== '' &&
             !isNaN(floor)){
-          controller.registerArea(form.code, form.description, [form.PDF], form.address, floor);
+          controller.registerArea(form.code, form.description, ['Prueba1'], form.address, floor);
           setFormValues('','','', selectedOption,'');
           alert("Area agregada exitosamente")
         }else{
@@ -83,13 +83,12 @@ function Areas(): JSX.Element{
       
       function Drop() {
         let deleteArea = controller.deleteArea(form.code);
-        setFormValues('','','', selectedOption,'');
-        // if (deleteAreA) {
-        //   setFormValues('', '', '', selectedOption, '');
-        //   alert("Area eliminada exitosamente")
-        // } else {
-        //   alert("No se ha encontado area con ese codigo")
-        // }
+        if (deleteArea ) {
+          setFormValues('', '', '', selectedOption, '');
+          swal("Area eliminada exitosamente","" ,"success");
+        } else {
+          swal("No se ha encontado area con ese codigo","" ,"warning");
+        }
       }
 
       function Modify(){
