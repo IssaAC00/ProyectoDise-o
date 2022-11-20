@@ -44,7 +44,7 @@ class Controller{
     }
 
     public deleteSpolaige(id: string){
-        this.adminSpolaige.delete(id);
+        return this.adminSpolaige.delete(id);
     }
 
     //Area

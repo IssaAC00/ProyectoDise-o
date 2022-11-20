@@ -50,24 +50,26 @@ function Encargado (): JSX.Element {
                 }
         }
 
-        function saveCheckButton(listType: Set<TypeWork>){
+        function saveCheckButton(){
+                let listType: Set<TypeWork> = new Set();
                 if(isCheckedA){
-                        listType.add(Number(Puesto));
+                        listType.add(Number(0));
                 }else{
-                        listType.delete(Number(Puesto));
+                        listType.delete(Number(0));
                 }
 
                 if(isCheckedB){
-                        listType.add(Number(Puesto1));
+                        listType.add(Number(1));
                 }else{
-                        listType.delete(Number(Puesto1));
+                        listType.delete(Number(1));
                 }
 
                 if(isCheckedC){
-                        listType.add(Number(Puesto2));
+                        listType.add(Number(2));
                 }else{
-                        listType.delete(Number(Puesto2));
+                        listType.delete(Number(2));
                 }
+                return listType;
         }
             
         const [selectedOption, setSelectedOption] = useState<string>();
@@ -142,7 +144,7 @@ function Encargado (): JSX.Element {
 
         function Register(){
                 let listType: Set<TypeWork> = new Set();
-                saveCheckButton(listType);
+                listType = saveCheckButton();
                 let typeDuty = Number(selectedOption), idDuty = Number(form.id), managerId = Number(form.managerId);
                 if(!isNaN(typeDuty) && !isNaN(idDuty) && form.name.trim() !== '' && validarLegal(typeDuty, managerId, form.name)){
                         controller.registerDutyManager(typeDuty, idDuty, form.name, form.email, listType, 
@@ -177,7 +179,7 @@ function Encargado (): JSX.Element {
 
         function Modify(){
                 let listType: Set<TypeWork> = new Set();
-                saveCheckButton(listType);
+                listType = saveCheckButton();
                 let typeDuty = Number(selectedOption), idDuty = Number(form.id), managerId = Number(form.managerId);
                 if(!isNaN(typeDuty) && !isNaN(idDuty) && form.name.trim() !== '' && validarLegal(typeDuty, managerId, form.name)){
                         controller.modifyDutyManager(typeDuty, idDuty, form.name, form.email, listType, 
@@ -187,7 +189,6 @@ function Encargado (): JSX.Element {
                 }else{
                         alert('No deben existir espacios en blanco');
                 }
-                
         }
 
 
