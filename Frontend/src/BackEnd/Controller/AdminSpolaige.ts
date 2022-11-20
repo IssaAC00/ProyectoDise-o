@@ -47,18 +47,27 @@ class AdminSpolaige{
     }
 
     public modify(spolaige: Spolaige):boolean{
-        this._spolaiges.forEach((item, index, arr) => {
-            if (item.id === spolaige.id){
-                arr[index] = spolaige;
-            }
-        });
-        return true;
+        let updateSpolaige = this.isSpolaige(spolaige);
+        if(!updateSpolaige){
+            this._spolaiges.forEach((item, index, arr) => {
+                if (item.id === spolaige.id){
+                    arr[index] = spolaige;
+                }
+            });
+            this.daoSpolaige.updateSpolaige(spolaige);
+            return true;
+        }
+        return false;
     }
 
     public delete(id: string):boolean{
         let spolaige = this.search(id);
-        this._spolaiges = this._spolaiges.filter(item => item !== spolaige);
-        return true;
+        if(spolaige != null){
+            this.daoSpolaige.dropSpolaige(spolaige);
+            this._spolaiges = this._spolaiges.filter(item => item !== spolaige);
+            return true;
+        }
+        return false;
     }
 }
 
@@ -96,12 +105,13 @@ class DAOSpolaige{
         await axios.post(this.url, spolaigeDB);
     }
 
-    public async dropSpolaige(){
-
+    public async dropSpolaige(spolaige: Spolaige){
+        await axios.delete(this.url + `/${spolaige.id}`);
     }
 
-    public async updateSpolaige(){
-        
+    public async updateSpolaige(spolaige: Spolaige){
+        let updateSpolaige = this.objectTOBD(spolaige);
+        await axios.put(this.url + `/${spolaige.id}`, updateSpolaige);
     }
 
     

@@ -115,9 +115,14 @@ export async function deleteDutyManagerLegal(req: Request, res: Response) {
 export async function updateDutyManagerInternal(req: Request, res: Response) {
     try{
         const id = req.params.postId;
-        const updateDutyManager: dutyManager = req.body;
+        // const updateDutyManager: dutyManager = req.body;
+        // const conn = await MySQL.getInstance().getConnect();
+        // await conn.query('UPDATE DutyManager set ? WHERE DNIManager = ?;', [updateDutyManager, id]);
+        const updateDutyManager: dutyManager = req.body.General;
+        const updateInternal: dutyManager = req.body.Specific;
         const conn = await MySQL.getInstance().getConnect();
         await conn.query('UPDATE DutyManager set ? WHERE DNIManager = ?;', [updateDutyManager, id]);
+        await conn.query('UPDATE InternalPerson set ? WHERE DNIMANAGER = ?;', [updateInternal, id]);
         res.json({
             message: 'Duty Manager Updated'
         });

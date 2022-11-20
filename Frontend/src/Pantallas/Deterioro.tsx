@@ -57,24 +57,23 @@ function Deterioro (): JSX.Element {
 
     function Modify(){
       let type = Number(selectedOption);
-      if( form.code.trim() !== '' && form.description.trim() !== ''){
+      if(form.description.trim() !== ''){
         controller.modifyPolaige(form.code, form.description, type);
         setFormValues('','', selectedOption);
-        alert("Deterioro agregado exitosamente")
+        alert("Deterioro actulizado exitosamente")
       }else{
-        alert('No deben existir espacios en blanco');
+        alert('No deben existir espacios en blanco'); 
       }
     }
 
     function Drop(){
       let deleteS = controller.deleteSpolaige(form.code);
-      // if (deleteS) {
-      //   setFormValues('','', selectedOption);
-      //   alert("Area eliminada exitosamente")
-      // } else {
-      //   alert("No se ha encontado area con ese codigo")
-      // }
-      alert("Eliminado exitosamente")      
+      if (deleteS) {
+        setFormValues('','', selectedOption);
+        alert("Area eliminada exitosamente")
+      } else {
+        alert("No se ha encontado area con ese codigo")
+      }  
     }
 
     function Search(){

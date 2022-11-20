@@ -50,18 +50,27 @@ class AdminDutyManager{
     }
 
     public modify(dutyManager: DutyManager): boolean{
-        this._dutyManagers.forEach((item, index, arr) => {
-            if (item.id === dutyManager.id){
-                arr[index] = dutyManager;
-            }
-        });
-        return true;
+        let updateDuty = this.isDutyManager(dutyManager);
+        if(!updateDuty){
+            this._dutyManagers.forEach((item, index, arr) => {
+                if (item.id === dutyManager.id){
+                    arr[index] = dutyManager;
+                }
+            });
+            this.daoDutyManager.updateDutyManager(dutyManager);
+            return true;
+        }
+        return false;
     }
 
     public delete(id: number):boolean{
         let dutyManager = this.search(id);
-        this._dutyManagers = this._dutyManagers.filter(item => item !== dutyManager);
-        return true;
+        if(dutyManager != null){
+            this.daoDutyManager.dropDutyManager(dutyManager);
+            this._dutyManagers = this._dutyManagers.filter(item => item !== dutyManager);
+            return true;
+        }
+        return false;
     }
 }
 
@@ -166,12 +175,22 @@ class DAODutyManager{
         }
     }
 
-    public async dropDutyManager(){
-
+    public async dropDutyManager(dutyManager: DutyManager){
+        if (dutyManager.constructor.name == "InternalPerson"){
+            await axios.delete(this.url + "/internal" + `/${dutyManager.id}`);
+        }else{
+            await axios.delete(this.url + "/legal"+ `/${dutyManager.id}`);
+        }
     }
 
-    public async updateDutyManager(){
-        
+    public async updateDutyManager(dutyManager: DutyManager){
+        if (dutyManager.constructor.name == "InternalPerson"){
+            const updateInternal = this.internalTOBD(dutyManager);
+            await axios.put(this.url + "/internal" + `/${dutyManager.id}`, updateInternal);
+        }else{
+            const updateLegal = this.externalTOBD(dutyManager);
+            await axios.put(this.url + "/legal" + `/${dutyManager.id}`, updateLegal);
+        }
     }
 
     
