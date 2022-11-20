@@ -148,14 +148,13 @@ export async function updateDutyManagerLegal(req: Request, res: Response) {
 }
 
 // inspeccion x INTERNAL person 
-// Son todos
+// Son todos -- listo
+
 export async function getDutyManagerInternalXinspection (req: Request, res: Response) {
     try{
         const id = req.params.postId;
         const conn = await MySQL.getInstance().getConnect();
-        const posts = await conn.query('SELECT Inspection.idInspection, State.description, DutyManager.name FROM Inspection INNER JOIN State ON Inspection.state= State.id INNER JOIN  DutyManager on Inspection.dutyManager= DutyManager.DNIManager '+
-        'INNER JOIN InternalPerson on DutyManager.DNIManager= ? ',[id]+
-        'ORDER BY State.id, DutyManager.DNIManager');
+        const posts = await conn.query('SELECT Inspection.idInspection, State.description, DutyManager.name FROM Inspection INNER JOIN State ON Inspection.state= State.id INNER JOIN  DutyManager on Inspection.dutyManager= DutyManager.DNIManager  INNER JOIN InternalPerson on  InternalPerson.DNIMANAGER= DutyManager.DNIManager;');
         res.json(posts[0]);
     }catch(e){
         console.log(e);

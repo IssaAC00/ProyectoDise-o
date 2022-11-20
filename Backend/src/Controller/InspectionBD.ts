@@ -165,7 +165,7 @@ export async function getInspectionXState(req: Request, res: Response) {
 }
 
 //RETORNA LAS INSPECCIONES EN ORDEN POR EL ESTADO Y EL DUTY MANAGER
-// no se si sirve
+
 export async function getInspectionXStateXDuty(req: Request, res: Response) {
     try{
         const id = req.params.postId;
@@ -193,3 +193,9 @@ export async function getInspectionXDate(req: Request, res: Response) {
         console.log(e);
     }
 }
+
+
+
+//select Area.idArea,Area.description,Area.ubication, Area.image 
+//INNER JOIN inspeccionArea on inspeccionArea.inspeccion_id= Inspection.idInspection 
+//INNER JOIN Area on inspeccionArea.idArea=Area.idArea where Inspection.dutyManager=2;
