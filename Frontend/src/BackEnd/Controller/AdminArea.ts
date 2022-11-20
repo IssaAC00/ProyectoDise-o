@@ -27,9 +27,17 @@ class AdminArea{
         return null!;
     }
 
+    private isArea(area: Area): boolean{
+        return this.search(area.id) == null;
+    }
+
     public add(area: Area):boolean{
-        this._areas.push(area);
-        return true;
+        if(this.isArea(area)){
+            this._areas.push(area);
+            this.daoArea.createArea(area);
+            return true;
+        }
+        return false;
     }
 
     public see(id: string): Area{
@@ -42,18 +50,27 @@ class AdminArea{
     }
 
     public modify(area: Area): boolean{
-        this._areas.forEach((item, index, arr) => {
-            if (item.id === area.id){
-                arr[index] = area;
-            }
-        });
-        return true;
+        let areaUpdate = this.isArea(area);
+        if(!areaUpdate){
+            this._areas.forEach((item, index, arr) => {
+                if (item.id === area.id){
+                    arr[index] = area;
+                }
+            });
+            this.daoArea.updateArea(area);
+            return true;
+        }
+        return false;
     }
 
     public delete(id: string):boolean{
         let area = this.search(id);
-        this._areas = this._areas.filter(item => item !== area);
-        return true;
+        if(area != null){
+            this.daoArea.dropArea(area);
+            this._areas = this._areas.filter(item => item !== area);
+            return true;
+        }
+        return false;
     }
 }
 
@@ -78,12 +95,28 @@ class DAOArea{
         return result;
     }
 
-    public async dropArea(){
-
+    private objectTOBD(area: Area){
+        return {
+            idArea: area.id,
+            description: area.description,
+            image: area.images[0],
+            ubication: area.location,
+            floorA: area.floor
+        }
     }
 
-    public async updateArea(){
-        
+    public async createArea(area: Area){
+        const areaDB = this.objectTOBD(area);
+        await axios.post(this.url, areaDB);
+    }
+
+    public async dropArea(area: Area){
+        await axios.delete(this.url + `/${area.id}`);
+    }
+
+    public async updateArea(area: Area){
+        let updateArea = this.objectTOBD(area);
+        await axios.put(this.url + `/${area.id}`, updateArea);
     }
 
     

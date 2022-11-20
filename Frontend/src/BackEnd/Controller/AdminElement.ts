@@ -28,9 +28,19 @@ class AdminElement{
         return null!;
     }
 
+    private isElement(element: Element): boolean{
+        return this.search(element.id) == null;
+    }
+
     public add(element: Element):boolean{
-        this._elements.push(element);
-        return true;
+        if(this.isElement(element)){
+            this._elements.push(element);
+            this.daoElement.createElement(element);
+            console.log("Se ha agregado element")
+            return true;
+        }
+        console.log("No se ha agregado elemento");
+        return false;
     }
 
     public see(id: string): Element{
@@ -44,12 +54,18 @@ class AdminElement{
     }
 
     public modify(element: Element):boolean{
-        this._elements.forEach((item, index, arr) => {
-            if (item.id === element.id){
-                arr[index] = element;
-            }
-        });
-        return true;
+        let elementUpdate = this.isElement(element);
+        console.log(elementUpdate);
+        if(!elementUpdate){
+            this._elements.forEach((item, index, arr) => {
+                if (item.id === element.id){
+                    arr[index] = element;
+                }
+            });
+            this.daoElement.updateElement(element);
+            return true;
+        }
+        return false;
     }
 
     public delete(id: string):boolean{
@@ -96,14 +112,30 @@ class DAOElement{
     public set adminArea(adminArea : AdminArea) {
         this._adminArea = adminArea;
     }
-    
 
-    public async dropElement(){
-
+    private objectTOBD(element: Element){
+        return {
+            idElement: element.id,
+            description: element.description,
+            image: element.images[0],
+            ubication: element.location,
+            areaID: element.area.id
+        }
     }
 
-    public async updateElement(){
-        
+    public async createElement(element: Element){
+        const elementDB = this.objectTOBD(element);
+        await axios.post(this.url, elementDB);
+    }
+    
+
+    public async dropElement(element: Element){
+        await axios.delete(this.url + `/${element.id}`)
+    }
+
+    public async updateElement(element: Element){
+        let updateElement =  this.objectTOBD(element);
+        await axios.put(this.url + `/${element.id}`, updateElement);
     }
 
     

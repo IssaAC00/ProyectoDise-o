@@ -93,7 +93,6 @@ class DAOSpolaige{
 
     public async createSpolaige(spolaige: Spolaige){
         const spolaigeDB = this.objectTOBD(spolaige);
-        console.log(spolaigeDB)
         await axios.post(this.url, spolaigeDB);
     }
 
