@@ -25,9 +25,17 @@ class AdminUser{
         return null!;
     }
 
+    public isUser(user: User){
+        return this.search(user.email) == null;
+    }
+
     public add(user: User):boolean{
-        this._users.push(user);
-        return true;
+        if(this.isUser(user)){
+            this._users.push(user);
+            this.daoUser.createUser(user);
+            return true;
+        }
+        return false;
     }
 
     public see(email: string): User{
@@ -70,6 +78,19 @@ class DAOUser{
             console.log(error);
         })
         return result;
+    }
+
+    private objectTOBD(user: User){
+        return {
+            userMail: user.email,
+            userPassword: user.password,
+            rol: user.rol
+        }
+    }
+
+    public async createUser(user: User){
+        let newUser = this.objectTOBD(user);
+        await axios.post(this.url, newUser);
     }
 
     public async dropUser(){

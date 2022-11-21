@@ -74,7 +74,7 @@ function SuperUsuario(): JSX.Element{
             email: nombre,
             password: form.password
         };
-
+        // Strategy
         e.preventDefault();
         console.log(templateParams)
         console.log(form)

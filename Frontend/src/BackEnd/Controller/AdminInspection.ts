@@ -1,4 +1,4 @@
-import { FactoryInspections, Inspection, InspectionArea, InspectionElement, State} from '../Model/Inspection'
+import { FactoryInspections, Inspection, InspectionArea, InspectionElement, State, Form, Register} from '../Model/Inspection'
 import axios from "axios";
 import { AdminDutyManager } from './AdminDutyManger';
 import { AdminArea } from './AdminArea';
@@ -12,6 +12,26 @@ class AdminInspection{
     constructor(){
         this._inspections = [];
         this.daoInspection = new DAOInspection();
+    }
+
+    public isForm(inspection: Inspection){
+    }
+
+    public createForm(idInspection: number): boolean{
+        let inspectForm =  this.search(idInspection);
+        if(inspectForm != null && inspectForm.PDF == null){
+            inspectForm.PDF = new Form();
+            return true;
+        }
+        return false;
+    }
+
+    public addRegister(idInspection: number, register: Register): boolean{
+        let inspectForm = this.search(idInspection);
+        if(inspectForm != null){
+            (inspectForm.PDF as Form).addRegister(register);
+        }
+        return false;
     }
 
     public async load(adminDutyManager: AdminDutyManager, adminArea: AdminArea, adminElement: AdminElement){
@@ -173,12 +193,22 @@ class DAOInspection{
         }
     }
 
-    public async dropDutyManager(){
-
+    public async dropDutyManager(inspection: Inspection){
+        if (inspection.constructor.name == "InspectionArea"){
+            await axios.delete(this.url + "/Area");
+        }else{
+            await axios.delete(this.url + "/Element");
+        }
     }
 
-    public async updateDutyManager(){
-        
+    public async updateDutyManager(inspection: Inspection){
+        if (inspection.constructor.name == "InspectionArea"){
+            const updateInspArea = this.iAreaTOBD(inspection);
+            await axios.put(this.url + "/Area", updateInspArea);
+        }else{
+            const updateInspElement = this.iElementTOBD(inspection);
+            await axios.put(this.url + "/Element", updateInspElement);
+        }
     }
 
     

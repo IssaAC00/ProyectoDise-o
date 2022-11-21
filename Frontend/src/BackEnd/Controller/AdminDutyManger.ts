@@ -1,13 +1,16 @@
 import { DutyManager, ExternalPerson, FactoryDutyManager, LegalPerson, TypeWork } from '../Model/DutyManager'
 import axios from "axios";
+import { Resquest } from '../Model/User';
 
 class AdminDutyManager{
     private _dutyManagers: DutyManager[] = [];
     private daoDutyManager: DAODutyManager;
+    private requests: Resquest[];
 
     constructor(){
         this._dutyManagers = [];
         this.daoDutyManager =  new DAODutyManager();
+        this.requests = [];
     }
 
     public async load(){
@@ -24,6 +27,28 @@ class AdminDutyManager{
             }
         }
         return null!;
+    }
+
+    private searchRequest(request: Resquest){
+        for(const requestList of this.requests){
+            if (requestList == request) {
+                return requestList;
+            }
+        }
+        return null!;
+    }
+
+    public registerRequest(request: Resquest){
+        this.requests.push(request);
+    }
+
+    public acceptRequest(){
+        let voidList = this.requests.length;
+        if(voidList != 0){
+            this.requests.forEach(data =>{
+                data.processRequest();
+            });
+        }
     }
 
     private isDutyManager(duty: DutyManager){
