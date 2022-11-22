@@ -215,11 +215,9 @@ export async function cantidadInspeccionXEstado(req: Request, res: Response) {
         const id = req.params.postId;
         //const a : any;
         const conn = await MySQL.getInstance().getConnect();
-        await conn.query('SELECT COUNT(state), state FROM Inspection GROUP BY state HAVING COUNT(state) > 0;');
+        const query = await conn.query('SELECT COUNT(state) as count, state FROM Inspection GROUP BY state HAVING COUNT(state) > 0;');
         
-        res.json({
-            message: 'Inspection deleted'
-        });
+        res.json(query);
     }catch(e){
         console.log(e);
     }

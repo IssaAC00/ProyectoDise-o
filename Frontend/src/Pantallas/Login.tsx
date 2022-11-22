@@ -71,7 +71,7 @@ function Login (): JSX.Element {
         //     swal("Usuario no encontrado","" ,"warning");
         // } 
         // handleSubmit();
-        navigate('/DirectorOperativo');
+        navigate('/Area');
       };
 
       const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {

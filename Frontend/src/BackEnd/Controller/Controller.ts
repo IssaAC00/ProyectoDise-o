@@ -138,6 +138,10 @@ class Controller{
         let newRegister = new Register(spolaige, img, observation, description);
         this.adminInspection.addRegister(idInspection, newRegister);
     }
+
+    public async inspectionxState(){
+        return this.adminInspection.queryIxS().then(data => console.log(data));
+    }
     
     public seeInspection(idInspection: number): Inspection{
         return this.adminInspection.search(idInspection);
