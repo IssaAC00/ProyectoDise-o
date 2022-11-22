@@ -38,24 +38,20 @@ enum Rol{
 }
 
 class Resquest{
-    private _email: string;
-    private _rol: Rol;
-    private _state: boolean;
+    private _user: User;
     private _processMail: ProcessMail;
 
-    constructor(email: string, rol: Rol, state: boolean, processMail: ProcessMail){
-        this._email = email;
-        this._rol = rol;
-        this._state = state;
+    constructor(user: User, processMail: ProcessMail){
+        this._user = user;
         this._processMail = processMail;
     }
 
     public setProcessMail(processMail: ProcessMail){
-
+        this._processMail = processMail;
     }
 
     public processRequest(){
-        
+        this._processMail.sendMail(this._user);
     }
 }
 
@@ -87,4 +83,4 @@ class MailSolicitudFallida implements ProcessMail{
     }
 }
 
-export { Rol, User };
+export { Rol, User, Resquest, ProcessMail, MailAdministrator, MailDirector, MailOperator, MailSolicitudFallida};

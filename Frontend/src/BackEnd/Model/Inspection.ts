@@ -191,26 +191,50 @@ class UploadPDF implements PDF{
 class Form implements PDF{
     private _register: Register[] = [];
 
-    attachPDF(): String {
+    constructor(){
+    }
+
+    public attachPDF(): String {
         return '';
+    }
+
+    public addRegister(register: Register){
+        this._register.push(register);
     }
 }
 
 class Register{
-    private _id: number;
     private _spolaige: Spolaige;
     private _image: string;
     private _observation: string;
-    private _description: String;
+    private _description: string;
 
-    constructor(id: number, spolaige: Spolaige, image: string, observation: string, description: string){
-        this._id = id;
+    constructor(spolaige: Spolaige, image: string, observation: string, description: string){
         this._spolaige = spolaige;
         this._image = image;
         this._observation = observation;
         this._description = description;
     }
+
+    public get spolaige() : Spolaige {
+        return this._spolaige;
+    }
+
+    
+    public get image() : string {
+        return this._image;
+    }
+
+    
+    public get observation() : string {
+        return this._observation;
+    }
+
+    
+    public get description() : string {
+        return this._description;
+    }
 }
 
 export type{PDF};
-export { Inspection, State, InspectionArea, InspectionElement, FactoryInspections};
+export { Inspection, State, InspectionArea, InspectionElement, FactoryInspections, Form, Register};
