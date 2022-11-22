@@ -215,7 +215,7 @@ export async function cantidadInspeccionXEstado(req: Request, res: Response) {
         const id = req.params.postId;
         //const a : any;
         const conn = await MySQL.getInstance().getConnect();
-        await conn.query('select count(*) from Inspection where Inspection.state= ?', [id]);
+        await conn.query('SELECT COUNT(state), state FROM Inspection GROUP BY state HAVING COUNT(state) > 0;');
         
         res.json({
             message: 'Inspection deleted'
@@ -225,7 +225,12 @@ export async function cantidadInspeccionXEstado(req: Request, res: Response) {
     }
 }
 
-//const Estado1= await conn.query('select count(*) from Inspection where Inspection.state= 0');
+
+
+
+
+
+
 
 //select Area.idArea,Area.description,Area.ubication, Area.image 
 //INNER JOIN inspeccionArea on inspeccionArea.inspeccion_id= Inspection.idInspection 

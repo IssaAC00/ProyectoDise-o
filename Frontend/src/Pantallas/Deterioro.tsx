@@ -7,6 +7,11 @@ import { controller } from '../BackEnd/Controller/Controller'
 import { Spolaige } from '../BackEnd/Model/Spolaige'
 import { NavLink, useNavigate } from "react-router-dom"
 
+
+
+import  GraficaEncargado  from "../componentes/SegmentChartGrandient"
+
+
 function Deterioro (): JSX.Element {
 
 
@@ -122,9 +127,9 @@ function Deterioro (): JSX.Element {
             <button  className='buttonS' onClick= {Register} style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar Deterioro</button>
             <button  className='buttonS' onClick= {Drop} style = {{position: 'absolute', top: 860, left: 1650, fontSize: 23}}>Eliminar Deterioro</button>
 
-    
+            <GraficaEncargado></GraficaEncargado> // esto
             
-            
+
             
         </div>
 
