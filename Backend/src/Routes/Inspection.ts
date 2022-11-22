@@ -1,12 +1,12 @@
 import { Router } from 'express'
 import { getInspectionsArea, getInspectionsElement, createInspectionArea, createInspectionElement, 
         getInspectionArea,getInspectionElement, deleteInspectionArea, deleteInspectionElement,
-        updateInspectionArea, updateInspectionElement, getInspectionXState} from '../Controller/InspectionBD'
+        updateInspectionArea, updateInspectionElement, cantidadInspeccionXEstado} from '../Controller/InspectionBD'
 
 const router = Router();
 
 router.route('/QueryState')
-    .get(getInspectionXState);
+    .get(cantidadInspeccionXEstado);
 
 router.route('/Area')
     .get(getInspectionsArea)

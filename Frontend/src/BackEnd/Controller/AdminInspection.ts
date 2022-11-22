@@ -91,6 +91,10 @@ class AdminInspection{
         this._inspections = this._inspections.filter(item => item !== inspection);
         return true;
     }
+    
+    public async queryIxS(){
+        return this.daoInspection.queryInspectionXState();
+    }
 }
 
 class DAOInspection{
@@ -209,6 +213,14 @@ class DAOInspection{
             const updateInspElement = this.iElementTOBD(inspection);
             await axios.put(this.url + "/Element", updateInspElement);
         }
+    }
+
+    public async queryInspectionXState(){
+        let result = await axios.get(this.url+"/QueryState")
+        .then(query => {
+            return query.data[0].map((data: any) =>({count: data.count, state: data.state}));
+        });
+        return result;
     }
 
     
