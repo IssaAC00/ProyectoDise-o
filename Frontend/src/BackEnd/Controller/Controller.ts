@@ -140,7 +140,7 @@ class Controller{
     }
 
     public async inspectionxState(){
-        return this.adminInspection.queryIxS().then(data => console.log(data));
+        return this.adminInspection.queryIxS();
     }
     
     public seeInspection(idInspection: number): Inspection{

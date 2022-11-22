@@ -63,6 +63,22 @@ export default function LineChart() {
           backgroundColor: "rgba(127, 255, 0)",
           pointRadius: 6,
         },
+        {
+          label: "Mis datos (3)",
+          tension: 0.3,
+          data: scores2,
+          borderColor: "chocolate",
+          backgroundColor: "rgba(210, 105, 30)",
+          pointRadius: 6,
+        },
+        {
+          label: "Mis datos (4)",
+          tension: 0.3,
+          data: scores2,
+          borderColor: "darkgray",
+          backgroundColor: "rgba(169, 169, 169)",
+          pointRadius: 6,
+        },
       ],
       labels,
     };
