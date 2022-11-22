@@ -1,6 +1,5 @@
 import { User, Resquest} from '../Model/User'
 import axios from "axios";
-import emailjs from '@emailjs/browser';
 
 class AdminUser{
     private _users: User[] = [];
@@ -64,12 +63,29 @@ class AdminUser{
 
     public addRequest(request: Resquest):boolean{
         if(this.isUser(request.user) && this.isRequest(request)){
-            console.log("HOla")
             this.requets.push(request);
             this.daoUser.createRequest(request);
             return true;
         }
         return false;
+    }
+
+    public stringRequest(){
+        let chain = '';
+        for(const req of this.requets){
+            chain += `email: ${req.user.email}  rol: ${req.user.rol.toString()}\n`;
+
+        }
+        return chain;
+    }
+
+    public processRequests(){
+        for(const req of this.requets){
+            req.processRequest();
+            this.daoUser.updateUser(req.user);
+            this._users.push(req.user);
+        }
+        this.requets = [];
     }
 
     public see(email: string): User{
@@ -116,11 +132,11 @@ class DAOUser{
     }
 
     public async getRequest() {
-        let result = await axios.get(this.url)
+        let result = await axios.get(this.url + "/request")
         .then(response => {
             this._readyRequest = false;
             return response.data[0].map((userDB: any) => (
-                new User(userDB.userMail, userDB.userPassword, userDB.rol)
+                new Resquest(new User(userDB.userMail, userDB.userPassword, userDB.rol))
             ));
         })
         .catch(error => {
@@ -156,12 +172,15 @@ class DAOUser{
         let newRequest = this.requetsTOBD(request);
         await axios.post(this.url + "/request", newRequest);
     }
-    public async dropUser(){
 
+    
+    public async dropUser(){
+        
     }
 
-    public async updateUser(){
-        
+    public async updateUser(user: User){
+        let newUser = this.objectTOBD(user);
+        await axios.put(this.url + `/${user.email}`, newUser);
     }
 
     

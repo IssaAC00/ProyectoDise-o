@@ -87,7 +87,7 @@ class MailAdministrator implements ProcessMail{
         console.log(templateParams)
         emailjs.send(
             'service_k8aso0l', 
-            'template_4cdby7c', 
+            'template_r7xp99n', 
             templateParams,
             'TRjrmP7S5sC7IoxwD'
             ). then((res: any) => {
@@ -109,7 +109,7 @@ class MailOperator implements ProcessMail{
         console.log(templateParams)
         emailjs.send(
             'service_k8aso0l', 
-            'template_4cdby7c', 
+            'template_r7xp99n', 
             templateParams,
             'TRjrmP7S5sC7IoxwD'
             ). then((res: any) => {
@@ -131,7 +131,7 @@ class MailDirector implements ProcessMail{
         console.log(templateParams)
         emailjs.send(
             'service_k8aso0l', 
-            'template_4cdby7c', 
+            'template_r7xp99n', 
             templateParams,
             'TRjrmP7S5sC7IoxwD'
             ). then((res: any) => {
@@ -155,7 +155,7 @@ class MailSolicitudFallida implements ProcessMail{
         console.log(templateParams)
         emailjs.send(
             'service_k8aso0l', 
-            'template_4cdby7c', 
+            'template_r7xp99n', 
             templateParams,
             'TRjrmP7S5sC7IoxwD'
             ). then((res: any) => {

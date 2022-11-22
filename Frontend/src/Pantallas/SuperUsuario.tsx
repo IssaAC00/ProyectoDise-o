@@ -14,6 +14,7 @@ function SuperUsuario(): JSX.Element{
     const [selectedOption, setSelectedOption] = useState<String>();
     const [input, setSelecteInput] = useState<String>();
     const navigate = useNavigate(); 
+    const [text, setText] = useState(controller.stringRequest());
     
     const formEmail = useRef(null);
 
@@ -67,11 +68,10 @@ function SuperUsuario(): JSX.Element{
     }
 
     function Procesar (){
-
-
+        controller.processRequest();
+        setText('');
     }
     
-
     function sendEmail(e: any) {
 
         const nombre = form.email;
@@ -118,7 +118,7 @@ function SuperUsuario(): JSX.Element{
             </div>
             <div className='login-container2'>
             <label style = {{color: 'white', position: 'absolute', top: 61, left: 65, fontSize: 32, fontWeight: 'bold'}}>Solicitudes Pendientes</label>
-            <input type="text"style = {{position: 'absolute', fontSize: 23, fontWeight: 'bold' , height: 200}} />
+            <input type="text" value={text} style = {{position: 'absolute', fontSize: 23, fontWeight: 'bold' , height: 200}} />
             <button  className='buttonS' onClick = {Procesar}style = {{position: 'absolute', fontSize: 23,  top: 400, left: 65,}}>Procesar</button>
             </div>
 

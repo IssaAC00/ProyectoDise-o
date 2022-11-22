@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import  Navbar  from "../componentes/TopBarSuperUsuario"
 import fondo from '../imagenes/fondo.png';
 import './Login.css'
 import {  useNavigate } from "react-router-dom";
 import imagenM from '../imagenes/img_2827_002.jpg';
 import {controller} from '../BackEnd/Controller/Controller'
+
+
 
 function Registrarse (): JSX.Element {
     const [selectedOption, setSelectedOption] = useState<string>('0');
@@ -32,10 +34,11 @@ function Registrarse (): JSX.Element {
 
       function registrarse (){
         controller.createRequest(form.email, form.password, Number(selectedOption));
-        form.email = "";
-        form.password = "";
+        setForm({email : "", password : ""});
       }
-
+    
+      useEffect(() => {
+      }, []);
       
     const rol = [
         { label: "Administrador", value: "0" },
