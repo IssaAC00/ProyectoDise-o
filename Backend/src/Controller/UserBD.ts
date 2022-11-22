@@ -7,7 +7,18 @@ import { User } from '../interface/Post'
 export async function getUsers(_req: Request, res: Response){
     try {
         const conn = await MySQL.getInstance().getConnect();
-        const user = await conn.query('SELECT * FROM Usuario');
+        const user = await conn.query('SELECT * FROM Usuario where request = true');
+        res.json(user);
+    }
+    catch (e) {
+        console.log(e)
+    }
+}
+
+export async function getRequests(_req: Request, res: Response){
+    try {
+        const conn = await MySQL.getInstance().getConnect();
+        const user = await conn.query('SELECT * FROM Usuario where request = false');
         res.json(user);
     }
     catch (e) {
@@ -16,6 +27,20 @@ export async function getUsers(_req: Request, res: Response){
 }
 
 export async function createUser(req: Request, res: Response) {
+    try{
+        const newRequest: User = req.body;
+        const conn = MySQL.getInstance().getConnect();
+        console.log(newRequest);
+        await conn.query('INSERT INTO Usuario SET ?', [newRequest]);
+        res.json({
+            message: 'New User Created'
+        });
+    }catch(e){
+        console.log(e);
+    }
+}
+
+export async function createRequest(req: Request, res: Response) {
     try{
         const newUser: User = req.body;
         const conn = MySQL.getInstance().getConnect();

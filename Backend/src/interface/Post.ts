@@ -1,7 +1,7 @@
 export interface User{
     userMail: string;
     userPassword: string;
-    
+    request: boolean;
     rol: number;
 }
 

@@ -46,7 +46,7 @@ function Login (): JSX.Element {
 
     function nextPage(user: User){
        	switch (user.rol) {
-          case Rol.Adminitrador:
+          case Rol.Administrador:
               navigate('/Area');
               break;
           case Rol.Super:

@@ -8,7 +8,7 @@ import { Spolaige, TypeSpolaige } from '../Model/Spolaige'
 import { Area, Floor } from '../Model/Area'
 import { Element } from '../Model/Element'
 import { Inspection, FactoryInspections ,State, InspectionArea, PDF, Register } from '../Model/Inspection'
-import { Rol, User } from '../Model/User'
+import { Resquest, Rol, User } from '../Model/User'
 import { DutyManager, TypeWork, FactoryDutyManager} from '../Model/DutyManager'
 
 class Controller{
@@ -192,6 +192,11 @@ class Controller{
 
     public deleteUser(email: string){
         this.adminUser.delete(email);
+    }
+
+    public createRequest(email: string, pass: string, rol: Rol){
+        let newRequest =  new Resquest(new User(email, pass, rol));
+        this.adminUser.addRequest(newRequest);
     }
 
     public login(email: string, password: string): boolean{

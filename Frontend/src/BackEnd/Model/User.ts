@@ -1,3 +1,5 @@
+import emailjs from '@emailjs/browser';
+
 class User{
     private _email: string;
     private _password: string;
@@ -31,7 +33,7 @@ class User{
 }
 
 enum Rol{
-    Adminitrador,
+    Administrador,
     Super,
     Operativo,
     Direccion
@@ -41,18 +43,32 @@ class Resquest{
     private _user: User;
     private _processMail: ProcessMail;
 
-    constructor(user: User, processMail: ProcessMail){
+    constructor(user: User){
         this._user = user;
-        this._processMail = processMail;
+        this._processMail = this.strategyProcessMail();
     }
 
-    public setProcessMail(processMail: ProcessMail){
-        this._processMail = processMail;
+    private strategyProcessMail(){
+        if(this._user.rol == Rol.Administrador){
+            return new MailAdministrator();
+        }else if (this._user.rol == Rol.Operativo){
+            return new MailOperator();
+        }else if (this._user.rol == Rol.Direccion){
+            return new MailDirector();
+        }else {
+            return new MailSolicitudFallida();
+        }
     }
 
     public processRequest(){
         this._processMail.sendMail(this._user);
     }
+
+    
+    public get user() : User {
+        return this._user;
+    }
+    
 }
 
 interface ProcessMail{
@@ -61,24 +77,90 @@ interface ProcessMail{
 
 class MailAdministrator implements ProcessMail{
     sendMail(user: User): boolean {
+        var templateParams = {
+            email: user.email,
+            password: user.password,
+            rol: user.rol.toString(),
+            responsabilidades: "Crear, eliminar y modificar area, elementos, deterioros, encargados y inpecciones.\nConsultas de encargados y inspecciones en específico, listados areas, elementos y deterioros y gráficos inspecciones"
+        };
+        // Strategy
+        console.log(templateParams)
+        emailjs.send(
+            'service_k8aso0l', 
+            'template_4cdby7c', 
+            templateParams,
+            'TRjrmP7S5sC7IoxwD'
+            ). then((res: any) => {
+                console.log(res.text);
+        }).catch((err: any) =>console.log(err));
         return true;
     }
 }
 
 class MailOperator implements ProcessMail{
     sendMail(user: User): boolean {
+        var templateParams = {
+            email: user.email,
+            password: user.password,
+            rol: user.rol.toString(),
+            responsabilidades: "Consultas de encargados y inspecciones en específicos, ademas de que puede generar formulario de sus inspecciones"
+        };
+        // Strategy
+        console.log(templateParams)
+        emailjs.send(
+            'service_k8aso0l', 
+            'template_4cdby7c', 
+            templateParams,
+            'TRjrmP7S5sC7IoxwD'
+            ). then((res: any) => {
+                console.log(res.text);
+        }).catch((err: any) =>console.log(err));
         return true;
     }
 }
 
 class MailDirector implements ProcessMail{
     sendMail(user: User): boolean {
+        var templateParams = {
+            email: user.email,
+            password: user.password,
+            rol: user.rol.toString(),
+            responsabilidades: "Consultas de encargados y inspecciones en específico, listados areas, elementos y deterioros y gráficos inspecciones"
+        };
+        // Strategy
+        console.log(templateParams)
+        emailjs.send(
+            'service_k8aso0l', 
+            'template_4cdby7c', 
+            templateParams,
+            'TRjrmP7S5sC7IoxwD'
+            ). then((res: any) => {
+                console.log(res.text);
+        }).catch((err: any) =>console.log(err));
         return true;
+
     }
 }
 
+
+
 class MailSolicitudFallida implements ProcessMail{
     sendMail(user: User): boolean {
+        var templateParams = {
+            email: user.email,
+            password: user.password,
+            rol: user.rol.toString(),
+            responsabilidades: ""
+        };
+        console.log(templateParams)
+        emailjs.send(
+            'service_k8aso0l', 
+            'template_4cdby7c', 
+            templateParams,
+            'TRjrmP7S5sC7IoxwD'
+            ). then((res: any) => {
+                console.log(res.text);
+        }).catch((err: any) =>console.log(err));
         return true;
     }
 }
