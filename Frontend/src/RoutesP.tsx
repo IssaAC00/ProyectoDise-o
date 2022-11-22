@@ -12,6 +12,7 @@ import TareasEncargado from './Pantallas/TareasEncargado';
 import PlanInspeccion from './Pantallas/PlanInspeccion';
 import Elementos from './Pantallas/Elementos';
 import UsuarioOperativo from './Pantallas/UsuarioOperativo';
+import Directivo from './Pantallas/DirectorOperativo';
 
 
 export default function RoutesP() {
@@ -33,6 +34,10 @@ export default function RoutesP() {
                 <Route path="/Consultas" element={<Consultas />} />
                 <Route path="/Elementos" element={<Elementos />} />
                 <Route path="/UsuarioOperativo" element={<UsuarioOperativo />} />
+
+
+
+                <Route path="/DirectorOperativo" element={<Directivo />} />
 
                 
               

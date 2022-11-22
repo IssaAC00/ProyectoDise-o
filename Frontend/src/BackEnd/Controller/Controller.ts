@@ -7,7 +7,7 @@ import { AdminUser } from './AdminUser'
 import { Spolaige, TypeSpolaige } from '../Model/Spolaige'
 import { Area, Floor } from '../Model/Area'
 import { Element } from '../Model/Element'
-import { Inspection, FactoryInspections ,State, InspectionArea, PDF } from '../Model/Inspection'
+import { Inspection, FactoryInspections ,State, InspectionArea, PDF, Register } from '../Model/Inspection'
 import { Rol, User } from '../Model/User'
 import { DutyManager, TypeWork, FactoryDutyManager} from '../Model/DutyManager'
 
@@ -127,6 +127,16 @@ class Controller{
         let newInspection = factoryInspection.getInspection(optionInspection, id, iDate, eDate, dDate, dutyManager,
                                                             PDF, result, state, objectInspect);
         this.adminInspection.add(newInspection);
+    }
+
+    public createFormInspection(idInspection: number){
+        this.adminInspection.createForm(idInspection);
+    }
+
+    public createRegisterForm(idInspection: number, idSpolaige: string, img: string, observation: string, description: string){
+        let spolaige = this.adminSpolaige.see(idSpolaige);
+        let newRegister = new Register(spolaige, img, observation, description);
+        this.adminInspection.addRegister(idInspection, newRegister);
     }
     
     public seeInspection(idInspection: number): Inspection{
