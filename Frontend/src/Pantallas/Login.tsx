@@ -38,6 +38,7 @@ function Login (): JSX.Element {
 
     useEffect(() => {
         controller.loadUsers();
+        controller.loadRequest();
     }, []);
 
 
@@ -46,12 +47,18 @@ function Login (): JSX.Element {
 
     function nextPage(user: User){
        	switch (user.rol) {
-          case Rol.Administrador:
-              navigate('/Area');
-              break;
-          case Rol.Super:
-              navigate('/SuperUsuario');
-              break;
+            case Rol.Administrador:
+                navigate('/Area');
+                break;
+            case Rol.Super:
+                navigate('/SuperUsuario');
+                break;
+            case Rol.Operativo:
+                navigate('/UsuarioOperativo');
+                break;
+            case Rol.Direccion:
+                navigate("/DirectorOperativo");
+                break;
           default:
               break;
         }
@@ -59,19 +66,18 @@ function Login (): JSX.Element {
     }
     
     function Ingresar(){
-        // let pass = controller.login(form.email, form.password);
-        // if(pass){
+        let pass = controller.login(form.email, form.password);
+        if(pass){
             
-        //     let user = controller.seeUser(form.email)
-        //     swal("Loegueado exitosamente","" ,"success");
-        //     if (user != null){
-        //         nextPage(user);
-        //     }
-        // }else{
-        //     swal("Usuario no encontrado","" ,"warning");
-        // } 
-        // handleSubmit();
-        navigate('/Area');
+            let user = controller.seeUser(form.email)
+            swal("Loegueado exitosamente","" ,"success");
+            if (user != null){
+                nextPage(user);
+            }
+        }else{
+            swal("Usuario no encontrado","" ,"warning");
+        } 
+        handleSubmit();
       };
 
       const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {

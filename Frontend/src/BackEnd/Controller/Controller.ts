@@ -169,6 +169,9 @@ class Controller{
     }
 
     //User
+    public loadRequest(){
+        this.adminUser.loadRequest();
+    }
 
     public loadUsers(){
         this.adminUser.load();
@@ -197,6 +200,14 @@ class Controller{
     public createRequest(email: string, pass: string, rol: Rol){
         let newRequest =  new Resquest(new User(email, pass, rol));
         this.adminUser.addRequest(newRequest);
+    }
+
+    public stringRequest(){
+        return this.adminUser.stringRequest();
+    }
+
+    public processRequest(){
+        this.adminUser.processRequests();
     }
 
     public login(email: string, password: string): boolean{
