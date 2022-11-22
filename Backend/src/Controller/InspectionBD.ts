@@ -194,7 +194,38 @@ export async function getInspectionXDate(req: Request, res: Response) {
     }
 }
 
+// devuelve la cantidad de inspecciones x persona
+export async function cantidadInspeccionXpersona(req: Request, res: Response) {
+    try{
+        const id = req.params.postId;
+        const conn = await MySQL.getInstance().getConnect();
+        await conn.query('select count(*) from Inspection where Inspection.dutyManager= ?', [id]);
+        
+        res.json({
+            message: 'Inspection deleted'
+        });
+    }catch(e){
+        console.log(e);
+    }
+}
 
+// devuelve la cantiad de inspecciones x estado 
+export async function cantidadInspeccionXEstado(req: Request, res: Response) {
+    try{
+        const id = req.params.postId;
+        //const a : any;
+        const conn = await MySQL.getInstance().getConnect();
+        await conn.query('select count(*) from Inspection where Inspection.state= ?', [id]);
+        
+        res.json({
+            message: 'Inspection deleted'
+        });
+    }catch(e){
+        console.log(e);
+    }
+}
+
+//const Estado1= await conn.query('select count(*) from Inspection where Inspection.state= 0');
 
 //select Area.idArea,Area.description,Area.ubication, Area.image 
 //INNER JOIN inspeccionArea on inspeccionArea.inspeccion_id= Inspection.idInspection 
