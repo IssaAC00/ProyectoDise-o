@@ -1,8 +1,8 @@
 export interface User{
     userMail: string;
     userPassword: string;
+    
     rol: number;
-
 }
 
 export interface Area{
