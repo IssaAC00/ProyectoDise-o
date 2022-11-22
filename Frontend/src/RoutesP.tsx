@@ -14,7 +14,7 @@ import Elementos from './Pantallas/Elementos';
 import UsuarioOperativo from './Pantallas/UsuarioOperativo';
 import Directivo from './Pantallas/DirectorOperativo';
 
-
+import Directivo2 from './Pantallas/DirectorOperativo2';
 export default function RoutesP() {
     
 
@@ -38,11 +38,10 @@ export default function RoutesP() {
 
 
                 <Route path="/DirectorOperativo" element={<Directivo />} />
-
+                <Route path="/DirectorOperativo2" element={<Directivo2 />} />
                 
               
             </Routes>
             </BrowserRouter>
     )
   }
-// <Route path="/Grafica" element={<app/>} />  
