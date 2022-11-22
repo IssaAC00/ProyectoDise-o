@@ -92,6 +92,9 @@ function Login (): JSX.Element {
                 <Nav >
                  <Nav.Link to="/Contraseña" as={NavLink}  className = 'Contraseña '>Olvidaste tu contraseña</Nav.Link>
                 </Nav>
+                <Nav >
+                 <Nav.Link to="/Registrarse" as={NavLink}  className = 'Registrarse '>Registrarse</Nav.Link>
+                </Nav>
                 <img src={imagenM}  style = {{position: 'absolute', top: 210, left: 1500, fontSize: 23, fontWeight: 'bold'}}/>
             </div>
         )

@@ -13,7 +13,7 @@ import PlanInspeccion from './Pantallas/PlanInspeccion';
 import Elementos from './Pantallas/Elementos';
 import UsuarioOperativo from './Pantallas/UsuarioOperativo';
 import Directivo from './Pantallas/DirectorOperativo';
-
+import Registrarse from './Pantallas/Registrarse';
 import Directivo2 from './Pantallas/DirectorOperativo2';
 export default function RoutesP() {
     
@@ -34,11 +34,9 @@ export default function RoutesP() {
                 <Route path="/Consultas" element={<Consultas />} />
                 <Route path="/Elementos" element={<Elementos />} />
                 <Route path="/UsuarioOperativo" element={<UsuarioOperativo />} />
-
-
-
                 <Route path="/DirectorOperativo" element={<Directivo />} />
                 <Route path="/DirectorOperativo2" element={<Directivo2 />} />
+                <Route path="/Registrarse" element={<Registrarse />} />
                 
               
             </Routes>

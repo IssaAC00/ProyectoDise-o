@@ -93,7 +93,7 @@ function SuperUsuario(): JSX.Element{
         
 
         <div style = {{backgroundImage:`url(${fondo})`, height: '800px'}}>
-            <Navbar />
+            <Navbar  label="Super Usuario"/>
 
             <form ref={formEmail} onSubmit={sendEmail}>
                 <label style = {{color: 'black', position: 'absolute', top: 160, left: 70, fontSize: 15, fontWeight: 'bold'}}>Email</label>

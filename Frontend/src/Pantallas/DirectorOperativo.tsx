@@ -13,7 +13,7 @@ function DirectorOperativo (  ): JSX.Element {
     
     return (
         <div> 
-          <Navbar label="Director Operativo"/>
+         import  Navbar  from "../componentes/TopBarSuperUsuario"
           <GraficaEncargado></GraficaEncargado>
           
         </div>
