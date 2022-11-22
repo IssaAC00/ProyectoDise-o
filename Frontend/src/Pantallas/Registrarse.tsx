@@ -54,7 +54,7 @@ function Registrarse (): JSX.Element {
                     <input name = 'email' value= {form.email} id = 'email' type="text"  onChange = {changeHandler} placeholder="_________________" className='Input-container' style={{ width: 300 , height: 60, color: 'black' }}/>
                     <label style = {{color: 'white', position: 'absolute', top: 230, left: 65, fontSize: 32, fontWeight: 'bold'}}>Contraseña</label>
                     <input name = 'password' value= {form.password} id = 'password' type="password"  onChange = {changeHandler} placeholder="_________________" className='Input-Clave' style={{ width: 300 , height: 60, color: 'black' }} />
-                    <label style = {{position: 'absolute', top: 370, left: 65, fontSize: 32, fontWeight: 'bold', color: 'white'}}> Piso </label>
+                    <label style = {{position: 'absolute', top: 370, left: 65, fontSize: 32, fontWeight: 'bold', color: 'white'}}> Rol </label>
                     <select onChange = {selectChange} value= {selectedOption as string}   className= 'dropdown' name= 'floor'  style = {{position: 'absolute', top: 370  , fontSize: 23, fontWeight: 'bold', color:'black', width: 280}}>
                     {rol.map((options) => (
                     <option key={options.label} value={options.value}>
