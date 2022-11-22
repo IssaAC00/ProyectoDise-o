@@ -3,7 +3,7 @@ import  Navbar  from "../componentes/TopbarUsuarioOperativo"
 import '../componentes/inputEstiloGlobal.css'
 import  { Modal } from "../componentes/Modal"
 import '../componentes/buttonS.css'
-
+import {  useNavigate } from "react-router-dom"
 
 function UsuarioOperativo (  ): JSX.Element {
     const [form, setForm] = useState({
@@ -13,6 +13,7 @@ function UsuarioOperativo (  ): JSX.Element {
         Pdf: ''
        
     });
+    const navigate = useNavigate(); 
 
     const [isModalOpen, setModalState] = React.useState(false);
     const toggleModal = () => setModalState(!isModalOpen);
@@ -35,9 +36,9 @@ function UsuarioOperativo (  ): JSX.Element {
     
 
       const temporal = [
-        { label: "Primer Piso", value: "0" },
-        { label: "Segundo Piso", value: "1" },
-        { label: "Tercer Piso", value: "2" }
+        { label: "Agente 1", value: "0" },
+        { label: "Agente 2", value: "1" },
+        { label: "Agente 3", value: "2" }
       ];
 
       const cerrar = [
@@ -45,6 +46,11 @@ function UsuarioOperativo (  ): JSX.Element {
         { label: "Restauración", value: "1" },
       
       ];
+
+      function Volver (){
+        navigate('/');
+
+      }
 
 
     return (
@@ -103,7 +109,7 @@ function UsuarioOperativo (  ): JSX.Element {
 
             </Modal>
 
-            
+            <button onClick={Volver} className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
 
 
 
