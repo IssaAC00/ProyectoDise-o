@@ -7,6 +7,7 @@ import { controller } from "../BackEnd/Controller/Controller";
 import id from "date-fns/esm/locale/id/index.js";
 import { NavLink, useNavigate } from "react-router-dom"
 
+import graficos  from "../componentes/SegmentChartGrandient";
 
 
 function Encargado (): JSX.Element {
