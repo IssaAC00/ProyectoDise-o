@@ -90,7 +90,7 @@ function SuperUsuario(): JSX.Element{
             templateParams,
             'TRjrmP7S5sC7IoxwD'
             ). then((res: any) => {
-                console.log(res.text);
+                console.log(res.text); 
                 setFormValues('','', form.rol);
         }).catch((err: any) =>console.log(err));
     }
