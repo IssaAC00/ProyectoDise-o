@@ -2,7 +2,7 @@ import React, { useState , ReactNode } from "react";
 import  Navbar  from "../componentes/TopbarDirector"
 
 
-import  GraficaEncargado  from "../componentes/SegmentChartGrandient"
+import  GraficaEncargado  from "../componentes/SegmentChartGrandient2"
 
 
 function DirectorOperativo2 (  ): JSX.Element {
