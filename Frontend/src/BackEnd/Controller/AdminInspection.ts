@@ -1,4 +1,4 @@
-import { FactoryInspections, Inspection, InspectionArea, InspectionElement, State, Form, Register} from '../Model/Inspection'
+import { FactoryInspections, Inspection, InspectionArea, InspectionElement, State, Form, Register, UploadPDF, PDF} from '../Model/Inspection'
 import axios from "axios";
 import { AdminDutyManager } from './AdminDutyManger';
 import { AdminArea } from './AdminArea';
@@ -78,11 +78,13 @@ class AdminInspection{
 
     public modify(inspection: Inspection): boolean{
         inspection.updateState();
+        console.log(inspection);
         this._inspections.forEach((item, index, arr) => {
             if (item.id === inspection.id){
                 arr[index] = inspection;
             }
         });
+        this.daoInspection.updateDutyManager(inspection);
         return true;
     }
 
@@ -109,12 +111,19 @@ class DAOInspection{
 
     }
 
+    private makeGeneralPdf(nameFile: string): PDF{
+        if (nameFile != null!){
+            return new UploadPDF(nameFile);
+        }
+        return null!;
+    }
+
     private async getInspecArea() {
         let result = await axios.get(this.url+"/Area")
         .then(response => {
             this._ready = false;
             return response.data[0].map((iAreaDB: any) => 
-                this.factory.getInspection(0, iAreaDB.idInspection, iAreaDB.InitialDate, iAreaDB.endDate, iAreaDB.deliveryDate, this._adminDutyManager.search(iAreaDB.dutyManager), iAreaDB.pdf, iAreaDB.result, iAreaDB.state, this._adminArea.search(iAreaDB.idArea))
+                this.factory.getInspection(0, iAreaDB.idInspection, new Date(iAreaDB.InitialDate), new Date(iAreaDB.endDate), new Date(iAreaDB.deliveryDate), this._adminDutyManager.search(iAreaDB.dutyManager), this.makeGeneralPdf(iAreaDB.pdf), iAreaDB.result, iAreaDB.state, this._adminArea.search(iAreaDB.idArea))
             );
         })
         .catch(error => {
@@ -128,7 +137,7 @@ class DAOInspection{
         .then(response => {
             this._ready = false;
             return response.data[0].map((iElementDB: any) => 
-                this.factory.getInspection(1, iElementDB.idInspection, iElementDB.InitialDate, iElementDB.endDate, iElementDB.deliveryDate, this._adminDutyManager.search(iElementDB.dutyManager), iElementDB.pdf, iElementDB.result, iElementDB.state, this._adminElement.search(iElementDB.idElement))
+                this.factory.getInspection(1, iElementDB.idInspection, new Date(iElementDB.InitialDate), new Date(iElementDB.endDate), new Date(iElementDB.deliveryDate), this._adminDutyManager.search(iElementDB.dutyManager), this.makeGeneralPdf(iElementDB.pdf), iElementDB.result, iElementDB.state, this._adminElement.search(iElementDB.idElement))
             );
         })
         .catch(error => {
@@ -205,13 +214,51 @@ class DAOInspection{
         }
     }
 
+    private iAreaTOBDUpdate(iArea: Inspection){
+        return {
+            General: {
+                idInspection: iArea.id,
+                initialDate: this.transformeDate(iArea.initialDate),
+                endDate: this.transformeDate(iArea.endDate),
+                deliveryDate: this.transformeDate(iArea.deliveryDate),
+                pdf: iArea.PDF.constructor.name == 'UploadPDF'? (iArea.PDF as UploadPDF).nameFile:
+                (iArea.PDF as Form).nameFile,
+                DutyManager: iArea.dutyManager.id,
+                state: iArea.state,
+                result: iArea.result},
+            Specific: {
+                inspeccion_id: iArea.id,
+                idArea: (iArea as InspectionArea).area.id
+            }
+        }
+    }
+
+    private iElementTOBDUpdate(iElement: Inspection){
+        return {
+            General: {
+                idInspection: iElement.id,
+                initialDate: this.transformeDate(iElement.initialDate),
+                endDate: this.transformeDate(iElement.endDate),
+                deliveryDate: this.transformeDate(iElement.deliveryDate),
+                pdf: iElement.PDF.constructor.name == 'UploadPDF'? (iElement.PDF as UploadPDF).nameFile:
+                (iElement.PDF as Form).nameFile,
+                DutyManager: iElement.dutyManager.id,
+                state: iElement.state,
+                result: iElement.result},
+            Specific: {
+                inspeccion_id: iElement.id,
+                idElement: (iElement as InspectionElement).element.id
+            }
+        }
+    }
+
     public async updateDutyManager(inspection: Inspection){
         if (inspection.constructor.name == "InspectionArea"){
-            const updateInspArea = this.iAreaTOBD(inspection);
-            await axios.put(this.url + "/Area", updateInspArea);
+            const updateInspArea = this.iAreaTOBDUpdate(inspection);
+            await axios.put(this.url + `/Area/${inspection.id}`, updateInspArea);
         }else{
-            const updateInspElement = this.iElementTOBD(inspection);
-            await axios.put(this.url + "/Element", updateInspElement);
+            const updateInspElement = this.iElementTOBDUpdate(inspection);
+            await axios.put(this.url + `/Element/${inspection.id}`, updateInspElement);
         }
     }
 
