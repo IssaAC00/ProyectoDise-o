@@ -10,7 +10,7 @@ import {controller} from '../BackEnd/Controller/Controller'
 import '../componentes/ajustePaginas.css'
 import { Rol, User } from '../BackEnd/Model/User';
 import axios from "axios";
-import swal from "sweetalert";
+
 
 function Login (): JSX.Element {
     const url = "http://localhost:5001/User";

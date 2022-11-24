@@ -4,7 +4,7 @@ import '../componentes/inputEstiloGlobal.css'
 import React, { useState } from "react";
 import "./areas.css"
 import '../componentes/buttonS.css'
-import { NavLink, useNavigate } from "react-router-dom"
+import {  useNavigate } from "react-router-dom"
 
 
 function Contraseña (): JSX.Element{

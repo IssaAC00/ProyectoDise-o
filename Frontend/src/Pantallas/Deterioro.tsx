@@ -5,7 +5,7 @@ import '../componentes/buttonS.css'
 import '../componentes/inputEstiloGlobal.css'
 import { controller } from '../BackEnd/Controller/Controller'
 import { Spolaige } from '../BackEnd/Model/Spolaige'
-import { NavLink, useNavigate } from "react-router-dom"
+import {  useNavigate } from "react-router-dom"
 
 
 
@@ -127,7 +127,7 @@ function Deterioro (): JSX.Element {
             <button  className='buttonS' onClick= {Register} style = {{position: 'absolute', top: 780, left: 1650, fontSize: 23}}>Registrar Deterioro</button>
             <button  className='buttonS' onClick= {Drop} style = {{position: 'absolute', top: 860, left: 1650, fontSize: 23}}>Eliminar Deterioro</button>
 
-            <GraficaEncargado></GraficaEncargado> // esto
+            
             
 
             

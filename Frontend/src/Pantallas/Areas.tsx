@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import "./areas.css"
 import '../componentes/buttonS.css'
 import { controller } from '../BackEnd/Controller/Controller';
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
 

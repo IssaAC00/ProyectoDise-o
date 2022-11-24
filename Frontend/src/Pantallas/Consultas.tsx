@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Navbar  from "../componentes/topbar"
-import Checkbox from "../componentes/Checkbox";
+
 import "./consulta.css"
 import {DatePicker} from '@material-ui/pickers'
-import { NavLink, useNavigate } from "react-router-dom"
-import path from 'path';
-import createPDF from '../componentes/PDFService';
+import {  useNavigate } from "react-router-dom"
+
+
 
 //const filePath = path.join(__dirname, '..', 'pdfFiles', 'something.pdf');
 

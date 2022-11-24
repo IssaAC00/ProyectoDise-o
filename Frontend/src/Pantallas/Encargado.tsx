@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import  Navbar  from "../componentes/topbar"
 import Checkbox from "../componentes/Checkbox";
-import { ExternalPerson, LegalPerson, TypeWork } from "../BackEnd/Model/DutyManager";
-import { convertCompilerOptionsFromJson } from "typescript";
+import {  LegalPerson, TypeWork } from "../BackEnd/Model/DutyManager";
 import { controller } from "../BackEnd/Controller/Controller";
-import id from "date-fns/esm/locale/id/index.js";
-import { NavLink, useNavigate } from "react-router-dom"
+import {  useNavigate } from "react-router-dom"
 
 import graficos  from "../componentes/SegmentChartGrandient";
 

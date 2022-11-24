@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { controller } from "../BackEnd/Controller/Controller";
 import '../componentes/inputEstiloGlobal.css'
 import '../componentes/buttonS.css'
-import { NavLink, useNavigate } from "react-router-dom"
+import {  useNavigate } from "react-router-dom"
 
 
 function Elementos(): JSX.Element{
