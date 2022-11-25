@@ -148,7 +148,7 @@ class Controller{
     }//preguntar como se va a ver
 
     //Cuando se haga el register
-    public modifyInspection(optionInspection: number, id: number, description: string, iDate: Date, eDate: Date, dDate: Date,
+    public modifyInspection(optionInspection: number, id: number, iDate: Date, eDate: Date, dDate: Date,
         idDutyManager: number, PDF: PDF, result: TypeWork, state: State, idObjectInspect: string) {
         //Validar nombre && type
         let factoryInspection = new FactoryInspections();

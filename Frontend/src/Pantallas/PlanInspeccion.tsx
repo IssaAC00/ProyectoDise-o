@@ -4,8 +4,9 @@ import {DatePicker} from '@material-ui/pickers'
 import './planInspeccion.css'
 import '../componentes/inputEstiloGlobal.css'
 import {controller} from '../BackEnd/Controller/Controller'
-import {  useNavigate } from "react-router-dom"
-import { InspectionArea, InspectionElement } from '../BackEnd/Model/Inspection';
+import { NavLink, useNavigate } from "react-router-dom"
+import { InspectionArea, InspectionElement, State, UploadPDF } from '../BackEnd/Model/Inspection';
+import { cO } from 'chart.js/dist/chunks/helpers.core';
 
 function PlanInspeccion (): JSX.Element {
     const navigate = useNavigate();
@@ -179,8 +180,10 @@ function PlanInspeccion (): JSX.Element {
 
       function Modify(){
         //Modificar todavia le falta refinar
-        controller.modifyInspection(Number(form.typeInspection), Number(form.code), '', value as Date, fin as Date, null!, 
-                                        Number(form.duty), null! , null! , null! , form.codeAE); // pdf, resultado, deliveryDate
+        let filePDF = new UploadPDF(file?.name!);
+        let deliveryD = new Date(Date.now());
+        controller.modifyInspection(Number(form.typeInspection), Number(form.code), value as Date, fin as Date, deliveryD, 
+                                        Number(form.duty), filePDF, Number(SelectedResultado), null!, form.codeAE); 
         setFormValues(form.duty, form.typeInspection, '0', form.codeAE, '',value as Date, fin as Date);
         console.log(controller.seeInspection(Number(form.code)));
       }

@@ -93,11 +93,18 @@ abstract class Inspection{
 
     public updateState(){
         const dateNow = new Date(Date.now());
+        console.log('-----------------------');
+        console.log(this._deliveryDate);
+        console.log(dateNow);
+        console.log(this._deliveryDate != null);
+        console.log(this._initialDate <= dateNow);
+        console.log(this._endDate >= dateNow);
         if(dateNow < this.initialDate){
             this.state = State.PorSuceder;
         }else if(this.initialDate <= dateNow && this._endDate >= dateNow && this._deliveryDate == null){
             this.state = State.EnEjecucion;
         }else if(this.initialDate <= dateNow && this._endDate >= dateNow && this._deliveryDate != null){
+            console.log('Ejecutada');
             this.state = State.Ejecutada;
         }else if(this._endDate < dateNow && this._deliveryDate != null){
             this._state = State.EjecucionConRetraso;
@@ -183,13 +190,23 @@ interface PDF{
 }
 
 class UploadPDF implements PDF{
-    attachPDF(): String {
+    private _nameFile: string;
+    constructor(nameFile: string){
+        this._nameFile = nameFile;
+    }
+    public attachPDF(): String {
         return '';
+    }
+
+    
+    public get nameFile() : string {
+        return this._nameFile;
     }
 }
 
 class Form implements PDF{
     private _register: Register[] = [];
+    private _nameFile: string = null!;
 
     constructor(){
     }
@@ -201,6 +218,12 @@ class Form implements PDF{
     public addRegister(register: Register){
         this._register.push(register);
     }
+
+    
+    public get nameFile() : string {
+        return this._nameFile;
+    }
+    
 }
 
 class Register{
@@ -237,4 +260,4 @@ class Register{
 }
 
 export type{PDF};
-export { Inspection, State, InspectionArea, InspectionElement, FactoryInspections, Form, Register};
+export { Inspection, State, InspectionArea, InspectionElement, FactoryInspections, Form, Register, UploadPDF};
