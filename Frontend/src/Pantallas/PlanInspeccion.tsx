@@ -17,7 +17,7 @@ function PlanInspeccion (): JSX.Element {
     const [SelectedArea, setSelectedArea] = useState<string>("");
     const [selectedOptionRadio, setSelectedOptionRadio] = useState<String>();
     const [file, setFile] = useState<File|null>();
-    const [state, setState] = useState<string>("")
+    const [state, setState] = useState<string>("");
     var options = [{id:'Area',value:"0", topl: 290, leftl: 500, top: 7, left: -40 },
     {id:'Elemento',value:"1",top: 7, left: -40,topl: 290, leftl: 800}];
 

@@ -1,24 +1,25 @@
-import React, { useState  } from "react";
+import React, { useState, useEffect  } from "react";
 import  Navbar  from "../componentes/TopbarUsuarioOperativo"
 import '../componentes/inputEstiloGlobal.css'
 import  { Modal } from "../componentes/Modal"
 import '../componentes/buttonS.css'
 import {  useNavigate } from "react-router-dom"
+import { controller } from '../BackEnd/Controller/Controller';
 
 function UsuarioOperativo (  ): JSX.Element {
     const [form, setForm] = useState({
-        code: '',
-        observaciones: '',
-        recomendaciones: '',
-        Pdf: ''
-       
+        idInspection: '',
+        images: '',
+        observation: '',
+        recomendation: '',
     });
+
     const navigate = useNavigate(); 
 
     const [isModalOpen, setModalState] = React.useState(false);
     const toggleModal = () => setModalState(!isModalOpen);
 
-    const [selectedOption, setSelectedOption] = useState<string>();
+    const [selectedOption, setSelectedOption] = useState<string>('0');
     const [cerrarDefinitivo, setCerrarDefinitivo] = useState<string>();
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,10 +59,31 @@ function UsuarioOperativo (  ): JSX.Element {
 
       };
 
+      useEffect(() => {
+        controller.loadForm();
+    }, []);
+
+      function setFormValues(idInspection: string, idSpolaige: string, images: string, observation: string, recomendation: string) {
+        setForm({
+          idInspection: idInspection,
+          images: images,
+          observation: observation,
+          recomendation: recomendation
+        })
+        setSelectedOption(idSpolaige);
+      }
+
 
       function Registrar (){
-
-
+        let idSpolaige = Number(selectedOption);
+        if (form.idInspection.trim() !== '' && form.observation !== '' && form.recomendation !== '')  { 
+          controller.registerForm(Number (form.idInspection), idSpolaige , form.images, form.observation, form.recomendation);
+          //setFormValues('', selectedOption, '','',' ');
+          alert("Form agregada exitosamente")
+        }
+        else{
+          console.log("Espacios en blanco");
+        }  
       }
 
 
@@ -69,12 +91,12 @@ function UsuarioOperativo (  ): JSX.Element {
         <div> 
             <Navbar />
             <label style = {{position: 'absolute', top: 200, left: 300, fontSize: 32, fontWeight: 'bold'}}> Inspecciones </label>
-            <input name = 'code' value={form.code} id = 'code' onChange = {changeHandler} type="text"  className='input-global'  style = {{position: 'absolute', top: 150, left: 550, fontSize: 32}} />
+            <input name = 'code' value={form.idInspection} id = 'code' onChange = {changeHandler} type="text"  className='input-global'  style = {{position: 'absolute', top: 150, left: 550, fontSize: 32}} />
             <label style = {{position: 'absolute', top: 400, left: 300, fontSize: 32, fontWeight: 'bold'}}> Registro de daño de :  </label>
             <label style = {{position: 'absolute', top: 600, left: 300, fontSize: 32, fontWeight: 'bold'}}> Observaciones </label>
-            <input name = 'description' value={form.observaciones} id = 'observaciones' onChange = {changeHandler} type="text"  className='input-global' style = {{position: 'absolute', top: 550, left: 550, fontSize: 23, fontWeight: 'bold'}} />
+            <input name = 'description' value={form.observation} id = 'observaciones' onChange = {changeHandler} type="text"  className='input-global' style = {{position: 'absolute', top: 550, left: 550, fontSize: 23, fontWeight: 'bold'}} />
             <label style = {{position: 'absolute', top: 800, left: 300, fontSize: 32, fontWeight: 'bold'}}> Recomendaciones  </label>
-            <input name = 'address' value={form.recomendaciones} id = 'recomendaciones' onChange = {changeHandler} type="text"  className='input-global' style = {{position: 'absolute', top: 750, left: 550, fontSize: 23, fontWeight: 'bold'}} />
+            <input name = 'address' value={form.recomendation} id = 'recomendaciones' onChange = {changeHandler} type="text"  className='input-global' style = {{position: 'absolute', top: 750, left: 550, fontSize: 23, fontWeight: 'bold'}} />
 
 
             <div className='importPDF' style = {{position: 'absolute', top: 700, left: 1300}}  >
@@ -85,7 +107,7 @@ function UsuarioOperativo (  ): JSX.Element {
                 </svg>
                 <label>Imagenes</label>
             </div>                    
-            <input type="text" value={form.Pdf} style = {{position: 'absolute',  top: 670, left: 1700, fontSize: 23, fontWeight: 'bold' , height: 200}} />
+            <input type="text" value={form.images} style = {{position: 'absolute',  top: 670, left: 1700, fontSize: 23, fontWeight: 'bold' , height: 200}} />
 
             <label  style = {{position: 'absolute',  top: 180, left: 1500, fontSize: 32, fontWeight: 'bold' , height: 200}}>Formularios Asociados</label>
                                

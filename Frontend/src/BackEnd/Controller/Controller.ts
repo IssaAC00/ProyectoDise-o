@@ -4,12 +4,15 @@ import { AdminElement } from './AdminElement'
 import { AdminInspection } from './AdminInspection'
 import { AdminSpolaige } from './AdminSpolaige'
 import { AdminUser } from './AdminUser'
+import { AdminForm } from './AdminForm'
 import { Spolaige, TypeSpolaige } from '../Model/Spolaige'
 import { Area, Floor } from '../Model/Area'
+import { Form } from '../Model/Form'
 import { Element } from '../Model/Element'
 import { Inspection, FactoryInspections ,State, InspectionArea, PDF, Register } from '../Model/Inspection'
 import { Resquest, Rol, User } from '../Model/User'
 import { DutyManager, TypeWork, FactoryDutyManager} from '../Model/DutyManager'
+//import { Form } from 'reactstrap'
 
 class Controller{
 
@@ -19,6 +22,27 @@ class Controller{
     private adminInspection: AdminInspection = new AdminInspection();
     private adminSpolaige: AdminSpolaige = new AdminSpolaige();
     private adminUser: AdminUser = new AdminUser();
+    private adminForm: AdminForm = new AdminForm();
+
+    //Forms
+    public async loadForm(){
+        return this.adminForm.load();
+    }
+
+    public registerForm(idInspection: number, idSpolaige:number, image: string, observation: string, recomendation: string ){
+        let newForm = new Form(idInspection, idSpolaige, image, observation, recomendation);
+        this.adminForm.add(newForm);
+    }
+    
+    public seeForm(idInspection: number): Form{
+        return this.adminForm.search(idInspection);
+    }
+    
+    public seeAllForm(): Form[]{
+        return this.adminForm.seeAll();
+    }
+
+
 
     // Spolaige
     public async loadSpolaige(){
