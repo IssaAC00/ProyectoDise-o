@@ -93,3 +93,23 @@ export interface legalPerson {
     DNILegalManager: number;
     nameLegal: string;
 }
+
+export interface form{
+    idInspection: number;
+    idSpolaige: number;
+    image: string;
+    observation: string;
+    recomendation: string;
+}
+
+
+
+// CREATE TABLE Form (
+//     idInspection integer,
+//     idSpolaige integer,
+//     image VARCHAR(500),
+//     observation VARCHAR(200),
+//     recomendation VARCHAR(200), 
+//     FOREIGN KEY (idInspection) REFERENCES Inspection (idInspection),
+//     FOREIGN KEY (idSpolaige) REFERENCES Spolaige (id)
+// );

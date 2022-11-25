@@ -52,11 +52,23 @@ function UsuarioOperativo (  ): JSX.Element {
 
       }
 
+      function Search(){
+
+
+
+      };
+
+
+      function Registrar (){
+
+
+      }
+
 
     return (
         <div> 
             <Navbar />
-            <label style = {{position: 'absolute', top: 200, left: 300, fontSize: 32, fontWeight: 'bold'}}> Tarea vigente </label>
+            <label style = {{position: 'absolute', top: 200, left: 300, fontSize: 32, fontWeight: 'bold'}}> Inspecciones </label>
             <input name = 'code' value={form.code} id = 'code' onChange = {changeHandler} type="text"  className='input-global'  style = {{position: 'absolute', top: 150, left: 550, fontSize: 32}} />
             <label style = {{position: 'absolute', top: 400, left: 300, fontSize: 32, fontWeight: 'bold'}}> Registro de daño de :  </label>
             <label style = {{position: 'absolute', top: 600, left: 300, fontSize: 32, fontWeight: 'bold'}}> Observaciones </label>
@@ -75,6 +87,10 @@ function UsuarioOperativo (  ): JSX.Element {
             </div>                    
             <input type="text" value={form.Pdf} style = {{position: 'absolute',  top: 670, left: 1700, fontSize: 23, fontWeight: 'bold' , height: 200}} />
 
+            <label  style = {{position: 'absolute',  top: 180, left: 1500, fontSize: 32, fontWeight: 'bold' , height: 200}}>Formularios Asociados</label>
+                               
+            <input type="text"  style = {{position: 'absolute',  top: 180, left: 1850, fontSize: 23, fontWeight: 'bold' , height: 200}} />
+
 
             <label style = {{position: 'absolute', top: 1000, left: 300, fontSize: 32, fontWeight: 'bold'}}> Agente Deterioro </label>
             <select onChange = {selectChange} value= {selectedOption} className= 'dropdown'  style = {{position: 'absolute', top: 950, left: 600, fontSize: 23, fontWeight: 'bold', color:'black'}}>
@@ -84,6 +100,11 @@ function UsuarioOperativo (  ): JSX.Element {
             </option>
                 ))}
                 </select>
+
+            <button onClick={Volver} className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
+            <button  onClick= {Search} className='buttonS' style = {{position: 'absolute', top: 180, left: 1100, fontSize: 23}}>Buscar</button>
+            <button  onClick= {Registrar} className='buttonS' style = {{position: 'absolute', top: 1100, left: 1100, fontSize: 23}}>Registrar</button>
+
             <button
               className= 'buttonS'
               onClick={toggleModal}
@@ -109,9 +130,7 @@ function UsuarioOperativo (  ): JSX.Element {
 
             </Modal>
 
-            <button onClick={Volver} className='buttonS' style = {{position: 'absolute', top: 1100, left: 100, fontSize: 23}}>Volver</button>
-
-
+            
 
         </div>
    

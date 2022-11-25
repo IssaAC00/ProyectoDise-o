@@ -17,6 +17,7 @@ import spolaige from './Routes/Spolaige'
 import user from './Routes/User'
 import element from './Routes/Element'
 import routeMongo from './Routes/RouteMongo';
+import Form from './Routes/Form';
 
 
 
@@ -62,6 +63,7 @@ export class App {
         // this.app.use('/typeWork', typeWork);
         this.app.use('/MongoDB', routeMongo);
         this.app.use('/user', user);
+        this.app.use('/form', Form);
         this.app.use('/uploads', express.static(path.resolve('uploads')))
     }
 

@@ -9,8 +9,6 @@ import {  useNavigate } from "react-router-dom"
 
 
 
-import  GraficaEncargado  from "../componentes/SegmentChartGrandient"
-
 
 function Deterioro (): JSX.Element {
 
